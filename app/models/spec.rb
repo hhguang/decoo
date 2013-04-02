@@ -8,8 +8,9 @@ class Spec < ActiveRecord::Base
   @@color_exist=true
   belongs_to :product
   belongs_to :color
-  has_one :stock
+  has_one :stock,:dependent=>:destroy
   has_many :in_stock_items,:dependent=>:destroy
+  has_many :outstock_items,:dependent=>:destroy
   
   
   validate :bh_exist?
@@ -48,12 +49,12 @@ class Spec < ActiveRecord::Base
      end
   end
 
-  before_destroy :check_stock
-  def check_stock
-    if self.stock
-      raise "规格编号为#{self.bh}的零件已加入库存，如要删除请管理员清除此规格零件的库存"
-    end
-  end
+#  before_destroy :check_stock
+#  def check_stock
+#    if self.stock
+#      raise "规格编号为#{self.bh}的零件已加入库存，如要删除请管理员清除此规格零件的库存"
+#    end
+#  end
 
 
   def material_to_array

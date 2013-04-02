@@ -9,7 +9,7 @@
     <div class="controls center">
 
       <%= link_to "",edit_product_spec_path(@product,spec),:class=>"icon12 icomoon-icon-pencil",:remote=>true %>
-      <%= link_to "", spec, :class => "icon icomoon-icon-remove",'data-confirm' => "确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
+      <%= link_to "", spec, :class => "icon icomoon-icon-remove",'data-confirm' => "慎重，此操作同时会删除相关的库存和出入库单，确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
 
     </div>
   </td>
