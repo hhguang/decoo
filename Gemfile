@@ -52,3 +52,9 @@ gem 'simple_form', "2.0.2"
 #gem 'carrierwave', '0.6.2'
 
 #gem 'mini_magick','3.3', :require => false
+
+group :development, :test do
+  gem 'capistrano', '2.9.0', :require => false
+  gem 'rvm-capistrano', :require => false
+  
+end
