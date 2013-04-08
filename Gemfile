@@ -60,3 +60,4 @@ group :development, :test do
 end
 
 gem "eventmachine"
+gem "therubyracer", :require => 'v8'
