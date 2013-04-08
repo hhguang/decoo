@@ -18,7 +18,7 @@ set :runner, "rails"
 
 role :web, "42.120.19.221"                          # Your HTTP server, Apache/etc
 role :app, "42.120.19.221"                          # This may be the same as your `Web` server
-#role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
+role :db,  "42.120.19.221", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
 # if you're still using the script/reaper helper you will need

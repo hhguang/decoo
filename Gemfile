@@ -58,3 +58,5 @@ group :development, :test do
   gem 'rvm-capistrano', :require => false
   
 end
+
+gem "eventmachine"
