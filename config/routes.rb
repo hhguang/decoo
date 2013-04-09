@@ -7,6 +7,8 @@ Decoo::Application.routes.draw do
 #      :omniauth_callbacks => "users/omniauth_callbacks"
     }
 
+  resources :users
+
   resources :spec_properties
 
   resources :specs
