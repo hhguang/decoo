@@ -6,12 +6,12 @@
   
   
   <div class="form-actions">
-    <% if @user.state != User::STATE[:deleted] %>
+    <%# if @user.state != User::STATE[:deleted] %>
       <div class="pull-right">
-        <%= link_to '删除此用户', user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn btn-danger"  %>
+        <%#= link_to '删除此用户', user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn btn-danger"  %>
       </div>
-    <% end %>
-    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <%# end %>
+    <%= f.submit "保存", :class => "btn btn-primary", 'data-disable-with' =>"保存中……" %>
     或者
     <%= link_to 'Back', users_path %>
   </div>

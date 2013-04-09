@@ -47,3 +47,5 @@ gem 'thin'
 
 # 用户系统
 gem 'devise', '2.1.0'
+
+gem 'simple_form', "2.0.2"
