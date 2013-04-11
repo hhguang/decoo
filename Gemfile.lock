@@ -142,7 +142,6 @@ DEPENDENCIES
   bootstrap_helper (= 1.4.1)
   capistrano (= 2.9.0)
   coffee-rails (~> 3.2.1)
-  eventmachine
   jquery-rails
   rails (= 3.2.3)
   rvm-capistrano
