@@ -21,13 +21,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.email = params[:user][:email]
-    @user.login = params[:user][:login]
-    @user.state = params[:user][:state]
-    @user.verified = params[:user][:verified]
+#    @user.email = params[:user][:email]
+#    @user.login = params[:user][:login]
+#    @user.state = params[:user][:state]
+#    @user.verified = params[:user][:verified]
 
     if @user.save
-      redirect_to(cpanel_users_path, :notice => 'User was successfully created.')
+      redirect_to(users_path, :notice => 'User was successfully created.')
     else
       render :action => "new"
     end
