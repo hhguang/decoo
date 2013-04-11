@@ -20,10 +20,17 @@
     <%= stock.color_name %>
   </td>
   <td>
+    
     <%= stock.spec.material if stock.spec %>
+      
   </td>
   <td>
+    <span class="badge badge-info">
     <%= stock.quantity %>
+      </span>
+  </td>
+  <td>
+    <%= stock.quantity*stock.product.weight %>
   </td>
   <td>
     <%#= link_to "", stock, :class => "icon icomoon-icon-remove",'data-confirm' => "如非零件规格错误，不要删除，慎重！确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
