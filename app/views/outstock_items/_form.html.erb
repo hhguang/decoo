@@ -1,0 +1,26 @@
+<%= simple_form_for(@outstock_item ,:remote=>true) do |f| %>
+  <% if @outstock_item.errors.any? %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss='alert' href="#">×</a>
+      <p><strong>有 <%= @outstock_item.errors.count %> 处问题导至无法提交:</strong></p>
+      <ul>
+        <% @outstock_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :spec_bh %>
+    <%#= f.input :spec_id %>
+    <%#= f.input :product_id %>
+    <%#= f.input :outstock_id %>
+    <%= f.input :weight %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

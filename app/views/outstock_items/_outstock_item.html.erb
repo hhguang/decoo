@@ -1,0 +1,24 @@
+<% if outstock_item.spec  %>
+<tr id="<%= outstock_item.spec.bh %>">
+  <td>
+    <%= outstock_item.spec.bh if outstock_item.spec %>
+  </td>
+  <td style="background-color: <%= outstock_item.spec.color.value if outstock_item.spec %>"></td>
+  <td>
+    <%= outstock_item.spec.color.name if outstock_item.spec %>
+  </td>
+  <td>
+    <%= outstock_item.spec.material if outstock_item.spec %>
+  </td>
+  <td>
+    <%= outstock_item.weight %>
+  </td>
+  <td>
+    <%= outstock_item.quantity %>
+  </td>
+  <td>
+    <a href="#" class="icon icomoon-icon-remove" title="删除" onclick="$('#<%= outstock_item.spec.bh %>').remove();$('tr[id=<%= outstock_item.spec.bh %>]').remove();"></a>
+  </td>
+
+</tr>
+<% end %>

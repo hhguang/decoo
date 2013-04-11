@@ -1,0 +1,8 @@
+<% if @deleted %>
+<% flash.now[:notice]="零件已删除" %>
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+$('#product_<%= @product.id %>').fadeOut(1000);
+<% else %>
+
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+<% end %>

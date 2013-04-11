@@ -1,4 +1,5 @@
 Decoo::Application.routes.draw do
+
 #  devise_for :users
 
   devise_for :users, :path => "account", :controllers => {
@@ -8,6 +9,13 @@ Decoo::Application.routes.draw do
     }
 
   resources :users
+
+  resources :outstock_items
+
+  resources :outstocks do
+    
+  end
+
 
   resources :spec_properties
 
@@ -26,6 +34,9 @@ Decoo::Application.routes.draw do
   end
 
   get "main/index"
+  post "outstocks/find_stock"
+
+  resources :photos
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

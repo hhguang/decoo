@@ -1,5 +1,79 @@
-<h1>New color</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <div class="heading">
 
-<%= render 'form' %>
+    <h3>产品颜色管理</h3>
 
-<%= link_to 'Back', colors_path %>
+
+    <ul class="breadcrumb">
+      <li>You are here:</li>
+      <li>
+        <a href="#" class="tip" title="back to dashboard">
+          <span class="icon16 icomoon-icon-screen"></span>
+        </a>
+        <span class="divider">
+          <span class="icon16 icomoon-icon-arrow-right"></span>
+        </span>
+      </li>
+      <li class="active">颜色管理</li>
+    </ul>
+
+  </div><!-- End .heading-->
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>颜色列表</span>
+          </h4>
+        </div>
+
+
+        <div class="content ">
+          <%= simple_form_for(@color, :html=>{:class=>'form-horizontal'}) do |f| %>
+            <% if @color.errors.any? %>
+              <div class="alert alert-block alert-error">
+                <a class="close" data-dismiss='alert' href="#">×</a>
+                <p><strong>有 <%= @color.errors.count %> 处问题导至无法提交:</strong></p>
+                <ul>
+                  <% @color.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%= f.input :name %>
+            <%= f.input :bh %>
+            <%= f.input :memo, input_html: { :rows=>3 } %>
+          <div class="control-group file optional">
+              <label class="file optional control-label" for="product_memo">颜色值</label>
+              <div class="controls">
+                <div style="position:relative;margin-left: 0" class="span8">
+                    <input type="text" value="<%= @color.value.empty? ? '#123456':@color.value %>" name="color[value]" id="color" style="background-color: <%= @color.value %>;" class="text">
+                    <div class="picker">
+                      <div class="farbtastic">
+                        <div class="color" style="background-color: rgb(0, 127, 255);"></div>
+                        <div class="wheel"></div>
+                        <div class="overlay"></div>
+                        <div class="h-marker marker" style="left: 55px; top: 170px;"></div>
+                        <div class="sl-marker marker" style="left: 82px; top: 127px;"></div>
+                      </div>
+                    </div>
+                    </input>
+                  </div>
+              </div>
+          </div>
+            
+
+            <div class="form-actions">
+              <button class="btn btn-info" type="submit" >保存</button>
+              <a class="btn" href="<%= colors_path %>">取消</a>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

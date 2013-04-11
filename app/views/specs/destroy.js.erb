@@ -1,0 +1,6 @@
+<% if @deleted %>
+$('#count-spec-<%= @product.id %>').html("<%= @product.specs.size %>");
+$('#spec-<%= @spec.id %>').remove();
+<% else %>
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+<% end %>

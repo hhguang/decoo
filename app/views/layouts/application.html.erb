@@ -50,7 +50,7 @@
 
     <!-- Main stylesheets -->
     <link href="/css/main.css" rel="stylesheet" type="text/css" />
-
+    
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -69,7 +69,7 @@
     </script>
     <%= javascript_include_tag "application" %>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <%#*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>%>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
@@ -256,13 +256,18 @@
               <li>
                 <a href="#"><span class="icon16 minia-icon-list-4"></span>库存管理</a>
                 <ul class="sub">
-                  <li><a href="#"><span class="icon16 icomoon-icon-paper"></span>库存查询</a></li>
                   <li>
-                    <a href="/in_stocks/new" <%= 'class="current"' if controller_name.in?(['in_stocks']) && action_name.in?(['new'])  %>>
+                    <a href="/stocks" <%= 'class="current"' if controller_name.in?(['stocks']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>库存查询
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/in_stock_items" <%= 'class="current"' if controller_name.in?(['in_stock_items']) %>>
                       <span class="icon16 icomoon-icon-paper"></span>入库
                     </a>
                   </li>
-                  <li><a href="#"><span class="icon16 icomoon-icon-paper"></span>出库</a></li>
+                  <li><a href="/outstocks" <%= 'class="current"' if controller_name.in?(['outstocks']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>出库</a></li>
                 </ul>
               </li>
               <li>
@@ -394,6 +399,7 @@
     <script type="text/javascript" src="/plugins/touch-punch/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
 
+    <%#= controller_javascript_include_tag %>
 
   </body>
 </html>

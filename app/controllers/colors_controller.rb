@@ -86,10 +86,14 @@ class ColorsController < ApplicationController
   # DELETE /colors/1.json
   def destroy
     @color = Color.find(params[:id])
+    begin
     @color.destroy
-
+    flash[:notice]="数据已删除"
+    rescue Exception=>e
+      flash[:error]=e.message
+    end
     respond_to do |format|
-      format.html { redirect_to colors_url, notice: '数据已删除.' }
+      format.html { redirect_to colors_url}
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,38 @@
+<tr id="product_<%= product.id %>">
+  <td><%= product.id %></td>
+  <td>
+    <a title="<%= product.title %>" rel="prettyPhoto" href="/products/<%= product.image_url %>">
+      <img src="/products/<%= product.image_url %>" class="img-polaroid" style="width:auto;height: 60px;"/>
+    </a>
+  </td>
+  <td><%= product.bh %></td>
+  <td><%= product.title %></td>
+
+  <td><%= product.weight.to_f if product.weight %></td>
+  <td>
+    <span id="count-spec-<%= product.id %>">
+      <%= product.specs.size %>
+    </span>
+    <span id="show-specs-<%= product.id %>">
+      <%= link_to '展开',product_specs_path(product),:class=>"icomoon-icon-arrow-down",:remote=>true %>
+    </span>
+    <span id="hide-specs-<%= product.id %>" style="display: none;">
+      <a href="#" class="icomoon-icon-arrow-up" onclick="$('#spec-<%= product.id %>').hide();$('#hide-specs-<%= product.id %>').hide();$('#show-specs-<%= product.id %>').show();return;">收缩</a>
+    </span>
+    <%= link_to '增加',new_product_spec_path(product),:class=>"icomoon-icon-plus-2",:remote=>true %>
+    <div id="spec-<%= product.id %>" style="display: none;"></div>
+  </td>
+  <td>
+    <%= product.created_at.to_s(:db) %>
+  </td>
+  <td>
+    <div class="controls center">
+      <a data-toggle="modal" href="#detail_modal" data-target="#detail_modal" data-remote="<%= product_url(product) %>" class="icon brocco-icon-eye" title="查看产品详细信息"></a>
+      <%= link_to '',edit_product_url(product),:class=>"icon icomoon-icon-pencil",:title=>"编辑零件详细信息",:remote=>true %>
+      
+      <%= link_to "", product, :class => "icon icomoon-icon-remove",'data-confirm' => "同时会删除包含的规格，确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
+
+    </div>
+  </td>
+
+</tr>

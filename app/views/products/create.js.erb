@@ -1,0 +1,6 @@
+# encoding: utf-8
+$('#product-modal').modal('hide');
+$('#products').prepend("<%= escape_javascript(render(@product)) %>");
+<% flash.now[:notice]="零件已成功创建" %>
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+$('#product_<%= @product.id %>').fadeOut(1000).fadeIn(1000);

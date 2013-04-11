@@ -1,37 +1,56 @@
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
+<%= simple_form_for(@product, :remote=>true,:html=>{:class=>'form-horizontal',:multipart=>true}) do |f| %>
+  <% if @product.errors.any? %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss='alert' href="#">×</a>
+      <p><strong>有 <%= @product.errors.count %> 处问题导至无法提交:</strong></p>
       <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <% end %>
+  <div class="row-fluid">
+           <%= f.input :title %>
+           <%= f.input :bh %>
+           <%= f.input :weight %>
+
+      <div class="form-row row-fluid">
+        <div class="span12">
+          <div class="row-fluid">
+            <label for="weight" class="form-label span4">备注</label>
+            <%= f.text_area :memo,:class=>'span8 uniform',:rows=>3 %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row row-fluid">
+        <div class="span12">
+          <div class="row-fluid">
+            <label class="form-label span4">上传文件：</label>
+            <%= f.hidden_field :image_url,:id=>"image-url" %>
+           
+             <img src="<%= "/products/#{@product.image_url}" if @product.image_url %>" class="img-polaroid" style="width:auto;height: 60px;" id="product-image"/>
+
+              <%= link_to("点击上传", "#", :id => "topic_add_image", :rel => "twipsy", :class => "btn eco-images ")%>
+
+          </div>
+        </div>
+      </div>
+
   </div>
-  <div class="field">
-    <%= f.label :image_url %><br />
-    <%= f.text_field :image_url %>
-  </div>
-  <div class="field">
-    <%= f.label :bh %><br />
-    <%= f.text_field :bh %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :color_id %><br />
-    <%= f.number_field :color_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit  %>
+
+  <div class="form-actions">
+    <button class="btn btn-info" type="submit" >保存</button>    
+<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
   </div>
 <% end %>
+<%= controller_javascript_include_tag %>
+
+<div style="display:none;">
+    <form >
+      <input type="file" id="topic_upload_images"/>
+    </form>
+</div>

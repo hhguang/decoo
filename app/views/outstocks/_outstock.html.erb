@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= link_to outstock.bh,outstock_path(outstock) %>
+  </td>
+  <td>
+    <%= outstock.taker %>
+  </td>
+  <td>
+    <%= outstock.user_id %>
+  </td>
+  <td>
+    <%= outstock.memo %>
+  </td>
+  <td>
+    <%= outstock.created_at.to_s(:db) %>
+  </td>
+</tr>

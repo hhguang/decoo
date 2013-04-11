@@ -1,31 +1,251 @@
-<h1>Listing specs</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <div class="heading">
 
-<table>
-  <tr>
-    <th>Bh</th>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Is color</th>
-    <th>Color</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <h3>零件管理</h3>
 
-<% @specs.each do |spec| %>
-  <tr>
-    <td><%= spec.bh %></td>
-    <td><%= spec.name %></td>
-    <td><%= spec.value %></td>
-    <td><%= spec.is_color %></td>
-    <td><%= spec.color_id %></td>
-    <td><%= link_to 'Show', spec %></td>
-    <td><%= link_to 'Edit', edit_spec_path(spec) %></td>
-    <td><%= link_to 'Destroy', spec, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <ul class="breadcrumb">
+      <li>You are here:</li>
+      <li>
+        <a href="#" class="tip" title="back to dashboard">
+          <span class="icon16 icomoon-icon-screen"></span>
+        </a>
+        <span class="divider">
+          <span class="icon16 icomoon-icon-arrow-right"></span>
+        </span>
+      </li>
+      <li class="active">零件管理</li>
+    </ul>
 
-<br />
+  </div><!-- End .heading-->
+<%= notice_message %>
+<div class="row-fluid" >
+    <div class="span12">
+      <a href="#new-modal" role="button"  class="btn btn-success " data-toggle="modal">
+        <span class="icon14 iconic-icon-plus white"></span>
+        新增零件
+      </a>
 
-<%= link_to 'New Spec', new_spec_path %>
+      <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  products_path %>">
+        <input type="text" class="input-medium search-query" name="search"/>
+        <button type="submit" class="btn">搜索</button>
+      </form>
+    </div>
+  </div>
+
+<div class="row-fluid" style="padding: 10px;">
+  <div class="span4">
+    <img src="/products/<%= @product.image_url %>" class="img-polaroid" style="width:auto;height: 120px;"/>
+  </div>
+  <div class="span8">
+    <p>
+      <b>名称:</b>
+      <%= @product.title %>
+    </p>
+    <p>
+      <b>编号:</b>
+      <%= @product.bh %>
+    </p>
+    <p>
+      <b>重量:</b>
+      <%= @product.weight %>
+    </p>
+    <p>
+      <b>备注:</b>
+      <%= @product.memo %>
+    </p>
+  </div>
+</div>
+
+<div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>规格</span>
+          </h4>
+        </div>
+        <div class="content noPad">
+          <div style="padding: 15px;">
+
+            <%= form_for(@spec, :url=>product_specs_path(@product),:remote=>true,:html=>{:class=>'form-horizontal'}) do |f| %>
+            <% if @spec.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@spec.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+                <ul>
+                  <% @spec.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="row-fluid">
+              <div class="span4">
+                <div class="form-row row-fluid">
+                  <div class="span12">
+                    <div class="row-fluid">
+                      <label for="bh" class="form-label span4">货号</label>
+                      <%= f.text_field :bh,:class=>'span8 focused text',:readonly=>"readonly",:id=>'spec_bh' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row row-fluid">
+                  <div class="span12">
+                    <div class="row-fluid">
+                      <label for="weight" class="form-label span4">颜色编号</label>
+                      <input id="spec_color_bh" name="spec[color_bh]" class="span8 focused text"></input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="form-row row-fluid">
+                  <div class="span12">
+                    <div class="row-fluid">
+                      <label class="form-label span4" for="checkboxes">材料</label>
+                      <div class="span8 controls">
+                        <select name="spec[material][]" class="nostyle" multiple="multiple">
+                          <%= options_for_select SpecProperty.material %>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="form-row row-fluid">
+                  <div class="span12">
+                    <div class="row-fluid">
+                      <label for="weight" class="form-label span4">备注</label>
+                      <%= f.text_area :memo,:class=>'span8 uniform',:rows=>3 %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-info" type="submit">
+                <span class="icon14 iconic-icon-plus white"></span>
+              新增规格
+                </button>
+            </div>
+          <% end %>
+          </div>
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>货号</th>
+                <th colspan="2">颜色</th>
+                <th>材料</th>
+                <th>备注</th>
+<%#*<th class="ch" id="masterCh"><div class="checker" id="uniform-undefined"><span><input type="checkbox" class="styled" value="all" name="checkbox" style="opacity: 0;"></span></div></th>%>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="specs">
+
+              <%= render(@specs) %>
+
+            <tbody>
+
+            </tbody>
+          </table>
+          <div style="padding: 10px;">
+
+          </div>
+        </div>
+
+      </div><!-- End .box -->
+
+</div>
+
+<div id="new-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">新增零件</h3>
+    </div>
+    <div class="modal-body">
+      <%= form_for(@product, :html=>{:class=>'form-horizontal',:multipart=>true}) do |f| %>
+        <% if @product.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+            <ul>
+              <% @product.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="form-row row-fluid">
+          <div class="span12">
+            <div class="row-fluid">
+              <label for="title" class="form-label span4">名称</label>
+              <%= f.text_field :title,:class=>'span8 focused text' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-row row-fluid">
+          <div class="span12">
+            <div class="row-fluid">
+              <label for="bh" class="form-label span4">编号</label>
+              <%= f.text_field :bh,:class=>'span8 focused text' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-row row-fluid">
+          <div class="span12">
+            <div class="row-fluid">
+              <label for="weight" class="form-label span4">重量</label>
+              <%= f.text_field :weight,:class=>'span8 focused text' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-row row-fluid">
+          <div class="span12">
+            <div class="row-fluid">
+              <label for="weight" class="form-label span4">备注</label>
+              <%= f.text_area :memo,:class=>'span8 uniform',:rows=>3 %>
+            </div>
+          </div>
+        </div>
+        <div class="form-row row-fluid">
+          <div class="span12">
+            <div class="row-fluid">
+              <label class="form-label span4">上传文件：</label>
+              <input type="file" name="product[upload_picture]" class='span8 focused text'></input>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" type="submit">保存</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+
+      </div>
+    <% end %>
+  </div>
+
+<div id="edit-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">修改规格</h3>
+    </div>
+  <div class="modal-body">
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('body').on('hidden', '.modal', function () {
+    $(this).removeData('modal');
+  });
+  $('#spec_color_bh').change(function(){
+    $('#spec_bh').attr("value","<%= @spec.bh %>"+$(this).attr("value"));
+
+  });
+</script>

@@ -6,8 +6,9 @@ class ProductsController < ApplicationController
     
     @product = Product.new
     w="1=1"
-    o="id"
+    o="bh"
     @search=params[:search]
+    @order=params[:order]
     if params[:search] and !params[:search].empty?
       w="title like ? or bh like ? ","%#{params[:search]}%","%#{params[:search]}%"
     end
@@ -40,15 +41,21 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
+      format.js
     end
   end
 
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
-    @specs=@product.specs
+    @specs=@product.specs.order('id desc')
     @spec=Spec.new(:product_id=>@product.id,:bh=>"#{@product.bh}-")
     @materials=SpecProperty.material
+    respond_to do |format|
+      format.html { render :layout=>false }
+      format.js
+    end
+    
   end
 
   # POST /products
@@ -58,11 +65,14 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to edit_product_url(@product), notice: '零件已成功创建.' }
+        format.html { redirect_to product_specs_url(@product), notice: '零件已成功创建.' }
         format.json { render json: @product, status: :created, location: @product }
+        format.js
+
       else
         format.html { render action: "new" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.js   { render action: "new"}
       end
     end
   end
@@ -71,14 +81,18 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
+    @specs=@product.specs
+    @spec=Spec.new(:product_id=>@product.id,:bh=>"#{@product.bh}-")
+    @materials=SpecProperty.material
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
+        format.js   { @current_product=@product }
       else
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.js   { render action: "edit"}
       end
     end
   end
@@ -87,11 +101,17 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product = Product.find(params[:id])
+    begin
     @product.destroy
-
+    @deleted=true
+    rescue Exception=>e
+      flash.now[:error]=e.message
+      @deleted=false
+    end
     respond_to do |format|
       format.html { redirect_to products_url, notice: '数据已删除.' }
       format.json { head :no_content }
+      format.js   { @deleted }
     end
   end
 

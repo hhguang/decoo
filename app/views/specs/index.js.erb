@@ -1,0 +1,6 @@
+$('#new-spec-modal').modal('hide');
+$('#count-spec-<%= @product.id %>').html("<%= @product.specs.size %>");
+$('#spec-<%= @product.id %>').html(" <table class=\"responsive table table-bordered \"> <thead><tr><th>货号</th>    <th colspan=\"2\">颜色<\/th>                <th>材料<\/th>                <th>备注<\/th>                <th>Actions<\/th>              <\/tr>            <\/thead>            <tbody id=\"specs\"><%= escape_javascript(render(@specs)) %>            <\/tbody><\/table>              ");
+$('#spec-<%= @product.id %>').show();
+$('#hide-specs-<%= @product.id %>').show();
+$('#show-specs-<%= @product.id %>').hide();

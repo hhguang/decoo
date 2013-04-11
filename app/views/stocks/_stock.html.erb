@@ -1,0 +1,31 @@
+<tr>
+  <td>
+    <%= stock.id %>
+  </td>
+  <td>
+    <a title="<%= stock.name %>" rel="prettyPhoto" href="/products/<%= stock.product.image_url %>">
+      <img src="/products/<%= stock.product.image_url %>" class="img-polaroid" style="width:auto;height: 60px;"/>
+    </a>
+  </td>
+  <td>
+    <%= stock.bh %>
+  </td>
+  <td>
+    <%= stock.name %>
+  </td>
+  <td style="background-color: <%= stock.color.value %>">
+    
+  </td>
+  <td>
+    <%= stock.color_name %>
+  </td>
+  <td>
+    <%= stock.spec.material if stock.spec %>
+  </td>
+  <td>
+    <%= stock.quantity %>
+  </td>
+  <td>
+    <%#= link_to "", stock, :class => "icon icomoon-icon-remove",'data-confirm' => "如非零件规格错误，不要删除，慎重！确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
+  </td>
+</tr>

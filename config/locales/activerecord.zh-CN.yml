@@ -1,0 +1,28 @@
+## YAML Template.
+---
+zh-CN:
+  activerecord:
+    models:
+      product: "零件"
+      outstock_item: "出库单明细"
+    attributes:
+      product:
+        bh: "编号"
+        title: "名称"
+        memo: "备注"
+        weight: "重量"
+      color:
+        bh: "编号"
+        name: "名称"
+        memo: "备注"
+        value: "颜色值"
+      in_stock_item:
+        spec_bh: "货号"
+        memo: "备注"
+        weight: "重量"
+      outstock:
+        memo: "备注"
+        taker: "领料人"
+      outstock_item:
+        spec_bh: "货号"
+        weight: "重量"

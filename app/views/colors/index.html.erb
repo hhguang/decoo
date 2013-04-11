@@ -98,8 +98,8 @@
   <%#*</td>%>
                   <td>
                     <div class="controls center">
-                      <a class="tip" href="<%= edit_color_path(color) %>" oldtitle="Edit task" title="">
-                        <span class="icon12 icomoon-icon-pencil"></span>
+                      <a class="icon12 icomoon-icon-pencil" href="<%= edit_color_path(color) %>" oldtitle="Edit task" title="">
+                        
                       </a>
                       <%= link_to "", color, :class => "icon icomoon-icon-remove",'data-confirm' => "确定要删除吗？", :method => :delete, :title => "确定要删除吗？" %>
 
@@ -178,7 +178,14 @@
           </div>
         </div>
       </div>
-      
+      <div class="form-row row-fluid">
+              <div class="span12">
+                <div class="row-fluid">
+                  <label for="weight" class="form-label span4">备注</label>
+                  <%= f.text_area :memo,:class=>'span8 uniform',:rows=>3 %>
+                </div>
+              </div>
+            </div>
 
 
     </div>

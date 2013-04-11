@@ -1,0 +1,31 @@
+<tr>
+  <td>
+    <%= in_stock_item.id %>
+  </td>
+  <td>
+    <%= in_stock_item.spec.bh if in_stock_item.spec %>
+  </td>
+  <td style="background-color: <%= in_stock_item.spec.color.value if in_stock_item.spec %>">
+  
+  </td>
+  <td></td>
+  <td>
+    <%= in_stock_item.spec.material if in_stock_item.spec %>
+  </td>
+  <td>
+    <%= in_stock_item.weight %>
+  </td>
+  <td>
+    <%= in_stock_item.quantity %>
+  </td>
+  <td>
+    <%= in_stock_item.memo %>
+  </td>
+  <td>
+    <%= in_stock_item.user_id %>
+  </td>
+  <td>
+    <%= in_stock_item.created_at.to_s(:db) %>
+  </td>
+
+</tr>

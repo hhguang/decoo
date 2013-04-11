@@ -1,21 +1,68 @@
-<h1>Listing in_stock_items</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <div class="heading">
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <h3>库存管理</h3>
 
-<% @in_stock_items.each do |in_stock_item| %>
-  <tr>
-    <td><%= link_to 'Show', in_stock_item %></td>
-    <td><%= link_to 'Edit', edit_in_stock_item_path(in_stock_item) %></td>
-    <td><%= link_to 'Destroy', in_stock_item, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <ul class="breadcrumb">
+      <li>You are here:</li>
+      <li>
+        <a href="#" class="tip" title="back to dashboard">
+          <span class="icon16 icomoon-icon-screen"></span>
+        </a>
+        <span class="divider">
+          <span class="icon16 icomoon-icon-arrow-right"></span>
+        </span>
+      </li>
+      <li class="active">库存管理</li>
+    </ul>
 
-<br />
+  </div><!-- End .heading-->
 
-<%= link_to 'New In stock item', new_in_stock_item_path %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="msg" style="padding:10px;">
+        <%= notice_message %>
+      </div>
+      
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>入库单</span>
+          </h4>
+        </div>
+        <div class="content noPad">
+          <div style="padding: 15px;" id="form">
+
+            <%= render 'form' %>
+            
+                    </div>
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>货号</th>
+                <th colspan="2">颜色</th>
+                <th>材料</th>
+                
+                <th>重量</th>
+                <th>数量</th>
+                <th>备注</th>
+                <th>业务员</th>
+                <th>入库时间</th>
+                
+              </tr>
+            </thead>
+            <tbody id="items">
+              <%= render(@items) %>
+            </tbody>
+          </table>
+          <div style="padding: 10px;">
+            <%= will_paginate @items, :inner_window => 2 %>
+          </div>
+        </div>
+      </div><!-- End .box -->
+    </div>
+  </div>
+</div>
+

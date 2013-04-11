@@ -1,0 +1,7 @@
+# encoding: utf-8
+$('#product-modal').modal('hide');
+<% flash.now[:notice]="零件信息已成功修改" %>
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+$('#product_<%= @product.id %>').replaceWith("<%= escape_javascript(render(@product)) %>");
+$('#product_<%= @product.id %>').fadeOut(1000).fadeIn(1000);
+
