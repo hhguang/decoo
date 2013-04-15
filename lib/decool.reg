@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Decool0\Parameters]
+"Application"="D:\RubyStack-3.2.3-0\ruby\bin\ruby.exe"
+"AppParameters"="D:\RubyStack-3.2.3-0\ruby\bin\thin start -e production -p 3000"
+"AppDirectory"="D:\apps\decoo\"
