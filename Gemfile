@@ -57,3 +57,5 @@ gem 'simple_form', "2.0.2"
 
 #gem 'mini_magick','3.3', :require => false
 
+# permission
+gem "cancan", "~> 1.6.7"

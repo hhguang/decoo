@@ -35,13 +35,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.email = params[:user][:email]
-    @user.login = params[:user][:login]
-    @user.state = params[:user][:state]
-    @user.verified = params[:user][:verified]
+    
 
     if @user.update_attributes(params[:user])
-      redirect_to(cpanel_users_path, :notice => 'User was successfully updated.')
+      redirect_to(users_path, :notice => 'User was successfully updated.')
     else
       render :action => "edit"
     end

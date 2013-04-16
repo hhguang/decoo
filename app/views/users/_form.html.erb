@@ -5,7 +5,13 @@
   <%= f.input :email, :as => :email, :input_html => { :class => "xxlarge" } %>
 <%= f.input :password %>
 <%= f.input :password_confirmation %>
-  
+  <% for role in Role.all %>
+<div>
+  <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+  <%=h role.title %>
+</div>
+<% end %>
+<%= hidden_field_tag "user[role_ids][]", "" %>
   
   <div class="form-actions">
     <%# if @user.state != User::STATE[:deleted] %>

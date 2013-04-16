@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,:username,:name
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:username,:name,:role_ids
   # attr_accessible :title, :body
+
+  has_many :assignments
+  has_many :roles, :through => :assignments
+  accepts_nested_attributes_for :roles
+
+  def has_role?(role_sym)
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
 end

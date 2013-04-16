@@ -1,5 +1,7 @@
 Decoo::Application.routes.draw do
 
+  resources :roles
+
 #  devise_for :users
 
   devise_for :users, :path => "account", :controllers => {
