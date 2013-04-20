@@ -38,7 +38,8 @@ class Ability
         # admin
         can :manage, :all
       elsif user.has_role?(:warehouse_keeper)
-
+        can :read,Product
+        can :read,Color
       end
     end
 end

@@ -1,5 +1,6 @@
 # encoding: utf-8
 class ColorsController < ApplicationController
+  load_and_authorize_resource
   # GET /colors
   # GET /colors.json
   def index
