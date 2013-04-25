@@ -1,23 +1,7 @@
 # encoding: utf-8
 <div class="contentwrapper"><!--Content wrapper-->
-  <div class="heading">
-
-    <h3>用户管理</h3>
-
-    <ul class="breadcrumb">
-      <li>You are here:</li>
-      <li>
-        <a href="#" class="tip" title="back to dashboard">
-          <span class="icon16 icomoon-icon-screen"></span>
-        </a>
-        <span class="divider">
-          <span class="icon16 icomoon-icon-arrow-right"></span>
-        </span>
-      </li>
-      <li class="active">用户管理</li>
-    </ul>
-
-  </div><!-- End .heading-->
+  <%= render '/share/head',:title=>'用户管理',:here=>'用户列表' %>
+  <!-- End .heading-->
 
   <div class="row-fluid">
     <div class="span12" id="msg">
@@ -39,7 +23,7 @@
         </div>
         <div class="content noPad">
           <div style="padding: 15px;">
-            <a href="<%= new_product_path %>"  class="btn btn-success " data-remote="true" >
+            <a href="<%= new_user_path %>"  class="btn btn-success "  >
               <span class="icon14 iconic-icon-plus white"></span>
               新增用户
             </a>
@@ -78,4 +62,5 @@
     </div>
 
 
+</div>
 </div>

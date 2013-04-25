@@ -1,5 +1,6 @@
 # encoding: utf-8
 class SpecsController < ApplicationController
+  load_and_authorize_resource
   # GET /specs
   # GET /specs.json
   def index

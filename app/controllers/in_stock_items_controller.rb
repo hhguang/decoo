@@ -1,5 +1,6 @@
 # encoding: utf-8
 class InStockItemsController < ApplicationController
+  load_and_authorize_resource
   # GET /in_stock_items
   # GET /in_stock_items.json
   def index

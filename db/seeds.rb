@@ -8,3 +8,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Role.create(name: 'admin',title: '管理员')
 Role.create(name: 'warehouse_keeper',title: '仓库管理员')
+Role.create(name: 'produce_manager',title: '生产管理员')

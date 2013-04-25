@@ -1,5 +1,6 @@
 # encoding: utf-8
 class OutstocksController < ApplicationController
+  load_and_authorize_resource
   # GET /outstocks
   # GET /outstocks.json
   def index

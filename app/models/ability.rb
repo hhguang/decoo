@@ -40,6 +40,12 @@ class Ability
       elsif user.has_role?(:warehouse_keeper)
         can :read,Product
         can :read,Color
+        can :read, Spec
+        
+        can :manage,Stock
+        can :manage, InStockItem
+        can :manage, Outstock
+        can :manage, OutstockItem
       end
     end
 end
