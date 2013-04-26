@@ -1,0 +1,3 @@
+$('#new-spec-modal').modal('hide');
+$('#spec-<%= @spec.id %>').replaceWith("<%= escape_javascript(render(@spec)) %>");
+

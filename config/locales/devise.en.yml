@@ -1,3 +1,4 @@
+
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 en:
@@ -55,3 +56,4 @@ en:
         subject: 'Reset password instructions'
       unlock_instructions:
         subject: 'Unlock Instructions'
+

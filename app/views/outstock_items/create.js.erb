@@ -1,0 +1,11 @@
+
+<% if @outstock_item && @outstock_item.errors.empty? %>
+$('#add-modal').modal('hide');
+$('#outstock_items').prepend("<%= escape_javascript(render(@outstock_item) ) %>");
+$('#new_outstock').prepend("<div id=\"<%= @outstock_item.spec_bh %>\"> <input type=\"hidden\" name=\"outstock[outstock_items_attributes][][spec_bh]\" value=\"<%= @outstock_item.spec_bh %>\" \/><input type=\"hidden\" name=\"outstock[outstock_items_attributes][][weight]\" value=\"<%= @outstock_item.weight %>\" \/> <\/div>");
+<% else %>
+  <% flash.now[:error]="有 #{@outstock_item.errors.count} 处问题导至无法提交" %>
+$("#add-modal> .modal-body").html("<%= escape_javascript(render(:partial=>'form')) %>");
+ $('#add-modal').modal('show');
+<% end %>
+$('#msg').html("<%= escape_javascript(notice_message ) %>");

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Spec bh:</b>
+  <%= @outstock_item.spec_bh %>
+</p>
+
+<p>
+  <b>Spec:</b>
+  <%= @outstock_item.spec_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @outstock_item.product_id %>
+</p>
+
+<p>
+  <b>Outstock:</b>
+  <%= @outstock_item.outstock_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_outstock_item_path(@outstock_item) %> |
+<%= link_to 'Back', outstock_items_path %>

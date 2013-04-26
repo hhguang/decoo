@@ -1,17 +1,24 @@
-<%= form_for(@in_stock_item) do |f| %>
+<%= simple_form_for(@in_stock_item, :url=>in_stock_items_path(@in_stock_item),:remote=>true,:html=>{:class=>'form-horizontal'}) do |f| %>
   <% if @in_stock_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@in_stock_item.errors.count, "error") %> prohibited this in_stock_item from being saved:</h2>
-
-      <ul>
-      <% @in_stock_item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+    <div class="alert alert-block alert-error">
+                <a class="close" data-dismiss='alert' href="#">×</a>
+                <p><strong>有 <%= @in_stock_item.errors.count %> 处问题导至无法提交:</strong></p>
+                <ul>
+                  <% @in_stock_item.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
   <% end %>
+<%= f.input :spec_bh %>
+<%= f.input :weight %>
+<%= f.input :memo,input_html: { :rows=>3 } %>
+  
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <button class="btn btn-info" type="submit">
+      <span class="icon14 iconic-icon-plus white"></span>
+      新增入库条目
+    </button>
   </div>
 <% end %>

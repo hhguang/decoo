@@ -1,8 +1,14 @@
 class StocksController < ApplicationController
+  load_and_authorize_resource
   # GET /stocks
   # GET /stocks.json
   def index
-    @stocks = Stock.all
+    @search=params[:search]
+    w="1=1"
+    if params[:search] and !params[:search].empty?
+      w="name like ? or bh like ? or color_name like ?","%#{params[:search]}%","%#{params[:search]}%","%#{params[:search]}%"
+    end
+    @stocks = Stock.paginate(:page => params[:page], :per_page => 10).where(w).order("bh")
 
     respond_to do |format|
       format.html # index.html.erb

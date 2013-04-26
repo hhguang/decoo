@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  spec_bh: MyString
+  spec_id: 1
+  product_id: 1
+  outstock_id: 1
+
+two:
+  spec_bh: MyString
+  spec_id: 1
+  product_id: 1
+  outstock_id: 1

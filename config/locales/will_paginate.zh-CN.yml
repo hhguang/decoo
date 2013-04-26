@@ -1,5 +1,19 @@
+
 "zh-CN":
   will_paginate:
     next_label: "下一页 &#8594;"
     previous_label: "&#8592; 上一页"
     page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} found"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:  "没有找到 %{model} "
+        one:   "显示 <b>1</b> %{model}"
+        other: "显示 <b>all&nbsp;%{count}</b> %{model}"
+
+      multi_page: "Displaying %{model} %{from} - %{to} of %{count} in total"
+      multi_page_html: "总共有%{model}<b>%{count}</b> ，当前显示 <b>%{from}&nbsp;-&nbsp;%{to}</b> "
+

@@ -1,0 +1,29 @@
+<h1>Listing outstock_items</h1>
+
+<table>
+  <tr>
+    <th>Spec bh</th>
+    <th>Spec</th>
+    <th>Product</th>
+    <th>Outstock</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @outstock_items.each do |outstock_item| %>
+  <tr>
+    <td><%= outstock_item.spec_bh %></td>
+    <td><%= outstock_item.spec_id %></td>
+    <td><%= outstock_item.product_id %></td>
+    <td><%= outstock_item.outstock_id %></td>
+    <td><%= link_to 'Show', outstock_item %></td>
+    <td><%= link_to 'Edit', edit_outstock_item_path(outstock_item) %></td>
+    <td><%= link_to 'Destroy', outstock_item, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Outstock item', new_outstock_item_path %>

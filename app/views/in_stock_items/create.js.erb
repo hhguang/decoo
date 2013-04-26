@@ -1,0 +1,7 @@
+# encoding: utf-8
+$('#items').prepend("<%= escape_javascript(render(@in_stock_item)) %>");
+$('#msg').html(" ");
+<% flash.now[:notice]="入库操作成功" %>
+$('#msg').html("<%=  escape_javascript(notice_message) %> ");
+<% @in_stock_item=InStockItem.new %>
+$('#form').html("<%= escape_javascript(render('form')) %>");

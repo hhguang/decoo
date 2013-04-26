@@ -3,10 +3,7 @@
 <div class="contentwrapper"><!--Content wrapper-->
   <div class="heading">
 
-    <h3>产品管理</h3>
-
-
-
+    <h3>零件管理</h3>
     <ul class="breadcrumb">
       <li>You are here:</li>
       <li>
@@ -17,11 +14,30 @@
           <span class="icon16 icomoon-icon-arrow-right"></span>
         </span>
       </li>
-      <li class="active">产品管理</li>
+      <li class="active">零件管理</li>
     </ul>
 
   </div><!-- End .heading-->
 
+  <div class="row-fluid">
+    <div class="span12">
+    <a href="#new-modal" role="button"  class="btn btn-success " data-toggle="modal">
+                <span class="icon14 iconic-icon-plus white"></span>
+                新增零件
+              </a>
+
+              <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  products_path %>">
+                <input type="text" class="input-medium search-query" name="search"/>
+                <button type="submit" class="btn">搜索</button>
+              </form>
+      </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <%= notice_message %>
+    </div>
+  </div>
+  
   <div class="row-fluid">
     <div class="span12">
       <div class="box">
@@ -34,68 +50,32 @@
 
 
         <div class="content ">
-          <%= form_for(@product, :html=>{:class=>'form-horizontal',:multipart=>true}) do |f| %>
+          <%= simple_form_for(@product, :html=>{:class=>'form-horizontal',:multipart=>true}) do |f| %>
             <% if @product.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
+              <div class="alert alert-block alert-error">
+                <a class="close" data-dismiss='alert' href="#">×</a>
+                <p><strong>有 <%= @product.errors.count %> 处问题导至无法提交:</strong></p>
                 <ul>
                   <% @product.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                   <% end %>
                 </ul>
               </div>
+
             <% end %>
-
-            <div class="row-fluid"">
-              <div class="span4">
-                <div class="form-row row-fluid">
-                  <div class="span12">
-                    <div class="row-fluid">
-                      <label for="title" class="form-label span4">名称</label>
-                      <%= f.text_field :title,:class=>'span8 focused text' %>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row row-fluid">
-                  <div class="span12">
-                    <div class="row-fluid">
-                      <label for="bh" class="form-label span4">编号</label>
-                      <%= f.text_field :bh,:class=>'span8 focused text' %>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row row-fluid">
-                  <div class="span12">
-                    <div class="row-fluid">
-                      <label for="weight" class="form-label span4">重量</label>
-                      <%= f.text_field :weight,:class=>'span8 focused text' %>
-                    </div>
-                  </div>
-                </div>
-                
-
-              </div>
-              <div class="span8">
-                <div class="form-row row-fluid">
-                  <div class="span12">
-                    <div class="row-fluid">
-                      <label class="form-label span4">上传文件：</label>
-                      <input type="file" name="product[upload_picture]" class='span4 focused text'></input>
-                      <% if @product.image_url %>
-                        <img src="/products/<%= @product.image_url %>" class="span4 img-polaroid " style="width:69px;height: 60px;" />
-                      <% end %>
-                    </div>
-                  </div>
-
-                </div>
-                
-
-              </div>
-
-            </div>
-
-        
+            <%= f.input :title %>
+            <%= f.input :bh %>
+            <%= f.input :weight %>
+            <%= f.input :memo, input_html: { :rows=>3 } %>
+            <div class="control-group file optional">
+              <label class="file optional control-label" for="product_memo">上传文件：</label>
+              <div class="controls">
+                <input type="file" name="product[upload_picture]" class='file optional uniform'></input>
+                <% if @product.image_url %>
+                    <img src="/products/<%= @product.image_url %>" class="span4 img-polaroid " style="width:69px;height: 60px;" />
+                  <% end %>
+              </div></div>
+            
 
 
 

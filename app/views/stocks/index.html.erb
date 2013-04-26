@@ -1,33 +1,90 @@
-<h1>Listing stocks</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <div class="heading">
 
-<table>
-  <tr>
-    <th>Bh</th>
-    <th>Name</th>
-    <th>Color</th>
-    <th>Color</th>
-    <th>Product</th>
-    <th>Quantity</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <h3>库存管理</h3>
 
-<% @stocks.each do |stock| %>
-  <tr>
-    <td><%= stock.bh %></td>
-    <td><%= stock.name %></td>
-    <td><%= stock.color %></td>
-    <td><%= stock.color_id %></td>
-    <td><%= stock.product_id %></td>
-    <td><%= stock.quantity %></td>
-    <td><%= link_to 'Show', stock %></td>
-    <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
-    <td><%= link_to 'Destroy', stock, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <ul class="breadcrumb">
+      <li>You are here:</li>
+      <li>
+        <a href="#" class="tip" title="back to dashboard">
+          <span class="icon16 icomoon-icon-screen"></span>
+        </a>
+        <span class="divider">
+          <span class="icon16 icomoon-icon-arrow-right"></span>
+        </span>
+      </li>
+      <li class="active">库存管理</li>
+    </ul>
 
-<br />
+  </div><!-- End .heading-->
 
-<%= link_to 'New Stock', new_stock_path %>
+  <div class="row-fluid" >
+    <div class="span12">
+      <div class="btn-group span4" >
+      <a href="/stocks" role="button"  class="btn  ">
+        所有库存
+      </a>
+        <a href="#query-modal" role="button"  class="btn " data-toggle="modal">
+        高级查询
+      </a>
+      </div>
+      <form class="form-inline " style="padding-left:20px;" action="<%=  stocks_path %>">
+        <label>快速搜索：</label>
+        <input type="text" class="input-medium " name="search"/>
+        <button type="submit" class="btn">搜索</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row-fluid" >
+    <div class="span12">
+      <%= notice_message %>
+    </div>
+  </div>
+
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>库存</span>
+          </h4>
+        </div>
+        <div class="content noPad">
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>图片</th>
+                <th>货号</th>
+                <th>名称</th>
+                <th colspan="2">颜色</th>
+                <th>材料</th>                
+                <th>数量</th>
+                <th>操作</th>
+
+              </tr>
+            </thead>
+            <tbody id="items">
+              <%= render(@stocks) %>
+            </tbody>
+          </table>
+           <%= will_paginate @stocks, :inner_window => 2,:params=>{:search=>@search} %>
+        </div>
+  </div>
+
+</div>
+
+<div id="query-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">高级查询</h3>
+    </div>
+    <div class="modal-body">
+      <%#*<form>%>
+        <%#*<label>颜色:</label>%>
+        <%#*<input type="text" placeholder="Type something…"></input>%>
+      <%#*</form>%>
+    </div>
+
+  </div>
+

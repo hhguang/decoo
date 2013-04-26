@@ -1,0 +1,4 @@
+
+
+$('#count-spec-<%= @product.id %>').html("<%= @product.specs.size %>");
+$('#spec-<%= @product.id %>').html("<%= escape_javascript(render(@specs)) %>");

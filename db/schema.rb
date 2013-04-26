@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313154201) do
+ActiveRecord::Schema.define(:version => 20130416083034) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -30,10 +37,33 @@ ActiveRecord::Schema.define(:version => 20130313154201) do
     t.integer  "quantity"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "memo"
+    t.integer  "spec_id"
+    t.integer  "user_id"
+    t.string   "spec_bh"
   end
 
   create_table "in_stocks", :force => true do |t|
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "outstock_items", :force => true do |t|
+    t.string   "spec_bh"
+    t.integer  "spec_id"
+    t.integer  "product_id"
+    t.integer  "outstock_id"
+    t.decimal  "weight"
+    t.integer  "quantity"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "outstocks", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "memo"
+    t.string   "taker"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -45,6 +75,13 @@ ActiveRecord::Schema.define(:version => 20130313154201) do
     t.decimal  "weight"
     t.integer  "color_id"
     t.text     "memo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -72,17 +109,20 @@ ActiveRecord::Schema.define(:version => 20130313154201) do
   create_table "stocks", :force => true do |t|
     t.string   "bh"
     t.string   "name"
-    t.string   "color"
+    t.string   "color_name"
     t.integer  "color_id"
     t.integer  "product_id"
     t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "spec_id"
   end
 
   create_table "users", :force => true do |t|
+    t.string   "username",               :default => ""
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "name",                   :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

@@ -8,7 +8,8 @@
                                 用户名:
                                 <span class="icon16 icomoon-icon-user-2 right gray marginR10"></span>
                             </label>
-                            <input class="span12" id="username" type="text" name="username" value="Administrator" />
+                           <%= f.text_field :username,:class=>"span12" %>
+                            <%#*<input class="span12" id="username" type="text" name="username" value="Administrator" />%>
                         </div>
                     </div>
                 </div>
@@ -19,9 +20,10 @@
                             <label class="form-label span12" for="password">
                                 密码:
                                 <span class="icon16 icomoon-icon-locked right gray marginR10"></span>
-                                <span class="forgot"><a href="#">Forgot your password?</a></span>
+                                <span class="forgot"><a href="/account/password/new">Forgot your password?</a></span>
                             </label>
-                            <input class="span12" id="password" type="password" name="password" value="somepass" />
+                          <%= f.password_field :password,:class=>"span12" %>
+                            <%#*<input class="span12" id="password" type="password" name="password" value="somepass" />%>
                         </div>
                     </div>
                 </div>
@@ -30,8 +32,11 @@
                         <div class="row-fluid">
                             <div class="form-actions">
                             <div class="span12 controls">
-                                <input type="checkbox" id="keepLoged" value="Value" class="styled" name="logged" /> Keep me logged in
-                                <button type="submit" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter white"></span> Login</button>
+                              <% if devise_mapping.rememberable? -%>
+    <%= f.check_box :remember_me,:class=>"styled" %> 记住我
+  <% end -%>
+                                <%#*<input type="checkbox" id="keepLoged" value="Value" class="styled" name="logged" /> Keep me logged in%>
+                                <button type="submit" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter white"></span> 登录</button>
                             </div>
                             </div>
                         </div>
@@ -40,20 +45,3 @@
 <% end %>
             <%#*</form>%>
         </div>
-<h2>Sign in</h2>
-
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
