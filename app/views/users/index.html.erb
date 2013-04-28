@@ -39,7 +39,9 @@
     </th>
     <th>EMAIL</th>
     <th>姓名</th>
-    <th>操作</th>
+    <th>登录次数</th>
+    <th>最后一次登录</th>
+    <th colspan="2">操作</th>
   </tr>
   </thead>
 <% @users.each do |user| %>
@@ -48,9 +50,15 @@
     <td><%= user.username %></td>
     <td><%= user.email %></td>
     <td><%= user.name %></td>
-    
+    <td>
+      <%= user.sign_in_count %>
+    </td>
+    <td><%= user.last_sign_in_at.to_s(:db) %></td>
     <td>
       <%= link_to '', edit_user_path(user), :class => "icon icomoon-icon-pencil" %>
+    </td>
+    <td>
+      <%= link_to '', user, :class => "icon icomoon-icon-remove",:method=>'delete','data-confirm' => "确定要禁用账号吗？", :title => "确定要禁用账号吗？" %>
     </td>
   </tr>
 <% end %>

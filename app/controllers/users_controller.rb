@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 #    @user.verified = params[:user][:verified]
 
     if @user.save
-      redirect_to(users_path, :notice => 'User was successfully created.')
+      redirect_to(users_path, :notice => '用户已经成功创建.')
     else
       render :action => "new"
     end
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     
-
-    if @user.update_attributes(params[:user])
-      redirect_to(users_path, :notice => 'User was successfully updated.')
+    
+    if @user.update_by_admin(params[:user])
+      redirect_to(users_path, :notice => '用户信息已经更新.')
     else
       render :action => "edit"
     end
@@ -46,8 +46,13 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.soft_delete
+    if @user.update_attributes(:disabled=>true)
+      redirect_to(users_path, :notice => '用户账号已经禁用.')
+    else
+      redirect_to :action => "index"
+    end
+    # @user.soft_delete
 
-    redirect_to(cpanel_users_url)
+    # redirect_to(cpanel_users_url)
   end
 end
