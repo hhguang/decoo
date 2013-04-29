@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326143430) do
+ActiveRecord::Schema.define(:version => 20130429021938) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -42,7 +49,19 @@ ActiveRecord::Schema.define(:version => 20130326143430) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "outstock_items", :force => true do |t|
+    t.string   "spec_bh"
+    t.integer  "spec_id"
+    t.integer  "product_id"
+    t.integer  "outstock_id"
+    t.decimal  "weight"
+    t.integer  "quantity"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "outstocks", :force => true do |t|
+    t.string   "bh"
     t.integer  "user_id"
     t.text     "memo"
     t.string   "taker"
@@ -57,6 +76,13 @@ ActiveRecord::Schema.define(:version => 20130326143430) do
     t.decimal  "weight"
     t.integer  "color_id"
     t.text     "memo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -95,9 +121,9 @@ ActiveRecord::Schema.define(:version => 20130326143430) do
 
   create_table "users", :force => true do |t|
     t.string   "username",               :default => ""
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "name",                   :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "name",                   :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -106,8 +132,9 @@ ActiveRecord::Schema.define(:version => 20130326143430) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "disabled",               :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

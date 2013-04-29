@@ -53,7 +53,7 @@
     <td>
       <%= user.sign_in_count %>
     </td>
-    <td><%= user.last_sign_in_at.to_s(:db) %></td>
+    <td><%= user.last_sign_in_at.to_s(:db) if user.last_sign_in_at %></td>
     <td>
       <%= link_to '', edit_user_path(user), :class => "icon icomoon-icon-pencil" %>
     </td>
