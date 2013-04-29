@@ -20,7 +20,7 @@
                             <label class="form-label span12" for="password">
                                 密码:
                                 <span class="icon16 icomoon-icon-locked right gray marginR10"></span>
-                                <span class="forgot"><a href="/account/password/new">Forgot your password?</a></span>
+                                <!-- <span class="forgot"><a href="/account/password/new">Forgot your password?</a></span> -->
                             </label>
                           <%= f.password_field :password,:class=>"span12" %>
                             <%#*<input class="span12" id="password" type="password" name="password" value="somepass" />%>
@@ -33,7 +33,7 @@
                             <div class="form-actions">
                             <div class="span12 controls">
                               <% if devise_mapping.rememberable? -%>
-    <%= f.check_box :remember_me,:class=>"styled" %> 记住我
+    <!-- <%#= f.check_box :remember_me,:class=>"styled" %> 记住我 -->
   <% end -%>
                                 <%#*<input type="checkbox" id="keepLoged" value="Value" class="styled" name="logged" /> Keep me logged in%>
                                 <button type="submit" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter white"></span> 登录</button>

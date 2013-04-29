@@ -32,3 +32,4 @@ zh-CN:
         password: "密码"
         password_confirmation: "密码确认"
         disabled: "禁用账号"
+        current_password: "原密码"
