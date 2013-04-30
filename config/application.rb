@@ -1,3 +1,4 @@
+
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -60,3 +61,4 @@ module Decoo
     config.assets.version = '1.0'
   end
 end
+

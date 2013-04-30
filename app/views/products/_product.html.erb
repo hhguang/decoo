@@ -19,7 +19,9 @@
     <span id="hide-specs-<%= product.id %>" style="display: none;">
       <a href="#" class="icomoon-icon-arrow-up" onclick="$('#spec-<%= product.id %>').hide();$('#hide-specs-<%= product.id %>').hide();$('#show-specs-<%= product.id %>').show();return;">收缩</a>
     </span>
+    <% if can? :manage, @spec %>
     <%= link_to '增加',new_product_spec_path(product),:class=>"icomoon-icon-plus-2",:remote=>true %>
+    <% end %>
     <div id="spec-<%= product.id %>" style="display: none;"></div>
   </td>
   <td>
@@ -28,9 +30,11 @@
   <td>
     <div class="controls center">
       <a data-toggle="modal" href="#detail_modal" data-target="#detail_modal" data-remote="<%= product_url(product) %>" class="icon brocco-icon-eye" title="查看产品详细信息"></a>
+      <% if can? :manage, @product %>
       <%= link_to '',edit_product_url(product),:class=>"icon icomoon-icon-pencil",:title=>"编辑零件详细信息",:remote=>true %>
       
       <%= link_to "", product, :class => "icon icomoon-icon-remove",'data-confirm' => "同时会删除包含的规格，确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>
+      <% end %>
 
     </div>
   </td>

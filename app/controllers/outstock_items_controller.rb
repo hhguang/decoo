@@ -1,4 +1,5 @@
 class OutstockItemsController < ApplicationController
+  load_and_authorize_resource
   # GET /outstock_items
   # GET /outstock_items.json
   def index

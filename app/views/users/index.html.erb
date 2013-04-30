@@ -1,0 +1,78 @@
+# encoding: utf-8
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'用户管理',:here=>'用户列表' %>
+  <!-- End .heading-->
+
+  <div class="row-fluid">
+    <div class="span12" id="msg">
+      <%= notice_message %>
+    </div>
+  </div>
+
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>用户列表</span>
+
+          </h4>
+          
+        </div>
+        <div class="content noPad">
+          <div style="padding: 15px;">
+            <a href="<%= new_user_path %>"  class="btn btn-success "  >
+              <span class="icon14 iconic-icon-plus white"></span>
+              新增用户
+            </a>
+
+
+          </div>
+
+<table class="responsive table table-bordered">
+  <thead>
+  <tr class="head">
+    <th class="first">#</th>
+    <th>用户名
+    </th>
+    <th>EMAIL</th>
+    <th>姓名</th>
+    <th>登录次数</th>
+    <th>最后一次登录</th>
+    <th>状态</th>
+    <th colspan="2">操作</th>
+  </tr>
+  </thead>
+<% @users.each do |user| %>
+  <tr <%= "class='error'" if user.disabled? %> >
+    <td class="first"><%= user.id %></td>
+    <td><%= user.username %></td>
+    <td><%= user.email %></td>
+    <td><%= user.name %></td>
+    <td>
+      <%= user.sign_in_count %>
+    </td>
+    <td><%= user.last_sign_in_at.to_s(:db) if user.last_sign_in_at %></td>
+    <td>
+      <%= user.disabled? ? "禁用" : "正常" %>
+    </td>
+    <td>
+      <%= link_to '', edit_user_path(user), :class => "icon icomoon-icon-pencil" %>
+    </td>
+    <td>
+      <%= link_to '', user, :class => "icon  icomoon-icon-blocked",:method=>'delete','data-confirm' => "确定要禁用账号吗？", :title => "确定要禁用账号吗？" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @users %>
+
+    </div>
+      </div>
+    </div>
+
+
+</div>
+</div>

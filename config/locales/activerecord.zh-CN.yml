@@ -26,3 +26,10 @@ zh-CN:
       outstock_item:
         spec_bh: "货号"
         weight: "重量"
+      user:
+        username: "用户名"
+        name: "姓名"
+        password: "密码"
+        password_confirmation: "密码确认"
+        disabled: "禁用账号"
+        current_password: "原密码"

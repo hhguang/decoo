@@ -197,3 +197,6 @@ zh-CN:
   activerecord:
     errors:
       <<: *errors
+  unauthorized:
+    manage:
+      all: "您没有权限访问"

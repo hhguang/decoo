@@ -29,8 +29,10 @@
     <%= stock.quantity %>
       </span>
   </td>
-  <td>
-    <%= stock.quantity*stock.product.weight %>
+  <td>    
+
+    <%= number_with_precision((stock.quantity*stock.product.weight)) %>
+
   </td>
   <td>
     <%#= link_to "", stock, :class => "icon icomoon-icon-remove",'data-confirm' => "如非零件规格错误，不要删除，慎重！确定要删除吗？", :method => :delete, :title => "确定要删除吗？",:remote=>true %>

@@ -73,7 +73,7 @@
     <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
+    <%= csrf_meta_tag %>  
   <body>
     <!-- loading animation -->
     <div id="qLoverlay"></div>
@@ -174,26 +174,32 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
                     <img src="/images/avatar.jpg" alt="" class="image" />
-                    <span class="txt">admin@decoo.com</span>
+                    <span class="txt">
+                      <%= current_user.username  %> |
+                      <%= current_user.name %>
+                    </span>
                     <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
-<%#*<li class="menu">%>
-<%#*<ul>%>
-<%#*<li>%>
-<%#*<a href="#"><span class="icon16 icomoon-icon-user-3"></span>Edit profile</a>%>
-<%#*</li>%>
+                    <li class="menu">
+<ul>
+<li>
+  <a href="/account/edit"><span class="icon16 icomoon-icon-user-3"></span>修改个人资料</a>
+</li>
 <%#*<li>%>
 <%#*<a href="#"><span class="icon16 icomoon-icon-comments-2"></span>Approve comments</a>%>
 <%#*</li>%>
 <%#*<li>%>
 <%#*<a href="#"><span class="icon16 entypo-icon-contact"></span>Add user</a>%>
 <%#*</li>%>
-<%#*</ul>%>
-<%#*</li>%>
+</ul>
+</li>
                   </ul>
                 </li>
-                <li><a href="#"><span class="icon16 icomoon-icon-exit"></span> Logout</a></li>
+                <li>
+                  
+                  <a href="/account/sign_out" data-method="delete"><span class="icon16 icomoon-icon-exit"></span>退出</a>
+                </li>
               </ul>
             </div><!-- /.nav-collapse -->
           </div>
@@ -303,7 +309,7 @@
               <li>
                 <a href="#"><span class="icon16 minia-icon-cog"></span>系统管理</a>
                 <ul class="sub">
-                  <li><a href="#"><span class="icon16 icomoon-icon-rocket"></span>用户管理</a></li>
+                  <li><a href="/users"><span class="icon16 icomoon-icon-rocket"></span>用户管理</a></li>
                   <li><a href="#"><span class="icon16 icomoon-icon-paper"></span>数据备份</a></li>
                   <li><a href="#"><span class="icon16 minia-icon-cog"></span>系统管理</a></li>
                 </ul>

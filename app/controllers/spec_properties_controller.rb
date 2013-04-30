@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SpecPropertiesController < ApplicationController
-    
+    load_and_authorize_resource
 
   # GET /spec_properties
   # GET /spec_properties.json

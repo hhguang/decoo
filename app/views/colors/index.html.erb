@@ -72,7 +72,7 @@
                 <th>名称</th>
                 
 <%#*<th class="ch" id="masterCh"><div class="checker" id="uniform-undefined"><span><input type="checkbox" class="styled" value="all" name="checkbox" style="opacity: 0;"></span></div></th>%>
-                <th>Actions</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
@@ -98,11 +98,12 @@
   <%#*</td>%>
                   <td>
                     <div class="controls center">
+                      <% if can? :manage, @color %>
                       <a class="icon12 icomoon-icon-pencil" href="<%= edit_color_path(color) %>" oldtitle="Edit task" title="">
                         
                       </a>
                       <%= link_to "", color, :class => "icon icomoon-icon-remove",'data-confirm' => "确定要删除吗？", :method => :delete, :title => "确定要删除吗？" %>
-
+                      <% end %>
                     </div>
                   </td>
 

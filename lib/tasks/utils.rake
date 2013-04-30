@@ -7,4 +7,17 @@ namespace :utils do
     end
   end
 
+  desc "upload pic and db"
+  task(:upload => :environment) do |t|
+  	#require 'net/ssh'
+	#require 'net/sftp'
+	Net::SSH.start('42.120.19.221', 'rails', 'hhg1024') do |ssh|
+	 ssh.sftp.connect do |sftp|
+	   Dir.foreach('.') do |file|
+	     puts file
+	   end
+	 end
+	end
+  end
+
 end
