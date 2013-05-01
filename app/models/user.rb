@@ -27,5 +27,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  d
+  
 end

@@ -13,7 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
   def log
-  	UserLog.create!(:user_id=>current_user.id,:ctr_name=>controller_name,:action_name=>action_name
-  		)
+    if user_signed_in?
+      UserLog.create!(:user_id=>current_user.id,:ctr_name=>controller_name,:action_name=>action_name,
+        :description=>"#{UserLog::ACTIONS[action_name]}#{controller_name}",
+        :url=>request.url,
+        :remote_ip=>request.remote_ip
+      )
+    end
+  	
   end
 end
