@@ -309,7 +309,16 @@
               <li>
                 <a href="#"><span class="icon16 minia-icon-cog"></span>系统管理</a>
                 <ul class="sub">
-                  <li><a href="/users"><span class="icon16 icomoon-icon-rocket"></span>用户管理</a></li>
+                  <li>
+                    <a href="/users" <%= 'class="current"' if controller_name.in?(['users'])  %> >
+                      <span class="icon16 icomoon-icon-rocket"></span>用户管理
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/user_logs" <%= 'class="current"' if controller_name.in?(['user_logs'])  %>>
+                    <span class="icon16 icomoon-icon-rocket"></span>用户日志
+                    </a>
+                  </li>
                   <li><a href="#"><span class="icon16 icomoon-icon-paper"></span>数据备份</a></li>
                   <li><a href="#"><span class="icon16 minia-icon-cog"></span>系统管理</a></li>
                 </ul>
