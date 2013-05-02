@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  ctr_name: MyString
+  action_name: MyString
+  resource_id: 1
+  resource_name: MyString
+  description: MyText
+
+two:
+  user_id: 1
+  ctr_name: MyString
+  action_name: MyString
+  resource_id: 1
+  resource_name: MyString
+  description: MyText

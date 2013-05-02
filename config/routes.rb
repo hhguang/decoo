@@ -1,5 +1,7 @@
 Decoo::Application.routes.draw do
 
+  resources :user_logs
+
   resources :roles
 
 #  devise_for :users
