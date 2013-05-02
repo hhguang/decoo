@@ -1,8 +1,10 @@
+# encoding: utf-8
 class UserLogsController < ApplicationController
+  load_and_authorize_resource
   # GET /user_logs
   # GET /user_logs.json
   def index
-    @user_logs = UserLog.all :order=>'created_at desc'
+    @user_logs = UserLog.paginate(:page => params[:page], :per_page => 30).order('created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb

@@ -5,6 +5,12 @@ zh-CN:
     models:
       product: "零件"
       outstock_item: "出库单明细"
+      outstock: "出库单"
+      spec: "零件规格"
+      user: "用户"
+      in_stock_item: "入库明细"
+      stock: "库存"
+      color: "颜色"
     attributes:
       product:
         bh: "编号"

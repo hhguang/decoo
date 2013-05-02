@@ -21,32 +21,37 @@
           <table class="responsive table table-bordered">
             <thead>
             <tr>
-              <th>用户</th>
+              <th>用户</th>              
+              <th>操作描述</th>
+              <th>ip</th>
+              <th>时间</th>
               <th>Ctr name</th>
               <th>Action name</th>
               <th>Resource</th>
               <th>Resource name</th>
               <th>url</th>
-              <th>Description</th>
-              <th>ip</th>
-              <th>时间</th>
             </tr>
           </thead>
 
           <% @user_logs.each do |user_log| %>
             <tr>
               <td><%= user_log.user.name  %>[<%= user_log.user.username%>]</td>
+              
+              <td><%= user_log.description %></td>
+              <td><%= user_log.remote_ip %></td>
+              <td><%= user_log.created_at %></td>
               <td><%= user_log.ctr_name %></td>
               <td><%= user_log.action_name %></td>
               <td><%= user_log.resource_id %></td>
               <td><%= user_log.resource_name %></td>
               <td><%= user_log.url %></td>
-              <td><%= user_log.description %></td>
-              <td><%= user_log.remote_ip %></td>
-              <td><%= user_log.created_at %></td>
             </tr>
           <% end %>
           </table>
+          <div  class="">
+              
+              <%= will_paginate @user_logs, :inner_window => 2 %>
+            </div>
         </div>
     </div>
 </div>
