@@ -43,6 +43,7 @@ class OutstocksController < ApplicationController
   # POST /outstocks.json
   def create
     @outstock = Outstock.new(params[:outstock])
+    @outstock.user_id=current_user.id
     ActiveRecord::Base.transaction do
       @outstock.save!
       @outstock.outstock_items.each do |item|

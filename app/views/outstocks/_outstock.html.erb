@@ -6,7 +6,7 @@
     <%= outstock.taker %>
   </td>
   <td>
-    <%= outstock.user_id %>
+    <%= "#{outstock.user.name}" if outstock.user_id  %>
   </td>
   <td>
     <%= outstock.memo %>

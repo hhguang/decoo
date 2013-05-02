@@ -65,7 +65,7 @@
           <div class="client">
             <ul class="unstyled">
               <li><h3>经手人</h3></li>
-              <li><span class="icon12 typ-icon-arrow-right"></span><%= @outstock.user_id %></li>
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@outstock.user.name}" if @outstock.user_id %></li>
               
 
             </ul>

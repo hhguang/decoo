@@ -5,6 +5,7 @@ class InStockItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :color
   belongs_to :spec
+  belongs_to :user
 
   validates :spec_bh,:weight,:presence => true
   validates :weight,:numericality=>{:greater_than=>0}

@@ -47,6 +47,7 @@ class InStockItemsController < ApplicationController
     params[:in_stock_item][:spec_bh].strip!
     ActiveRecord::Base.transaction do
     @in_stock_item = InStockItem.new(params[:in_stock_item])
+    @in_stock_item.user_id=current_user.id
     @in_stock_item.save!
     if @stock=Stock.find_by_spec_id(@in_stock_item.spec_id)
       @stock.quantity +=@in_stock_item.quantity

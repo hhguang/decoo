@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :roles, :through => :assignments
   has_many :logs
+  has_many :in_stock_items
+  has_many :outstocks
   accepts_nested_attributes_for :roles
 
   def has_role?(role_sym)

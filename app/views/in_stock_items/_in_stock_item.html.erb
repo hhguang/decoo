@@ -22,7 +22,7 @@
     <%= in_stock_item.memo %>
   </td>
   <td>
-    <%= in_stock_item.user_id %>
+    <%= "#{in_stock_item.user.name}[#{in_stock_item.user.username}]" if in_stock_item.user_id %>
   </td>
   <td>
     <%= in_stock_item.created_at.to_s(:db) %>
