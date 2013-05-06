@@ -1,5 +1,11 @@
 Decoo::Application.routes.draw do
 
+  resources :parts
+
+  resources :packages
+
+  resources :toys
+
   resources :user_logs
 
   resources :roles

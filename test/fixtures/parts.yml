@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  package_id: 1
+  toy_id: 1
+  spec_id: 1
+  quantity: 1
+
+two:
+  package_id: 1
+  toy_id: 1
+  spec_id: 1
+  quantity: 1
