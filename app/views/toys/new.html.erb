@@ -1,5 +1,31 @@
 <h1>New toy</h1>
 
-<%= render 'form' %>
+<%#= render 'form' %>
+
+<%= form_for @toy do |f| %>
+  <%#= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <%= f.fields_for :packages do |builder| %>
+  <p>
+    <%= builder.label :name, "名称" %><br />
+    <%= builder.text_field :name %>
+
+    <%= builder.fields_for :parts do |sb| %>
+    <p>
+    	<%= sb.label :spec_bh,"编号" %><br/>
+    	<%= sb.text_field :spec_id %>
+    </p>
+    <p>
+    	<%= sb.label :quantity,"数量" %><br/>
+    	<%= sb.text_field :quantity %>
+    </p>
+    <% end %>
+  </p>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
 
 <%= link_to 'Back', toys_path %>

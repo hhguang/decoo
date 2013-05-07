@@ -11,6 +11,8 @@ class Spec < ActiveRecord::Base
   has_one :stock,:dependent=>:destroy
   has_many :in_stock_items,:dependent=>:destroy
   has_many :outstock_items,:dependent=>:destroy
+  has_many :parts
+  has_many :packages,:through=>:parts
   
   
   validate :bh_exist?

@@ -11,6 +11,7 @@ zh-CN:
       in_stock_item: "入库明细"
       stock: "库存"
       color: "颜色"
+      toy: "成品"
     attributes:
       product:
         bh: "编号"
@@ -39,3 +40,5 @@ zh-CN:
         password_confirmation: "密码确认"
         disabled: "禁用账号"
         current_password: "原密码"
+      toy:
+        name: "名称"

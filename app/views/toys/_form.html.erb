@@ -5,6 +5,13 @@
     <%= f.input :name %>
   </div>
 
+  <% f.fields_for :packages do |builder| %>
+  <p>
+    <%= builder.label :name, "名称" %><br />
+    <%= builder.text_field :name %>
+  </p>
+  <% end %>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
