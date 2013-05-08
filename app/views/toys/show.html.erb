@@ -5,16 +5,20 @@
 
 <div class="row-fluid">
     <div class="span12">
-      <div class="box">
-      	<div class="title">
-          <h4>
-            <span class="icon16 brocco-icon-grid"></span>
-            <span>
-            	成品：<%= @toy.name %>
-            </span>
-        	</h4>
-    	</div>
-<div class="content ">
+
+      <div class="well">
+        <span>
+        成品：<%= @toy.name %>  
+        </span>
+        <button type="submit" class="btn btn-success ">改名</button>
+        <button type="submit" class="btn btn-success ">新增零件包</button>
+      </div>
+
+      
+
+
+
+  <div class="tabbable tabs-left">
 <ul class="nav nav-tabs " id="myTab">
 	<% first=true %>
 <% @toy.packages.each do |package| %>
@@ -24,12 +28,16 @@
   </li>  
   <% first=false %>
 <% end %>
+
 </ul>
+
 <div class="tab-content">
 	<% first=true %>
 <% @toy.packages.each do |package| %>
 
   <div class="tab-pane <%= "active" if first %>" id="<%= package.id %>">
+    <button type="submit" class="btn btn-success ">新增零件</button>
+        <button type="submit" class="btn btn-success ">新增零件小包</button>
   	<ul class="thumbnails center" id="itemContainer">
   		<% package.parts.each do |part| %>
 	  <li class="span3">
@@ -44,18 +52,20 @@
 	    </div>
 	  </li>
 	  <% end %>
+
 	</ul>
   </div>
   
 
 <% end %>
 </div>
-
 </div>
+<!-- end tabbable -->
+
 
 <%= link_to 'Edit', edit_toy_path(@toy) %> |
 <%= link_to 'Back', toys_path %>
-</div>
+
 </div>
 </div>
 

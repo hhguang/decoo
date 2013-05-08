@@ -5,6 +5,7 @@ class CreateParts < ActiveRecord::Migration
       t.integer :toy_id
       t.integer :spec_id
       t.integer :quantity
+      t.integer :parent_id
 
       t.timestamps
     end
