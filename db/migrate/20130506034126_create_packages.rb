@@ -3,6 +3,7 @@ class CreatePackages < ActiveRecord::Migration
     create_table :packages do |t|
       t.string :name
       t.integer :toy_id
+      t.integer	:quantity
 
       t.timestamps
     end

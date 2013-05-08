@@ -5,27 +5,72 @@
 <%= form_for @toy do |f| %>
   <%#= f.error_messages %>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name,"成品名称" %><br />
     <%= f.text_field :name %>
   </p>
-  <%= f.fields_for :packages do |builder| %>
+<a href="#new" id="new">添加零件包</a>
+<div class="tabbable tabs-left">
+    <ul class="nav nav-tabs " id="myTab">
+      <li class="active">
+        <a href="#n1">新零件包1</a>
+      </li>
+      <li class="">
+        <a href="#n2">新零件包2</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane " id="n2">
+      </div>
+      <div class="tab-pane active" id="n1">
+    
+        <%= f.fields_for :packages do |builder| %>
   <p>
-    <%= builder.label :name, "名称" %><br />
+    <%= builder.label :name, "零件包名称" %><br />
     <%= builder.text_field :name %>
-
+<button type="submit" class="btn btn-success ">新增零件</button>
+        <button type="submit" class="btn btn-success ">新增零件小包</button>
     <%= builder.fields_for :parts do |sb| %>
     <p>
-    	<%= sb.label :spec_bh,"编号" %><br/>
-    	<%= sb.text_field :spec_id %>
+      <%= sb.label :spec_bh,"编号" %><br/>
+      <%= sb.text_field :spec_id %>
     </p>
     <p>
-    	<%= sb.label :quantity,"数量" %><br/>
-    	<%= sb.text_field :quantity %>
+      <%= sb.label :quantity,"数量" %><br/>
+      <%= sb.text_field :quantity %>
     </p>
     <% end %>
   </p>
   <% end %>
+    <ul class="thumbnails center" id="itemContainer">
+      
+    <li class="span3">
+      <div class="thumbnail">
+        <img src="/products/" alt="" style="width:auto;height: 60px;">
+        <h3></h3>
+        <p>
+          件数：
+          颜色：
+          名称：
+        </p>
+      </div>
+    </li>
+    
+
+  </ul>
+  </div>
+    </div>
+</div>
+  
   <p><%= f.submit "Submit" %></p>
 <% end %>
 
 <%= link_to 'Back', toys_path %>
+<SCRIPT TYPE="text/javascript">
+$("a#new").on( "click", function( event ) {
+  size=$("ul#myTab li").size()+1;
+  $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
+  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'> 零件包名称</div>");
+
+});
+
+</SCRIPT>

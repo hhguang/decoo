@@ -1,3 +1,70 @@
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'成品管理',:here=>'成品列表' %>
+
+  <div class="row-fluid">
+    <div class="span12" id="msg">
+      <%= notice_message %>
+    </div>
+  </div> 
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>成品列表</span>
+          </h4>
+          
+        </div>
+        <div class="content noPad">
+          <div style="padding: 15px;">
+            <% if can? :manage, @toy %>
+            <a href="<%= new_product_path %>"  class="btn btn-success " data-remote="true" >
+              <span class="icon14 iconic-icon-plus white"></span>
+              新增成品
+            </a>
+            <% end %>
+            <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  products_path %>">
+              <input type="text" class="input-medium search-query" name="search"/>
+              <button type="submit" class="btn">搜索</button>
+            </form>
+
+          </div>
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>名称</th>
+                
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="toys">
+              <%= render(@toys) %>
+
+            </tbody>
+          </table>
+
+          <div class="row-fluid" style="padding: 10px;">
+            
+              <%= will_paginate @toys, :inner_window => 2 %>
+            </div>
+                        
+          </div>
+          
+          
+        </div>
+
+      </div><!-- End .box -->
+
+    </div>
+
+  </div>
+
+
+
+
 <h1>Listing toys</h1>
 
 <table>
@@ -21,3 +88,4 @@
 <br />
 
 <%= link_to 'New Toy', new_toy_path %>
+</div>
