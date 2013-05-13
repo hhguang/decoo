@@ -26,7 +26,8 @@ class ToysController < ApplicationController
   def new
     @toy = Toy.new
     package=@toy.packages.build
-    part=package.parts.build
+    package.parts.build 
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @toy }

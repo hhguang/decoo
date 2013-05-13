@@ -29,6 +29,7 @@ class PartsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @part }
+      format.js
     end
   end
 
@@ -40,12 +41,16 @@ class PartsController < ApplicationController
   # POST /parts
   # POST /parts.json
   def create
-    @part = Part.new(params[:part])
+
+    #@part = Part.new(params[:part])
+    @part = Toy.reflect_on_association(:part).klass.new
+
 
     respond_to do |format|
-      if @part.save
+      if @part.valid?
         format.html { redirect_to @part, notice: 'Part was successfully created.' }
         format.json { render json: @part, status: :created, location: @part }
+        format.js   {  }
       else
         format.html { render action: "new" }
         format.json { render json: @part.errors, status: :unprocessable_entity }

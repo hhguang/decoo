@@ -27,18 +27,15 @@
   <p>
     <%= builder.label :name, "零件包名称" %><br />
     <%= builder.text_field :name %>
-<button type="submit" class="btn btn-success ">新增零件</button>
+    <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
+
         <button type="submit" class="btn btn-success ">新增零件小包</button>
-    <%= builder.fields_for :parts do |sb| %>
-    <p>
-      <%= sb.label :spec_bh,"编号" %><br/>
-      <%= sb.text_field :spec_id %>
-    </p>
-    <p>
-      <%= sb.label :quantity,"数量" %><br/>
-      <%= sb.text_field :quantity %>
-    </p>
+        <div id="fields">
+    <%= builder.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+    <%= sb.hidden_field :spec_id %>
+    <%= sb.hidden_field :quantity %>    
     <% end %>
+  </div>
   </p>
   <% end %>
     <ul class="thumbnails center" id="itemContainer">
@@ -65,6 +62,19 @@
 <% end %>
 
 <%= link_to 'Back', toys_path %>
+
+<div id="part-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">零件</h3>
+  </div>
+  <div class="modal-body">
+
+  </div>
+
+</div>
+
+
 <SCRIPT TYPE="text/javascript">
 $("a#new").on( "click", function( event ) {
   size=$("ul#myTab li").size()+1;
