@@ -1,0 +1,16 @@
+<div id="fields" >
+        <%= f.label :name, "零件包名称" %><br />
+        <%= f.text_field :name %>
+        <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
+
+            <button type="submit" class="btn btn-success ">新增零件小包</button>
+            
+      </div>
+      
+        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+        <%= render 'part_fields', :f => sb %>
+        <% end %>  
+ 
+        <ul class="thumbnails center" id="itemContainer">      
+        
+        </ul>

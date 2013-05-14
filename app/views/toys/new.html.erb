@@ -9,53 +9,45 @@
     <%= f.text_field :name %>
   </p>
 <a href="#new" id="new">添加零件包</a>
+<%
+association=:packages
+new_object = f.object.class.reflect_on_association(association).klass.new
+new_object.parts.build
+    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder)
+    end
+%>
+<SCRIPT TYPE="text/javascript">
+$("a#new").on( "click", function( event ) {
+  size=$("ul#myTab li").size()+1;
+  $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
+  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>");
+  $('#myTab a:last').tab('show');
+});
+
+</SCRIPT>
 <div class="tabbable tabs-left">
     <ul class="nav nav-tabs " id="myTab">
-      <li class="active">
-        <a href="#n1">新零件包1</a>
+      <% n=0 %>
+      <%= f.fields_for :packages do |builder| %>
+      <% n+=1 %>
+      <li class="<%= 'active' if n==1 %>">
+        <a href="#n<%= n %>">新零件包<%= n %></a>
       </li>
-      <li class="">
-        <a href="#n2">新零件包2</a>
-      </li>
+      <% end %>
+      
     </ul>
     <div class="tab-content">
-      <div class="tab-pane " id="n2">
+      <% p=0 %>
+      <%= f.fields_for :packages do |builder| %>
+      <% p+=1 %>
+      <div class="tab-pane <%= 'active' if p==1 %>" id="n<%= p %>">    
+        
+      <%= render 'package_fields', :f => builder %>
       </div>
-      <div class="tab-pane active" id="n1">
-    
-        <%= f.fields_for :packages do |builder| %>
-  <p>
-    <%= builder.label :name, "零件包名称" %><br />
-    <%= builder.text_field :name %>
-    <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
-
-        <button type="submit" class="btn btn-success ">新增零件小包</button>
-        <div id="fields">
-    <%= builder.fields_for :parts,:child_index => "new_parts"  do |sb| %>
-    <%= sb.hidden_field :spec_id %>
-    <%= sb.hidden_field :quantity %>    
-    <% end %>
-  </div>
-  </p>
-  <% end %>
-    <ul class="thumbnails center" id="itemContainer">
-      
-    <li class="span3">
-      <div class="thumbnail">
-        <img src="/products/" alt="" style="width:auto;height: 60px;">
-        <h3></h3>
-        <p>
-          件数：
-          颜色：
-          名称：
-        </p>
-      </div>
-    </li>
-    
-
-  </ul>
-  </div>
+      <% end %>
     </div>
+     
 </div>
   
   <p><%= f.submit "Submit" %></p>
@@ -75,12 +67,3 @@
 </div>
 
 
-<SCRIPT TYPE="text/javascript">
-$("a#new").on( "click", function( event ) {
-  size=$("ul#myTab li").size()+1;
-  $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
-  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'> 零件包名称</div>");
-
-});
-
-</SCRIPT>

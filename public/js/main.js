@@ -717,8 +717,8 @@ $(document).ready(function() {
 	})
 
     //make 2 tab active ( remove if not want )
-	$('.tabs-right li:eq(1) a').tab('show'); // Select third tab (0-indexed)
-	$('.tabs-left li:eq(1) a').tab('show'); // Select third tab (0-indexed)
+	// $('.tabs-right li:eq(1) a').tab('show'); // Select third tab (0-indexed)
+	// $('.tabs-left li:eq(1) a').tab('show'); // Select third tab (0-indexed)
 
 	$('#loadersTab a').click(function (e) {
 	  e.preventDefault();

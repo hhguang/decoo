@@ -25,8 +25,12 @@ class ToysController < ApplicationController
   # GET /toys/new.json
   def new
     @toy = Toy.new
-    package=@toy.packages.build
-    package.parts.build 
+    4.times do
+      package=@toy.packages.build
+      package.parts.build 
+    end
+    
+    
 
     respond_to do |format|
       format.html # new.html.erb

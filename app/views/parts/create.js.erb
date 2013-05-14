@@ -1,3 +1,12 @@
 $(".tab-content .active #itemContainer").append("<%= escape_javascript(render(:partial=>'part_pic')) %>")
  $('#part-modal').modal('hide');   
+ var new_id = new Date().getTime();
+  var regexp = new RegExp("new_parts" , "g");
+var spec_id_field=$(".tab-content .active #spec_id_field").clone(true);
+ spec_id_field.children("input").val(<%= @part.spec_id %>);   
+$(".tab-content .active #fields").append(spec_id_field.html().replace(regexp, new_id));
+
+var quantity_field=$(".tab-content .active #quantity_field").clone(true);
+ quantity_field.children("input").val(<%= @part.quantity %>);   
+$(".tab-content .active #fields").append(quantity_field.html().replace(regexp, new_id));
 

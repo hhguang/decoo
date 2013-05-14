@@ -42,8 +42,8 @@ class PartsController < ApplicationController
   # POST /parts.json
   def create
 
-    #@part = Part.new(params[:part])
-    @part = Toy.reflect_on_association(:part).klass.new
+    @part = Part.new(params[:part])
+    
 
 
     respond_to do |format|
