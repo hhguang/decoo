@@ -32,24 +32,62 @@
 <% @toy.packages.each do |package| %>
 
   <div class="tab-pane <%= "active" if first %>" id="<%= package.id %>">
-    <button type="submit" class="btn btn-success ">新增零件</button>
-        <button type="submit" class="btn btn-success ">新增零件小包</button>
-  	<ul class="thumbnails center" id="itemContainer">
-  		<% package.parts.each do |part| %>
-	  <li class="span3">
-	    <div class="thumbnail">
-	      <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
-	      <h3><%= part.spec.bh %></h3>
-	      <p>
-	      	件数：<%=  part.quantity %>
-	      	颜色：
-	      	名称：
-	      </p>
-	    </div>
-	  </li>
-	  <% end %>
+    <ul class="nav nav-tabs " id="package_tab">
+      
+      <li class="active">
+        <a href="#p" data-toggle='tab'>大零件包</a>
+      </li>
+      <% package.children.each do |s| %>
+      <li class="">
+        <a href="#p<%= s.id %>" data-toggle='tab'>
+          <%= s.name %>
+        </a>
+      </li>
+      <% end %>
+      
+      </ul>  
+        
+      
+      <div class="tab-content" id="package_content">
+        <div class="tab-pane active" id="p">
+        	<ul class="thumbnails center" id="itemContainer">
+        		<% package.parts.each do |part| %>
+        	  <li class="span3">
+        	    <div class="thumbnail">
+        	      <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
+        	      <h3><%= part.spec.bh %></h3>
+        	      <p>
+        	      	件数：<%=  part.quantity %>
+        	      	颜色：
+        	      	名称：
+        	      </p>
+        	    </div>
+        	  </li>
+        	  <% end %>
 
-	</ul>
+      	   </ul>
+        </div>
+        <% package.children.each do |s| %>
+          <div class="tab-pane " id="p<%= s.id %>">
+            <ul class="thumbnails center" id="itemContainer">
+              <% s.parts.each do |part| %>
+              <li class="span3">
+                <div class="thumbnail">
+                  <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
+                  <h3><%= part.spec.bh %></h3>
+                  <p>
+                    件数：<%=  part.quantity %>
+                    颜色：
+                    名称：
+                  </p>
+                </div>
+              </li>
+              <% end %>
+
+             </ul>
+          </div>
+        <% end %>
+      </div>
   </div>
   
 

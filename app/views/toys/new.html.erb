@@ -25,7 +25,9 @@ new_object.parts.build
 $("a#new").on( "click", function( event ) {
   size=$("ul#myTab li").size()+1;
   $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
-  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>");
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_packages" , "g");
+  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id));
   $('#myTab a:last').tab('show');
 });
 

@@ -4,6 +4,7 @@ class CreatePackages < ActiveRecord::Migration
       t.string :name
       t.integer :toy_id
       t.integer	:quantity
+      t.integer :parent_id
 
       t.timestamps
     end

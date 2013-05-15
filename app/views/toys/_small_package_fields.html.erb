@@ -1,8 +1,14 @@
 <div class='well'>
-	<span>名称数量</span>
+	
 	<%= f.label :name, "零件包名称" %>
         <%= f.text_field :small_package_name %>
         <%= f.label :quantity, "零件包数量" %>
         <%= f.text_field :quantity %>
+        
+        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+        <%= render 'part_fields', :f => sb %>
+        <% end %>  
+    <div>
         <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
+    </div>
 </div>

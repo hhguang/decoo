@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20130506034602) do
     t.string   "name"
     t.integer  "toy_id"
     t.integer  "quantity"
+    t.integer  "parent_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

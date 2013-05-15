@@ -1,36 +1,51 @@
 
-      <div class="tab-pane <%= 'active' if p==1 %>" id="n<%= p %>">    
-        
-      
-      
-<div id="fields" >
-        <%= f.label :name, "零件包名称" %>
-        <%= f.text_field :name %>
-        <%= f.label :quantity, "零件包数量" %>
-        <%= f.text_field :quantity %>
-      </div>
-      <div class="btn-group">
+      <div class="tab-pane <%= 'active' if p==1 %>" id="n<%= p %>">  
+
+        <div class="btn-group" style="padding:0 0 10px 0;">
         <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
         <%= link_to "新增零件小包",new_sp_parts_path,:class=>"btn btn-success",:remote=>true %>
         <a href="#new" id="new_small_package_<%= p %>" class='btn'>添加零件小包</a>
         <%
-        association=:small_package
-        new_object = Part.new
-        new_object.children.build
+        association=:children
+        new_object = Package.new
+        new_object.parts.build
             fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
               render(association.to_s.singularize + "_fields", :f => builder)
             end
         %>
         <SCRIPT TYPE="text/javascript">
         $("a#new_small_package_<%= p %>").on( "click", function( event ) {
-          
-          $("div.tab-content .active").append("<%= escape_javascript(fields) %>");
-          
+          size=$("#n<%= p %> ul#package_tab li").size()+1;
+          $("#n<%= p %> ul#package_tab").append("<li><a href='#p"+size+"' data-toggle='tab'>小零件包"+size+"</a></li>");
+          var new_id = new Date().getTime();
+          var regexp = new RegExp("new_children" , "g");
+          $("#n<%= p %> div.tab-content ").append("<div class='tab-pane ' id='p"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id));
+          $('#n<%= p %> #package_tab a:last').tab('show');
         });
 
         </SCRIPT>
 
       </div>
+
+      <ul class="nav nav-tabs " id="package_tab">
+      
+      <li class="active">
+        <a href="#p" data-toggle='tab'>大零件包</a>
+      </li>
+      
+      
+      </ul>  
+        
+      
+      <div class="tab-content" id="package_content">
+        <div class="tab-pane active" id='p'>  
+        <div id="fields" >
+                <%= f.label :name, "零件包名称" %>
+                <%= f.text_field :name %>
+                <%= f.label :quantity, "零件包数量" %>
+                <%= f.text_field :quantity %>
+        </div>
+      
       
         <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
         <%= render 'part_fields', :f => sb %>
@@ -39,6 +54,6 @@
         <ul class="thumbnails center" id="itemContainer">      
         
         </ul>
-
-
+      </div>
+      </div>
 </div>
