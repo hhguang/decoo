@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130506034602) do
   create_table "packages", :force => true do |t|
     t.string   "name"
     t.integer  "toy_id"
+    t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -82,8 +83,9 @@ ActiveRecord::Schema.define(:version => 20130506034602) do
     t.integer  "spec_id"
     t.integer  "quantity"
     t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "small_package_name"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "products", :force => true do |t|

@@ -1,6 +1,10 @@
 Decoo::Application.routes.draw do
 
-  resources :parts
+  resources :parts do
+    collection do
+      get :new_sp
+    end
+  end
 
   resources :packages
 

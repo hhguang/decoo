@@ -33,6 +33,13 @@ class PartsController < ApplicationController
     end
   end
 
+  def new_sp
+    @part=Part.new(:small_package_name=>"")
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /parts/1/edit
   def edit
     @part = Part.find(params[:id])
