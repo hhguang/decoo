@@ -1,11 +1,13 @@
-<% if @part.is_small_package? %>
-$(".tab-content .active ").append("<div class='well'><span>名称：数量：<\/span><a href='/parts/new/<%= @part.id %>' date-remote='true'>增加零件<\/a><\/div>");
-$('#part-modal').modal('hide');   
-<% else %>
-$(".tab-content .active #package_content .active #itemContainer").append("<%= escape_javascript(render(:partial=>'part_pic')) %>")
+var new_id = new Date().getTime();
+var regexp = new RegExp("new_parts" , "g");
+
+var remove_field=$(".tab-content .active #package_content .active #remove_field").clone(true);
+var pic="<%= escape_javascript(render(:partial=>'part_pic')) %>";
+pic.children("thumbnail").replace(regexp, new_id).append(remove_field);
+
+$(".tab-content .active #package_content .active #itemContainer").append(pic);
  $('#part-modal').modal('hide');   
- var new_id = new Date().getTime();
-  var regexp = new RegExp("new_parts" , "g");
+ 
 var spec_id_field=$(".tab-content .active #package_content .active #spec_id_field").clone(true);
  spec_id_field.children("input").val(<%= @part.spec_id %>);   
 $(".tab-content .active #package_content .active #fields").append(spec_id_field.html().replace(regexp, new_id));
@@ -14,4 +16,5 @@ var quantity_field=$(".tab-content .active #package_content .active #quantity_fi
  quantity_field.children("input").val(<%= @part.quantity %>);   
 $(".tab-content .active #package_content .active #fields").append(quantity_field.html().replace(regexp, new_id));
 
-<% end %>
+
+

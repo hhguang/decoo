@@ -10,6 +10,6 @@ class Package < ActiveRecord::Base
   				:class_name=>"Package" ,
   				:foreign_key=>"parent_id",
   				:dependent=>:destroy
-  accepts_nested_attributes_for :parts,:reject_if => lambda { |a| a[:spec_id].blank? }
+  accepts_nested_attributes_for :parts,:reject_if => lambda { |a| a[:spec_id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :children
 end

@@ -4,3 +4,7 @@
         <div id="quantity_field">
           <%= f.hidden_field :quantity %>    
         </div>
+        <div id="remove_field">
+        	<%= f.check_box :_destroy %>
+  			<%= f.label :_destroy, "移除" %>
+        </div>

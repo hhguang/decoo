@@ -32,6 +32,7 @@
 <% @toy.packages.each do |package| %>
 
   <div class="tab-pane <%= "active" if first %>" id="<%= package.id %>">
+    <% first=false %>
     <ul class="nav nav-tabs " id="package_tab">
       
       <li class="active">

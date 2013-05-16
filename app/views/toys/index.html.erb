@@ -20,7 +20,7 @@
         <div class="content noPad">
           <div style="padding: 15px;">
             <% if can? :manage, @toy %>
-            <a href="<%= new_product_path %>"  class="btn btn-success " data-remote="true" >
+            <a href="<%= new_toy_path %>"  class="btn btn-success " >
               <span class="icon14 iconic-icon-plus white"></span>
               新增成品
             </a>
@@ -62,30 +62,4 @@
 
   </div>
 
-
-
-
-<h1>Listing toys</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @toys.each do |toy| %>
-  <tr>
-    <td><%= toy.name %></td>
-    <td><%= link_to 'Show', toy %></td>
-    <td><%= link_to 'Edit', edit_toy_path(toy) %></td>
-    <td><%= link_to 'Destroy', toy, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Toy', new_toy_path %>
 </div>

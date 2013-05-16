@@ -1,9 +1,12 @@
 
       <div class="tab-pane <%= 'active' if p==1 %>" id="n<%= p %>">  
-
+        <%= f.label :name, "零件包名称" %>
+        <%= f.text_field :name %>
+        <%= f.label :quantity, "零件包数量" %>
+        <%= f.text_field :quantity %>
         <div class="btn-group" style="padding:0 0 10px 0;">
-        <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
-        <%= link_to "新增零件小包",new_sp_parts_path,:class=>"btn btn-success",:remote=>true %>
+        <%= link_to "新增零件",new_part_path,:class=>"btn ",:remote=>true %>
+        
         <a href="#new" id="new_small_package_<%= p %>" class='btn'>添加零件小包</a>
         <%
         association=:children
@@ -40,10 +43,7 @@
       <div class="tab-content" id="package_content">
         <div class="tab-pane active" id='p'>  
         <div id="fields" >
-                <%= f.label :name, "零件包名称" %>
-                <%= f.text_field :name %>
-                <%= f.label :quantity, "零件包数量" %>
-                <%= f.text_field :quantity %>
+               
         </div>
       
       

@@ -3,7 +3,18 @@
 
 <%= render '/share/head',:title=>'成品管理',:here=>'新增成品' %>
 
-<%#= render 'form' %>
+<div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>新增成品</span>
+          </h4>
+          
+        </div>
+        <div class="content ">
+          
 
 <%= form_for @toy do |f| %>
   <%#= f.error_messages %>
@@ -27,7 +38,7 @@ $("a#new").on( "click", function( event ) {
   $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_packages" , "g");
-  $("div.tab-content").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id));
+  $("div#big_package").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id));
   $('#myTab a:last').tab('show');
 });
 
@@ -43,7 +54,7 @@ $("a#new").on( "click", function( event ) {
       <% end %>
       
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" id="big_package">
       <% p=0 %>
       <%= f.fields_for :packages do |builder| %>
       <% p+=1 %>
@@ -61,15 +72,23 @@ $("a#new").on( "click", function( event ) {
 
 
 
-<div id="part-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">零件</h3>
-  </div>
-  <div class="modal-body">
+  <div id="part-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">零件</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
 
   </div>
 
 </div>
 
-</div>
+</div><!-- End .box -->
+
+    </div>
+
+  </div>  <!-- end row-flow -->
+
+</div><!--end Content wrapper-->
