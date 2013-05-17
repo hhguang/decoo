@@ -1,12 +1,15 @@
+# encoding: utf-8
 var new_id = new Date().getTime();
 var regexp = new RegExp("new_parts" , "g");
 
-var remove_field=$(".tab-content .active #package_content .active #remove_field").clone(true);
-var pic="<%= escape_javascript(render(:partial=>'part_pic')) %>";
-pic.children("thumbnail").replace(regexp, new_id).append(remove_field);
+ var remove_field=$(".tab-content .active #package_content .active #remove_field").clone();
+var pic=$("<%= escape_javascript(render(:partial=>'part_pic')) %>");
+pic.children(".thumbnail").append(remove_field.html().replace(regexp, new_id) );
 
-$(".tab-content .active #package_content .active #itemContainer").append(pic);
- $('#part-modal').modal('hide');   
+
+$(".tab-content .active #package_content .active #itemContainer").append(pic[0]);
+
+$('#part-modal').modal('hide');   
  
 var spec_id_field=$(".tab-content .active #package_content .active #spec_id_field").clone(true);
  spec_id_field.children("input").val(<%= @part.spec_id %>);   
