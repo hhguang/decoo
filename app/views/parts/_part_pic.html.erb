@@ -1,14 +1,23 @@
 # encoding: utf-8
-<li class="span3" id="pic" >
+<li class="span2" id="pic" >
       <div class="thumbnail">
         <img src="/products/<%= @part.spec.product.image_url%>" alt="" style="width:auto;height: 60px;">
         <h3></h3>
         <p>
-          件数：<%= @part.quantity %>
+          <strong>
+            <%= @part.spec.bh %>
+          </strong>
+        <br/>
+          <span >
+          数量：<%= @part.quantity %>
+        </span>
+        <br/>
+        <span style="background-color:<%= @part.spec.color.value %>">
           颜色：<%= @part.spec.color.name %>
-          名称：<%= @part.spec.product.title %>
-        </p>
-         
+        </span>
+        <br/>
+        
+         </p>
         
       </div>
     </li>

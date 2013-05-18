@@ -53,17 +53,9 @@
         <div class="tab-pane active" id="p">
         	<ul class="thumbnails center" id="itemContainer">
         		<% package.parts.each do |part| %>
-        	  <li class="span3">
-        	    <div class="thumbnail">
-        	      <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
-        	      <h3><%= part.spec.bh %></h3>
-        	      <p>
-        	      	件数：<%=  part.quantity %>
-        	      	颜色：
-        	      	名称：
-        	      </p>
-        	    </div>
-        	  </li>
+            <% @part=part %>
+            <%= render '/parts/part_pic',:object=>@part %>
+        	  
         	  <% end %>
 
       	   </ul>
