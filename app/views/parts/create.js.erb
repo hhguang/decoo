@@ -2,10 +2,11 @@
 var new_id = new Date().getTime();
 var regexp = new RegExp("new_parts" , "g");
 
- var remove_field=$(".tab-content .active #package_content .active #remove_field").clone();
+ var remove_field=$(".tab-content .active #package_content .active #remove_field").clone(true);
 var pic=$("<%= escape_javascript(render(:partial=>'part_pic')) %>");
-pic.children(".thumbnail").append(remove_field.html().replace(regexp, new_id) );
 
+pic.children(".thumbnail").append(remove_field.html().replace(regexp, new_id) );
+pic.children(".thumbnail").append("<a href='#' id='"+new_id+"' onclick='event.preventDefault();$(this).parents(\"li#pic\").hide();$(this).prev(\"input[type=hidden]\").val(\"1\"); ' >移除<\/>");
 
 $(".tab-content .active #package_content .active #itemContainer").append(pic[0]);
 
