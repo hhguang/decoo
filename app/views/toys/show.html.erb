@@ -5,14 +5,20 @@
 
 <div class="row-fluid">
     <div class="span12">
-
-      <div class="well">
-        <span>
-        成品：<%= @toy.name %>  
-        </span>
-        <button type="submit" class="btn btn-success ">改名</button>
-        <button type="submit" class="btn btn-success ">新增零件包</button>
-      </div>
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>成品：<%= @toy.name %>  </span>
+          </h4>
+          
+        </div>
+      <div class="content ">
+        <div style="padding:0 0 10px 0;" class="btn-group">
+        <%= link_to '编辑', edit_toy_path(@toy),:class=>'btn' %> 
+        <%= link_to '返回列表', toys_path,:class=>'btn' %>
+        
+        </div>
 
   <div class="tabbable tabs-left">
 <ul class="nav nav-tabs " id="myTab">
@@ -20,7 +26,7 @@
 <% @toy.packages.each do |package| %>
 
   <li  <%= "class='active'" if first %> >
-  	<a href="#<%= package.id %>"><%= package.name %></a>
+  	<a href="#<%= package.id %>">零件包：<%= package.name %></a>
   </li>  
   <% first=false %>
 <% end %>
@@ -28,6 +34,8 @@
 </ul>
 
 <div class="tab-content">
+
+
 	<% first=true %>
 <% @toy.packages.each do |package| %>
 
@@ -36,12 +44,12 @@
     <ul class="nav nav-tabs " id="package_tab">
       
       <li class="active">
-        <a href="#p<%= package.id %>" data-toggle='tab'>大零件包</a>
+        <a href="#p<%= package.id %>" data-toggle='tab'>零件列表</a>
       </li>
       <% package.children.each do |s| %>
       <li class="">
         <a href="#p<%= s.id %>" data-toggle='tab'>
-          <%= s.name %>
+          小包：<%= s.name %>
         </a>
       </li>
       <% end %>
@@ -82,10 +90,10 @@
 <!-- end tabbable -->
 
 
-<%= link_to 'Edit', edit_toy_path(@toy) %> |
-<%= link_to 'Back', toys_path %>
 
-</div>
-</div>
 
-</div>
+</div><!-- end content -->
+</div><!-- end box -->
+</div><!-- end span12 -->
+</div><!-- end row-fluid -->
+</div><!-- end wrapper -->
