@@ -46,13 +46,23 @@
                
         </div>
       
-      
-        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
-        <%= render 'part_fields', :f => sb %>
-        <% end %>  
+        <%
+        # association=:parts
+        # new_object = Package.new
+        # new_object.parts.build
+        #     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+        #       render(association.to_s.singularize + "_fields", :f => builder)
+        #     end
+        %>
+        <%#= fields %>
+        
  
         <ul class="thumbnails center" id="itemContainer">      
+          <%= f.fields_for :parts  do |sb| %>
           
+          
+          <%= render 'pic',:f=>sb %>
+          <% end %>  
         </ul>
       </div>
       </div>

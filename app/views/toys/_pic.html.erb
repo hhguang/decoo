@@ -1,0 +1,28 @@
+# encoding: utf-8
+<% part=f.object %>
+<li class="span2" id="pic" >
+      <div class="thumbnail">
+        <img src="/products/<%= part.spec.product.image_url%>" alt="" style="width:auto;height: 60px;">
+        <h3></h3>
+        <p>
+          <strong>
+            <%= part.spec.bh %>
+          </strong>
+        <br/>
+          <span >
+          数量：<%= part.quantity %>
+        </span>
+        <br/>
+        <span style="background-color:<%= part.spec.color.value %>">
+          颜色：<%= part.spec.color.name %>
+        </span>
+        <br/>
+        
+         </p>
+         <%= f.hidden_field :spec_id %>
+         <%= f.hidden_field :quantity %>    
+         <%= f.hidden_field :_destroy %>
+         <a href='#' id='' onclick='event.preventDefault();$(this).parents("li#pic").hide();$(this).prev("input[type=hidden]").val("1"); ' > 移除 </>
+      </div>
+      
+</li>

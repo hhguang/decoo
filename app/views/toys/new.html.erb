@@ -38,7 +38,10 @@ $("a#new").on( "click", function( event ) {
   $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_packages" , "g");
-  $("div#big_package").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id));
+  var sregexp =new RegExp("new_small_package","g");
+  var tregexp =new RegExp("ptab","g");
+  var nregexp =new RegExp("npanel","g");
+  $("div#big_package").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id).replace(sregexp,"sp"+new_id).replace(tregexp,"ptab"+new_id).replace(nregexp,"npanel"+new_id));
   $('#myTab a:last').tab('show');
 });
 
@@ -49,7 +52,7 @@ $("a#new").on( "click", function( event ) {
       <%= f.fields_for :packages do |builder| %>
       <% n+=1 %>
       <li class="<%= 'active' if n==1 %>">
-        <a href="#n<%= n %>">新零件包<%= n %></a>
+        <a href="#npanel<%= n %>">新零件包<%= n %></a>
       </li>
       <% end %>
       

@@ -1,114 +1,97 @@
+# encoding: utf-8
 <div class="contentwrapper"><!--Content wrapper-->
-<%= render '/share/head',:title=>'成品管理',:here=>'编辑' %>
 
-<p id="notice"><%= notice %></p>
-
-    <div class="navbar">
-    <div class="navbar-inner">
-    <a class="brand" href="#">
-      成品：<%= @toy.name %>
-    </a>
-    <ul class="nav">
-    <li ><a href="#">详细</a></li>
-    <li class="active"><a href="edit">编辑</a></li>
-    <li><a href="#">Link</a></li>
-    </ul>
-    </div>
-    </div>
+<%= render '/share/head',:title=>'成品管理',:here=>'新增成品' %>
 
 <div class="row-fluid">
     <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>成品编辑</span>
+          </h4>
+          
+        </div>
+        <div class="content ">
+          
 
-      
+<%= form_for @toy do |f| %>
+  <%#= f.error_messages %>
+  <p>
+    <%= f.label :name,"成品名称" %>
+    <%= f.text_field :name %>
+  </p>
+<a href="#new" id="new" class='btn'>添加零件包</a>
 
-  <div class="tabbable tabs-left">
-<ul class="nav nav-tabs " id="myTab">
-	<% first=true %>
-<% @toy.packages.each do |package| %>
+<%
+association=:packages
+new_object = f.object.class.reflect_on_association(association).klass.new
+new_object.parts.build
+    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder)
+    end
+%>
+<SCRIPT TYPE="text/javascript">
+$("a#new").on( "click", function( event ) {
+  size=$("ul#myTab li").size()+1;
+  $("ul#myTab").append("<li><a href='#n"+size+"' data-toggle='tab'>新零件包"+size+"</a></li>");
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_packages" , "g");
+  var sregexp =new RegExp("new_small_package","g");
+  var tregexp =new RegExp("ptab","g");
+  var nregexp =new RegExp("npanel","g");
+  $("div#big_package").append("<div class='tab-pane ' id='n"+size+"'><%= escape_javascript(fields) %> </div>".replace(regexp, new_id).replace(sregexp,"sp"+new_id).replace(tregexp,"ptab"+new_id).replace(nregexp,"npanel"+new_id));
+  $('#myTab a:last').tab('show');
+});
 
-  <li  <%= "class='active'" if first %> >
-  	<a href="#<%= package.id %>"><%= package.name %></a>
-  </li>  
-  <% first=false %>
-<% end %>
-
-</ul>
-
-<div class="tab-content">
-	<% first=true %>
-<% @toy.packages.each do |package| %>
-
-  <div class="tab-pane <%= "active" if first %>" id="<%= package.id %>">
-    <% first=false %>
-    <ul class="nav nav-tabs " id="package_tab">
-      
-      <li class="active">
-        <a href="#p" data-toggle='tab'>大零件包</a>
-      </li>
-      <% package.children.each do |s| %>
-      <li class="">
-        <a href="#p<%= s.id %>" data-toggle='tab'>
-          <%= s.name %>
-        </a>
+</SCRIPT>
+<div class="tabbable tabs-left" style='padding: 10px 0;'>
+    <ul class="nav nav-tabs " id="myTab">
+      <% n=0 %>
+      <%= f.fields_for :packages do |builder| %>
+      <% n+=1 %>
+      <li class="<%= 'active' if n==1 %>">
+        <a href="#npanel<%= n %>"><%= builder.object.name %></a>
       </li>
       <% end %>
       
-      </ul>  
-        
-      
-      <div class="tab-content" id="package_content">
-        <div class="tab-pane active" id="p">
-        	<ul class="thumbnails center" id="itemContainer">
-        		<% package.parts.each do |part| %>
-        	  <li class="span3">
-        	    <div class="thumbnail">
-        	      <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
-        	      <h3><%= part.spec.bh %></h3>
-        	      <p>
-        	      	件数：<%=  part.quantity %>
-        	      	颜色：
-        	      	名称：
-        	      </p>
-        	    </div>
-        	  </li>
-        	  <% end %>
+    </ul>
+    <div class="tab-content" id="big_package">
+      <% p=0 %>
+      <%= f.fields_for :packages do |builder| %>
+      <% p+=1 %>
+      <%= render 'edit_package', :f => builder,:p=>p %>
+      <% end %>
 
-      	   </ul>
-        </div>
-        <% package.children.each do |s| %>
-          <div class="tab-pane " id="p<%= s.id %>">
-            <ul class="thumbnails center" id="itemContainer">
-              <% s.parts.each do |part| %>
-              <li class="span3">
-                <div class="thumbnail">
-                  <img src="/products/<%= part.spec.product.image_url %>" alt="" style="width:auto;height: 60px;">
-                  <h3><%= part.spec.bh %></h3>
-                  <p>
-                    件数：<%=  part.quantity %>
-                    颜色：
-                    名称：
-                  </p>
-                </div>
-              </li>
-              <% end %>
-
-             </ul>
-          </div>
-        <% end %>
-      </div>
-  </div>
+    </div>
+     
+</div>
   
-
+  <p>
+  <button type='submit' class="btn btn-success ">保存</button>或者<%= link_to '返回列表', toys_path %>
+  </p>
 <% end %>
-</div>
-</div>
-<!-- end tabbable -->
 
 
-<%= link_to 'Edit', edit_toy_path(@toy) %> |
-<%= link_to 'Back', toys_path %>
+
+  <div id="part-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">零件</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+
+  </div>
 
 </div>
-</div>
 
-</div>
+</div><!-- End .box -->
+
+    </div>
+
+  </div>  <!-- end row-flow -->
+
+</div><!--end Content wrapper-->
