@@ -1,14 +1,24 @@
 <div class='well'>
-	
+	<div id="fields">
 	<%= f.label :name, "零件包名称" %>
-        <%= f.text_field :small_package_name %>
+        <%= f.text_field :name %>
         <%= f.label :quantity, "零件包数量" %>
         <%= f.text_field :quantity %>
         
+        <%= f.label :_destroy,"移除" %>
+        <%= f.check_box :_destroy %>
         <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
         <%= render 'part_fields', :f => sb %>
         <% end %>  
+    </DIV>
+</div>  
     <div>
         <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
     </div>
-</div>
+    <ul class="thumbnails center" id="itemContainer">      
+        <%= f.fields_for :parts  do |sb| %>
+          
+          
+          <%= render 'pic',:f=>sb %>
+        <% end %>  
+    </ul>

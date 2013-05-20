@@ -35,26 +35,28 @@
       <li class="active">
         <a href="#ptab<%= p %>" data-toggle='tab'>大零件包</a>
       </li>
-      
+      <%= f.fields_for :children do  |builder| %>
+      <li><a href='#ptab<%= builder.object.id %>' data-toggle='tab'><%= builder.object.name %></a></li>
+      <% end %>
       
       </ul>  
         
       
-      <div class="tab-content" id="package_content">
-        <div class="tab-pane active" id='ptab<%= p %>'>  
+    <div class="tab-content" id="package_content">
+      <div class="tab-pane active" id='ptab<%= p %>'>  
         <div id="fields" >
                
         </div>
       
         <%
-        # association=:parts
-        # new_object = Package.new
-        # new_object.parts.build
-        #     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
-        #       render(association.to_s.singularize + "_fields", :f => builder)
-        #     end
+        association=:parts
+        new_object = Part.new
+        
+            fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+              render(association.to_s.singularize + "_fields", :f => builder)
+            end
         %>
-        <%#= fields %>
+        <%= fields %>
         
  
         <ul class="thumbnails center" id="itemContainer">      
@@ -65,5 +67,12 @@
           <% end %>  
         </ul>
       </div>
+
+      <%= f.fields_for :children do  |builder| %>
+      <div class='tab-pane ' id='ptab<%= builder.object.id %>'>
+        <%= render 'small_package_fields',:f=>builder %>
       </div>
+      <% end %>
+
+    </div>
 </div>
