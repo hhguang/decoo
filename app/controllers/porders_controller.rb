@@ -44,7 +44,8 @@ class PordersController < ApplicationController
   # POST /porders.json
   def create
     @porder = Porder.new(params[:porder])
-
+    @porder.user_id=current_user.id
+    @porder.name="p"+Time.now.strftime("%Y%m%d%H%M%S ")
     respond_to do |format|
       if @porder.save
         format.html { redirect_to @porder, notice: 'Porder was successfully created.' }

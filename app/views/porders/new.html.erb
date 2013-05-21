@@ -20,19 +20,26 @@
         <div class="content noPad">
           <div style="padding: 15px;">
             
-            <form class="form-inline pull-left" style="padding-left:20px;" action="<%=  toys_path %>">
-            	<label>成品名称</label>
-              <input type="text" class="input-medium " name="name" value=<%= @toy.name %> disabled=true />
-              <label>数量</label>
-              <input type="text" class="input-medium " name="quantity" value=<%= @quantity %> />
-              <a  class="btn" href="#" id='js'>计算</a>
-              <button type="submit" class="btn btn-success">下单</button>
-            </form>
+            <%= form_for(@porder,:html=>{:class=>"form-inline pull-left"} ) do |f| %>
+              
+                <span>
+                  成品名称：<%= @toy.name %>
+                </span>
+                <%= f.label :quantity,"数量" %>        
+                <%= f.text_field :quantity %>
+                <%= f.hidden_field :toy_id %>
+                <a  class="btn" href="#" id='js'>计算</a>
+                <button type="submit" class="btn btn-success">下单</button>
+              
+            <% end %>
+            
             <script type="text/javascript">
             	$("a#js").on( "click", function( event ) {
+                var q=$("input#porder_quantity").val();
             		$("tbody#parts tr").each(function(index){
-            			this.find("#quantity")
-            		}) 
+            			$(this).children("#zs").text(parseFloat($(this).find("#sl").text())*q);
+                  $(this).children("#zzl").text(parseFloat($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text()));
+            		}) ;
             	}
             	)
             </script>
@@ -42,9 +49,10 @@
             <thead>
               <tr>
                 <th>#</th>
+                <th>单个重量</th>
                 <th>数量</th>
                 <th>总件数</th>
-                <th>重量</td>
+                <th>总重量</td>
                 <th>库存</th>
               </tr>
             </thead>
@@ -55,17 +63,20 @@
               	<td>
               		<%= part.spec.bh %>
               	</td>
+                <td id="zl">
+                  <%= part.spec.product.weight || "未知" %>
+                </td>
               	<td id="sl">
               		<%= part.quantity %>
               	</td>
               	<td id='zs'>
               		<%= part.quantity*@quantity %>
               	</td>
-              	<td>
-              		<%= number_with_precision(part.quantity*@quantity*part.spec.product.weight) %>
+              	<td id="zzl">
+              		<%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*@quantity*part.spec.product.weight) %>
               	</td>
               	<td>
-              		<%= part.spec.stock.quantity || 0 %>
+              		<%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
               	</td>
               </tr>
               <% end %>
@@ -89,8 +100,3 @@
   </div>
 
 </div>
-<h1>New porder</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', porders_path %>

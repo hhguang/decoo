@@ -1,30 +1,122 @@
-<p id="notice"><%= notice %></p>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render %>
 
-<p>
-  <b>Name:</b>
-  <%= @porder.name %>
-</p>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="btn-group span4" >
+        <a href="/outstocks" role="button"  class="btn  ">
+          所有出库单
+        </a>
+        <a href="/outstocks/new" role="button"  class="btn " >
+          新增出库单
+        </a>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <b>Toy:</b>
-  <%= @porder.toy_id %>
-</p>
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="msg" style="padding:10px;">
+        <%= notice_message %>
+      </div>
 
-<p>
-  <b>Quantity:</b>
-  <%= @porder.quantity %>
-</p>
+      <div class="box gradient invoice">
 
-<p>
-  <b>User:</b>
-  <%= @porder.user_id %>
-</p>
+        <div class="title clearfix">
 
-<p>
-  <b>Outstock:</b>
-  <%= @porder.outstock_id %>
-</p>
+          <h4 class="left">
+            <span>出库单</span>
+            <span class="number"> <strong class="red">#<%= @outstock.bh %></strong></span>
+          </h4>
+          <%#*<div class="print">%>
+            <%#*<a class="tip" href="#" oldtitle="Print invoice" title=""><span class="icon24 entypo-icon-printer"></span></a>%>
+          <%#*</div>%>
+          <div class="invoice-info">
+            
+            <span class="data gray"><%= @outstock.created_at.strftime("%Y-%m-%d ") %></span>
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+        <div class="content">
+          <div class="you">
+            <ul class="unstyled">
+              <li><h3>领料人</h3></li>
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= @outstock.taker %></li>
+              
+          </div>
+          <div class="client">
+            <ul class="unstyled">
+              <li><h3>经手人</h3></li>
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@outstock.user.name}" if @outstock.user_id %></li>
+              
+
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+
+          <table class="responsive table table-bordered">
+            <thead>
+              <tr>
+                
+                <th>货号</th>
+                <th colspan="2">颜色</th>
+                <th>材料</th>
+                <th>重量</th>
+                <th>数量</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% @outstock.outstock_items.each do |item|  %>
+
+              <tr>
+                <td>
+                  <%= item.spec.bh if item.spec %>
+                </td>
+                <td style="background-color:<%= item.spec.color.value if item.spec %> " >
+                  
+                </td>
+                <td>
+                  <%= item.spec.color.name if item.spec %>
+                </td>
+                <td>
+                  <%= item.spec.material if item.spec %>
+                </td>
+                <td>
+                  <%= item.weight %>
+                </td>
+                <td>
+                  <%= item.quantity %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <div class="payment">
+            <ul class="unstyled">
+              <li><h3>备注</h3></li>
+              <%= @outstock.memo %>
+            </ul>
+          </div>
+
+          <div class="total">
+            
+          </div>
 
 
-<%= link_to 'Edit', edit_porder_path(@porder) %> |
-<%= link_to 'Back', porders_path %>
+          <div class="clearfix"></div>
+
+          <div class="invoice-footer">
+            
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
