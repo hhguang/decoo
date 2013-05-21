@@ -2,7 +2,12 @@ class ToysController < ApplicationController
   # GET /toys
   # GET /toys.json
   def index
-    @toys = Toy.paginate(:page => params[:page], :per_page => 10)
+   
+    if params[:search] 
+      @toys=Toy.where('name like ?',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    else
+       @toys = Toy.paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
