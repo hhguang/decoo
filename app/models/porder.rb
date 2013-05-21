@@ -3,4 +3,8 @@ class Porder < ActiveRecord::Base
 
   belongs_to :toy
   belongs_to :user
+
+  validates :quantity,:presence => true,
+                    :numericality=>{:greater_than=>0}
+
 end

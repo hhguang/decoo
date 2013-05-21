@@ -277,13 +277,15 @@
                 </ul>
               </li>
               <li>
-                <a href="#" ><span class="icon16 silk-icon-columns"></span>生产</a>
+                <a href="#" ><span class="icon16 silk-icon-columns"></span>生产管理</a>
                 <ul class="sub">
                   <li><a href="/toys" <%= 'class="current"' if controller_name.in?(['toys']) %> > 
                     <span class="icon16 icomoon-icon-arrow-right"></span>成品管理</a>
                   </li>
                   
-                  <li><a href="#"><span class="icon16 icomoon-icon-arrow-right"></span>生产管理</a></li>
+                  <li><a href="/porders" <%= 'class="current"' if controller_name.in?(['porders']) %> >
+                    <span class="icon16 icomoon-icon-arrow-right"></span>生产单</a>
+                  </li>
                 </ul>
               </li>
               <li>
