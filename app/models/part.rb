@@ -17,5 +17,7 @@ class Part < ActiveRecord::Base
   def spec_bh
     self.spec.bh if self.spec
   end 
+
+  
   
 end

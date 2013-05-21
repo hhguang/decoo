@@ -24,8 +24,11 @@ class PordersController < ApplicationController
   # GET /porders/new
   # GET /porders/new.json
   def new
-    @porder = Porder.new
-
+    @toy=Toy.find(params[:toy_id]) if params[:toy_id]
+    
+    @quantity=params[:quantity] || 1
+    @parts=@toy.parts
+    @porder = @toy.porders.build(:quantity=>@quantity)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @porder }

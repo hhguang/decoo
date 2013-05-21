@@ -10,7 +10,9 @@ Decoo::Application.routes.draw do
 
   resources :packages
 
-  resources :toys
+  resources :toys do
+    resources :porders
+  end
 
   resources :user_logs
 

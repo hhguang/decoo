@@ -13,7 +13,7 @@ class Spec < ActiveRecord::Base
   has_many :outstock_items,:dependent=>:destroy
   has_many :parts
   has_many :packages,:through=>:parts
-  
+    
   
   validate :bh_exist?
   def bh_exist?    
