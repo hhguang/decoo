@@ -29,7 +29,12 @@
               <button type="submit" class="btn btn-success">下单</button>
             </form>
             <script type="text/javascript">
-            	$("a#js").onclick
+            	$("a#js").on( "click", function( event ) {
+            		$("tbody#parts tr").each(function(index){
+            			this.find("#quantity")
+            		}) 
+            	}
+            	)
             </script>
 
           </div>
@@ -50,10 +55,10 @@
               	<td>
               		<%= part.spec.bh %>
               	</td>
-              	<td>
+              	<td id="sl">
               		<%= part.quantity %>
               	</td>
-              	<td>
+              	<td id='zs'>
               		<%= part.quantity*@quantity %>
               	</td>
               	<td>
