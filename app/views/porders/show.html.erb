@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @porder.name %>
+</p>
+
+<p>
+  <b>Toy:</b>
+  <%= @porder.toy_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @porder.quantity %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @porder.user_id %>
+</p>
+
+<p>
+  <b>Outstock:</b>
+  <%= @porder.outstock_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_porder_path(@porder) %> |
+<%= link_to 'Back', porders_path %>

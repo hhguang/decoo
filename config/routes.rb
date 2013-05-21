@@ -1,5 +1,7 @@
 Decoo::Application.routes.draw do
 
+  resources :porders
+
   resources :parts do
     collection do
       get :new_sp
