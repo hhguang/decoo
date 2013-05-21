@@ -1,14 +1,14 @@
 <div class="contentwrapper"><!--Content wrapper-->
-  <%= render %>
+  <%= render '/share/head',:title=>'生产管理',:here=>'领料单' %>
 
   <div class="row-fluid">
     <div class="span12">
       <div class="btn-group span4" >
         <a href="/outstocks" role="button"  class="btn  ">
-          所有出库单
+          所有领料单
         </a>
         <a href="/outstocks/new" role="button"  class="btn " >
-          新增出库单
+          修改
         </a>
       </div>
     </div>
@@ -25,15 +25,15 @@
         <div class="title clearfix">
 
           <h4 class="left">
-            <span>出库单</span>
-            <span class="number"> <strong class="red">#<%= @outstock.bh %></strong></span>
+            <span>领料单</span>
+            <span class="number"> <strong class="red">#<%= @porder.name %></strong></span>
           </h4>
           <%#*<div class="print">%>
             <%#*<a class="tip" href="#" oldtitle="Print invoice" title=""><span class="icon24 entypo-icon-printer"></span></a>%>
           <%#*</div>%>
           <div class="invoice-info">
             
-            <span class="data gray"><%= @outstock.created_at.strftime("%Y-%m-%d ") %></span>
+            <span class="data gray"><%= @porder.created_at.strftime("%Y-%m-%d ") %></span>
             <div class="clearfix"></div>
           </div>
 
@@ -41,14 +41,14 @@
         <div class="content">
           <div class="you">
             <ul class="unstyled">
-              <li><h3>领料人</h3></li>
-              <li><span class="icon12 typ-icon-arrow-right"></span><%= @outstock.taker %></li>
+              <li><h3>成品</h3></li>
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= @porder.toy.name %></li>
               
           </div>
           <div class="client">
             <ul class="unstyled">
-              <li><h3>经手人</h3></li>
-              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@outstock.user.name}" if @outstock.user_id %></li>
+              <li><h3>下单人</h3></li>
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@porder.user.name}" if @porder.user_id %></li>
               
 
             </ul>
@@ -68,7 +68,7 @@
             </thead>
             <tbody>
 
-              <% @outstock.outstock_items.each do |item|  %>
+              <% @porder.toy.parts.each do |item|  %>
 
               <tr>
                 <td>
@@ -84,26 +84,26 @@
                   <%= item.spec.material if item.spec %>
                 </td>
                 <td>
-                  <%= item.weight %>
+                  <%= item.spec.product.weight*item.quantity*@porder.quantity %>
                 </td>
                 <td>
-                  <%= item.quantity %>
+                  <%= item.quantity*@porder.quantity %>
                 </td>
               </tr>
               <% end %>
             </tbody>
           </table>
 
-          <div class="payment">
+          <!-- <div class="payment">
             <ul class="unstyled">
               <li><h3>备注</h3></li>
-              <%= @outstock.memo %>
+              
             </ul>
           </div>
 
           <div class="total">
             
-          </div>
+          </div> -->
 
 
           <div class="clearfix"></div>
