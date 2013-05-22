@@ -46,6 +46,9 @@ class Ability
         can :manage, InStockItem
         can :manage, Outstock
         can :manage, OutstockItem
+        else
+            cannot :manage,:all
+
       end
     end
 end

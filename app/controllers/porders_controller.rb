@@ -89,4 +89,8 @@ class PordersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def out
+    index
+  end
 end

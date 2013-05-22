@@ -1,0 +1,73 @@
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'库存管理',:here=>'生产单列表' %>
+
+  <div class="row-fluid">
+    <div class="span12" id="msg">
+      <%= notice_message %>
+    </div>
+  </div> 
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>生产单列表</span>
+          </h4>
+          
+        </div>
+        <div class="content noPad">
+          <div style="padding: 15px;">
+            
+            <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  porders_path %>">
+              <input type="text" class="input-medium search-query" name="search"/>
+              <button type="submit" class="btn">搜索</button>
+            </form>
+
+          </div>
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>成品</th>
+                <th>数量</th>
+                <th>时间</th>
+                <th>已领料?</th>
+                <th colspan="3" >操作</th>
+              </tr>
+            </thead>
+            <tbody id="toys">
+              <% @porders.each do |porder| %>
+                  <tr>
+                    <td><%= porder.name %></td>
+                    <td><%= link_to porder.toy.name,toy_path(porder.toy_id) %></td>
+                    <td><%= porder.quantity %></td>
+                    <td><%= porder.created_at.strftime("%Y-%m-%d ") %></td>
+                    <td><%= porder.outstock_id.nil? ? "未领料" : "已领料" %></td>
+                    <td><%= link_to '出库', porder %></td>
+                    
+                  </tr>
+                <% end %>
+
+            </tbody>
+          </table>
+
+          <div class="row-fluid" style="padding: 10px;">
+            
+              <%= will_paginate @porders, :inner_window => 2 %>
+            </div>
+                        
+          </div>
+          
+          
+        </div>
+
+      </div><!-- End .box -->
+
+    </div>
+
+  </div>
+
+</div>
+

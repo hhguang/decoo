@@ -2,6 +2,7 @@ Decoo::Application.routes.draw do
 
   resources :porders do
     get :out,:on=>:collection
+    
   end
 
   resources :parts do
@@ -32,9 +33,8 @@ Decoo::Application.routes.draw do
 
   resources :outstock_items
 
-  resources :outstocks do
-    
-  end
+  resources :outstocks
+   
 
 
   resources :spec_properties
@@ -55,6 +55,7 @@ Decoo::Application.routes.draw do
 
   get "main/index"
   post "outstocks/find_stock"
+  get "outstocks/from_porder"
 
   resources :photos
 
