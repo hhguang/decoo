@@ -6,6 +6,7 @@ class CreatePorders < ActiveRecord::Migration
       t.integer :quantity
       t.integer :user_id
       t.integer :outstock_id
+      t.text    :memo
 
       t.timestamps
     end

@@ -2,7 +2,12 @@ class PordersController < ApplicationController
   # GET /porders
   # GET /porders.json
   def index
-    @porders = Porder.all
+    if params[:search] 
+      @porders=Porder.where('name like ?',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    else
+       @porders = Porder.paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +49,8 @@ class PordersController < ApplicationController
   # POST /porders.json
   def create
     @porder = Porder.new(params[:porder])
-
+    @porder.user_id=current_user.id
+    @porder.name="p"+Time.now.strftime("%Y%m%d%H%M%S ")
     respond_to do |format|
       if @porder.save
         format.html { redirect_to @porder, notice: 'Porder was successfully created.' }
