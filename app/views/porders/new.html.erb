@@ -38,8 +38,8 @@
 
                 var q=$("input#porder_quantity").val();
             		$("tbody#parts tr").each(function(index){
-            			$(this).children("#zs").text(parseFloat($(this).find("#sl").text())*q);
-                  $(this).children("#zzl").text(parseFloat($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text()));
+            			$(this).children("#zs").text(parseInt($(this).find("#sl").text())*q);
+                  $(this).children("#zzl").text( Math.round(parseInt($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text())*100)/100 );
             		}) ;
 
             	}
