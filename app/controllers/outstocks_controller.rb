@@ -1,6 +1,6 @@
 # encoding: utf-8
 class OutstocksController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except=>:from_porder
   # GET /outstocks
   # GET /outstocks.json
   def index

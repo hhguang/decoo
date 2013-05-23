@@ -1,38 +1,12 @@
 <div class="contentwrapper"><!--Content wrapper-->
-  <div class="heading">
-
-    <h3>库存管理</h3>
-
-    <ul class="breadcrumb">
-      <li>You are here:</li>
-      <li>
-        <a href="#" class="tip" title="back to dashboard">
-          <span class="icon16 icomoon-icon-screen"></span>
-        </a>
-        <span class="divider">
-          <span class="icon16 icomoon-icon-arrow-right"></span>
-        </span>
-      </li>
-      <li class="active">库存管理</li>
-    </ul>
-
-  </div><!-- End .heading-->
+  <%= render '/share/head',:title=>'库存管理',:here=>'生产单出库' %>
 
   <div class="row-fluid">
     <div class="span12">
-      <div class="btn-group span4" >
-        <a href="/outstocks" role="button"  class="btn  ">
-          所有出库单
-        </a>
-        <a href="/outstocks/new" role="button"  class="btn " >
-          新增出库单
-        </a>
-        <a href="/porders/out" role="button"  class="btn " >
-          生产单出库
-        </a>
-      </div>
+      <%= render 'btngroup' %>
     </div>
   </div>
+  
 
   <div class="row-fluid">
     <div class="span12">
