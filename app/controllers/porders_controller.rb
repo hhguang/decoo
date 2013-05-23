@@ -43,6 +43,7 @@ class PordersController < ApplicationController
   # GET /porders/1/edit
   def edit
     @porder = Porder.find(params[:id])
+    @parts=@porder.toy.parts
   end
 
   # POST /porders

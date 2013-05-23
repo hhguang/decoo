@@ -1,6 +1,77 @@
-<h1>Editing porder</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'生产管理',:here=>'生产单编辑' %>
 
-<%= render 'form' %>
+  <div class="row-fluid">
+    <div class="span12" id="msg">
+      <%= notice_message %>
+    </div>
+  </div> 
 
-<%= link_to 'Show', @porder %> |
-<%= link_to 'Back', porders_path %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>生产单:<%= @porder.name %></span>
+          </h4>
+          
+        </div>
+        <div class="content noPad">
+          	<div style="padding: 15px;">
+				<%= render 'form' %>
+			</div>
+			<table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>单个重量</th>
+                <th>数量</th>
+                <th>总件数</th>
+                <th>总重量</td>
+                <th>库存</th>
+              </tr>
+            </thead>
+            <tbody id="parts">
+              <% @parts.each do |part| %>
+              <tr>
+              	
+              	<td>
+              		<%= part.spec.bh %>
+              	</td>
+                <td id="zl">
+                  <%= part.spec.product.weight || "未知" %>
+                </td>
+              	<td id="sl">
+              		<%= part.quantity %>
+              	</td>
+              	<td id='zs'>
+              		<%= part.quantity*@porder.quantity %>
+              	</td>
+              	<td id="zzl">
+              		<%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*@porder.quantity*part.spec.product.weight) %>
+              	</td>
+              	<td>
+              		<%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
+              	</td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+<div class="row-fluid" style="padding: 10px;">
+            
+              
+            </div>
+                        
+          </div>
+          
+          
+        </div>
+
+      </div><!-- End .box -->
+
+    </div>
+
+  </div>
+
+</div>

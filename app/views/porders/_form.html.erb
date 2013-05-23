@@ -1,15 +1,25 @@
-<%= simple_form_for(@porder) do |f| %>
-  <%= f.error_notification %>
+<%= form_for(@porder,:html=>{:class=>"form-inline pull-left"} ) do |f| %>
+              
+                <span>
+                  成品名称：<%= @porder.toy.name %>
+                </span>
+                <%= f.label :quantity,"数量" %>        
+                <%= f.text_field :quantity %>
+                <%= f.hidden_field :toy_id %>
+                <a  class="btn" href="#" id='js'>计算</a>
+                <button type="submit" class="btn btn-success">下单</button>
+              
+            <% end %>
+            
+            <script type="text/javascript">
+              $("a#js").on( "click", function( event ) {
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :toy_id %>
-    <%= f.input :quantity %>
-    <%= f.input :user_id %>
-    <%= f.input :outstock_id %>
-  </div>
+                var q=$("input#porder_quantity").val();
+                $("tbody#parts tr").each(function(index){
+                  $(this).children("#zs").text(parseInt($(this).find("#sl").text())*q);
+                  $(this).children("#zzl").text( Math.round(parseInt($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text())*100)/100 );
+                }) ;
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+              }
+              )
+            </script>
