@@ -115,5 +115,14 @@ class OutstocksController < ApplicationController
       format.js   
     end
   end
+
+  def from_porder
+    @porder=Porder.find(params[:id])
+    @outstock = Outstock.new
+    # @outstock.outstock_items.build
+    @porder.toy.parts.each do |part|
+      @outstock.outstock_items.build(:spec_id=>part.spec_id,:weight=>(part.quantity*part.spec.product.weight*@porder.quantity),:quantity=>part.quantity*@porder.quantity)
+    end
+  end
   
 end

@@ -45,7 +45,7 @@
                     <td><%= porder.quantity %></td>
                     <td><%= porder.created_at.strftime("%Y-%m-%d ") %></td>
                     <td><%= porder.outstock_id.nil? ? "未领料" : "已领料" %></td>
-                    <td><%= link_to '出库', porder %></td>
+                    <td><%= link_to '出库', :controller=>'outstocks',:action=>'from_porder',:id=>porder %></td>
                     
                   </tr>
                 <% end %>
