@@ -12,10 +12,13 @@
           数量：<%= @part.quantity %>
         </span>
         <br/>
-        <span style="background-color:<%= @part.spec.color.value %>">
-          颜色：<%= @part.spec.color.name %>
+        
+        <span style="background-color:<%= @part.spec.color.value %>;width:10px;">
+          &nbsp&nbsp&nbsp
         </span>
+        <%= @part.spec.color.name %>
         <br/>
+        
         
          </p>
         
