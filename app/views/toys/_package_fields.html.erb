@@ -44,18 +44,20 @@
       
       <div class="tab-content" id="package_content">
         <div class="tab-pane active" id='ptab<%= p %>'>  
-        <div id="fields" >
-               
-        </div>
-      
-      
-        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
-        <%= render 'part_fields', :f => sb %>
-        <% end %>  
- 
-        <ul class="thumbnails center" id="itemContainer">      
+          <div id="fields" >
+                 <%= f.fields_for :parts  do |builder| %>
+                 <%= render 'npart_fields', :f=>builder %>
+                 <% end %>
+          </div>
           
-        </ul>
+        
+          <%#= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+          <%#= render 'part_fields', :f => sb %>
+          <%# end %>  
+   
+          <ul class="thumbnails center" id="itemContainer">      
+            
+          </ul>
       </div>
       </div>
 </div>

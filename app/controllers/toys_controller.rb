@@ -30,9 +30,9 @@ class ToysController < ApplicationController
   # GET /toys/new.json
   def new
     @toy = Toy.new
-    4.times do
+    1.times do
       package=@toy.packages.build
-      package.parts.build 
+      30.times { package.parts.build }
     end
     
     
