@@ -4,6 +4,8 @@
         <%= f.text_field :name %>
         <%= f.label :quantity, "零件包数量" %>
         <%= f.text_field :quantity %>
+        <%= f.label :_destroy,"移除" %>
+        <%= f.check_box :_destroy %>
         <div class="btn-group" style="padding:0 0 10px 0;">
         <%= link_to "新增零件",new_part_path,:class=>"btn ",:remote=>true %>
         
@@ -33,7 +35,7 @@
       <ul class="nav nav-tabs " id="package_tab">
       
       <li class="active">
-        <a href="#ptab<%= p %>" data-toggle='tab'>大零件包</a>
+        <a href="#ptab<%= p %>" data-toggle='tab'>零件列表</a>
       </li>
       
       
