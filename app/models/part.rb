@@ -5,7 +5,7 @@ class Part < ActiveRecord::Base
   belongs_to :package
   belongs_to :spec  
 
-  validates_presence_of :spec_id,:if=>Proc.new{|u| !u.is_small_package? }  
+  validates_presence_of :spec_id
 
   def spec_bh=(bh_field)          
     self.spec_id=Spec.find_by_bh!(bh_field.strip).id

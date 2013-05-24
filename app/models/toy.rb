@@ -3,7 +3,7 @@ class Toy < ActiveRecord::Base
 
   has_many :packages
   has_many :porders
-  accepts_nested_attributes_for :packages,:reject_if => lambda { |a| a[:name].blank? }
+  accepts_nested_attributes_for :packages,:reject_if => lambda { |a| a[:name].blank? },:allow_destroy => true
 
   def parts
   	
