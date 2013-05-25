@@ -1,5 +1,5 @@
 <div >
-    <div id="fields" class='well'>
+    <div id="" class='well'>
 	
 	<%= f.label :name, "零件小包名称" %>
         <%= f.text_field :name %>
@@ -11,8 +11,32 @@
         <%= render 'part_fields', :f => sb %>
         <% end %>  
     </div>
-    <div>
-        <%= link_to "新增零件",new_part_path,:class=>"btn btn-success",:remote=>true %>
+    
+    <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_part_#{p}" %>
+        <%
+        association=:parts
+        new_object = f.object.class.reflect_on_association(association).klass.new
+         
+            fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+              render("npart_fields", :f => builder)
+            end
+        %>
+        <SCRIPT TYPE="text/javascript">
+        $("a#new_part_<%= p %>").on( "click", function( event ) {       
+          event.preventDefault();
+          for (var i=0; i<10; i++)
+          {
+          var new_id = new Date().getTime();
+          var regexp = new RegExp("new_part" , "g");
+          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id));
+          }
+        });
+
+        </SCRIPT>
+    <div id="fields" style="padding:10px;">
+                 <%= f.fields_for :parts  do |builder| %>
+                 <%= render 'npart_fields', :f=>builder %>
+                 <% end %>
     </div>
 
     <ul class="thumbnails center" id="itemContainer">      

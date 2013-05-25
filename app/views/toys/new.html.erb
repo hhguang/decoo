@@ -17,7 +17,19 @@
           
 
 <%= form_for @toy do |f| %>
-  <%#= f.error_messages %>
+          <% if @toy.errors.any? %>
+              <div class="alert alert-block alert-error">
+                <a class="close" data-dismiss='alert' href="#">×</a>
+                <p><strong>有 <%= @toy.errors.count %> 处问题导至无法提交:</strong></p>
+                <ul>
+                  <% @toy.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+
+            <% end %>
+
   <p>
     <%= f.label :name,"成品名称" %>
     <%= f.text_field :name %>
@@ -27,7 +39,7 @@
 <%
 association=:packages
 new_object = f.object.class.reflect_on_association(association).klass.new
-new_object.parts.build
+1.times { new_object.parts.build }
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end

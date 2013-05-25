@@ -12,6 +12,7 @@ zh-CN:
       stock: "库存"
       color: "颜色"
       toy: "成品"
+      package: "零件包"      
     attributes:
       product:
         bh: "编号"
@@ -42,3 +43,6 @@ zh-CN:
         current_password: "原密码"
       toy:
         name: "名称"
+      package:
+        name: "名称"
+        quantity: "数量"

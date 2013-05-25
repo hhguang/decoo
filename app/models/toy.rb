@@ -1,6 +1,8 @@
 class Toy < ActiveRecord::Base
   attr_accessible :name,:packages_attributes
 
+  validates_presence_of :name
+
   has_many :packages
   has_many :porders
   accepts_nested_attributes_for :packages,:reject_if => lambda { |a| a[:name].blank? },:allow_destroy => true

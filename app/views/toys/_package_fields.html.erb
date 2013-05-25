@@ -6,20 +6,41 @@
         <%= f.text_field :quantity %>
         <%= f.label :_destroy,"移除" %>
         <%= f.check_box :_destroy %>
-        <div class="btn-group" style="padding:0 0 10px 0;">
-        <%= link_to "新增零件",new_part_path,:class=>"btn ",:remote=>true %>
-        
+        <div class="btn-group" style="padding:10px 0 10px 0;">
+        <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_part_#{p}" %>
+        <%
+        association=:parts
+        new_object = f.object.class.reflect_on_association(association).klass.new
+         
+            fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+              render("npart_fields", :f => builder)
+            end
+        %>
+        <SCRIPT TYPE="text/javascript">
+        $("a#new_part_<%= p %>").on( "click", function( event ) {       
+          event.preventDefault();
+          for (var i=0; i<10; i++)
+          {
+          var new_id = new Date().getTime();
+          var regexp = new RegExp("new_part" , "g");
+          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id));
+          }
+        });
+
+        </SCRIPT>
+
         <a href="#new" id="new_small_package_<%= p %>" class='btn'>添加零件小包</a>
         <%
         association=:children
         new_object = Package.new
-        new_object.parts.build
+         new_object.parts.build 
             fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
               render(association.to_s.singularize + "_fields", :f => builder)
             end
         %>
         <SCRIPT TYPE="text/javascript">
         $("a#new_small_package_<%= p %>").on( "click", function( event ) {
+
           size=$("#npanel<%= p %> ul#package_tab li").size()+1;
           $("#npanel<%= p %> ul#package_tab").append("<li><a href='#ptab<%= p %>"+size+"' data-toggle='tab'>小零件包"+size+"</a></li>");
           var new_id = new Date().getTime();

@@ -6,6 +6,9 @@ class Part < ActiveRecord::Base
   belongs_to :spec  
 
   validates_presence_of :spec_id
+  validates :quantity,:presence => true
+  validates :quantity,:numericality=>{:greater_than=>0}
+
 
   def spec_bh=(bh_field)          
     self.spec_id=Spec.find_by_bh!(bh_field.strip).id

@@ -32,7 +32,7 @@ class ToysController < ApplicationController
     @toy = Toy.new
     1.times do
       package=@toy.packages.build
-      30.times { package.parts.build }
+      1.times { package.parts.build }
     end
     
     
