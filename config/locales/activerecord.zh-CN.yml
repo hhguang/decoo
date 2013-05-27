@@ -43,6 +43,9 @@ zh-CN:
         current_password: "原密码"
       toy:
         name: "名称"
-      package:
+      toy/packages:
+        name: "零件包名称"
+        quantity: "零件包数量"        
+      package: 
         name: "名称"
         quantity: "数量"

@@ -23,7 +23,7 @@
           {
           var new_id = new Date().getTime();
           var regexp = new RegExp("new_part" , "g");
-          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id));
+          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id+i));
           }
         });
 
@@ -59,7 +59,9 @@
         <a href="#ptab<%= p %>" data-toggle='tab'>零件列表</a>
       </li>
       
-      
+      <%= f.fields_for :children do  |builder| %>
+      <li><a href='#ptab<%= builder.object.name %>' data-toggle='tab'><%= builder.object.name %></a></li>
+      <% end %>
       </ul>  
         
       
@@ -79,6 +81,13 @@
           <ul class="thumbnails center" id="itemContainer">      
             
           </ul>
-      </div>
+        </div>
+        
+        <%= f.fields_for :children do |builder| %>
+          
+          <div class='tab-pane ' id='ptab<%= builder.object.name %>'>
+            <%= render 'child_fields',:f=>builder %>
+          </div>          
+        <% end %>
       </div>
 </div>
