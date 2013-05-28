@@ -1,11 +1,13 @@
 class Toy < ActiveRecord::Base
-  attr_accessible :name,:packages_attributes
+  attr_accessible :name,:packages_attributes,:photo, :photo_cache
 
   validates_presence_of :name
 
   has_many :packages
   has_many :porders
   accepts_nested_attributes_for :packages,:reject_if => lambda { |a| a[:name].blank? },:allow_destroy => true
+
+  mount_uploader :photo, PhotoUploader
 
   def parts
   	

@@ -16,7 +16,7 @@
         <div class="content ">
           
 
-<%= form_for @toy do |f| %>
+<%= form_for @toy, :html => {:multipart => true} do |f| %>
           <% if @toy.errors.any? %>
               <div class="alert alert-block alert-error">
                 <a class="close" data-dismiss='alert' href="#">×</a>
@@ -30,10 +30,17 @@
 
             <% end %>
 
-  <p>
+  <div class="controls controls-row">
+    <div class="span4">
     <%= f.label :name,"成品名称" %>
     <%= f.text_field :name %>
-  </p>
+    </div>
+    <div class="span4">
+      <label>成品图片</label>
+      <%= f.file_field :photo %>
+      <%= f.hidden_field :photo_cache %>
+    </div>
+  </div>
 <a href="#new" id="new" class='btn'>添加零件包</a>
 
 <%

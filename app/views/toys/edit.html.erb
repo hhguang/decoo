@@ -17,11 +17,35 @@
           
 
 <%= form_for @toy do |f| %>
-  <%#= f.error_messages %>
-  <p>
+  <% if @toy.errors.any? %>
+              <div class="alert alert-block alert-error">
+                <a class="close" data-dismiss='alert' href="#">×</a>
+                <p><strong>有 <%= @toy.errors.count %> 处问题导至无法提交:</strong></p>
+                <ul>
+                  <% @toy.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+
+            <% end %>
+  <div class="controls controls-row">
+    <div class="span4">
     <%= f.label :name,"成品名称" %>
     <%= f.text_field :name %>
-  </p>
+    </div>
+    <div class="span4">
+      <label>成品图片</label>
+      <%= f.file_field :photo %>
+      <%= f.hidden_field :photo_cache %>
+      <% if @toy.photo %>
+      <img src="<%= @toy.photo.url %>" alt="" style="width:auto;height: 40px;"> 
+      <% end %>
+    </div>
+    <div class="span2">
+      
+    </div>
+  </div>
 <a href="#new" id="new" class='btn'>添加零件包</a>
 
 <%
