@@ -1,16 +1,22 @@
-<tr>
-	<td>
-	</td>
-	<td>
-		<%= toy.name %>
-	</td>
-	<td>
-		
-		<%= link_to '查看',toy_path(toy) %> |
+
+
+<li class="span2" id="pic" >
+      <div class="thumbnail">
+        <img src="/products/<%#=  %>" alt="" style="width:auto;height: 60px;">
+        
+        <p>
+          <strong>
+            <%= link_to toy.name ,toy_path(toy) %>
+          </strong>
+        <br/>
+          <%= link_to '查看',toy_path(toy) %> |
 		<% if can? :manage, @toy %>
 		<%= link_to '编辑',edit_toy_path(toy) %> |		
 		<%= link_to "删除", toy, 'data-confirm' => "确定要删除吗？", :method => :delete, :title => "确定要删除吗？"%> |
-		<%= link_to '生产下单',new_toy_porder_path(toy) %>
+		<%= link_to '生产',new_toy_porder_path(toy) %>
 		<% end %>
-	</td>
-</tr>
+        
+         </p>
+        
+      </div>
+    </li>

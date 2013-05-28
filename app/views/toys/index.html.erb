@@ -31,21 +31,10 @@
             </form>
 
           </div>
-          <table id="DataTables_Table_0" class="responsive table table-bordered ">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>名称</th>
-                
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody id="toys">
-              <%= render(@toys) %>
-
-            </tbody>
-          </table>
-
+          
+          <ul class="thumbnails center" id="itemContainer" style="padding:0 0 0 10px;">
+            <%= render(@toys) %>
+          </ul>
           <div class="row-fluid" style="padding: 10px;">
             
               <%= will_paginate @toys, :inner_window => 2 %>
