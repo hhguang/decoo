@@ -35,6 +35,7 @@
 
   <li  <%= "class='active'" if first %> >
   	<a href="#<%= package.id %>">零件包：<%= package.name %></a>
+    <span class="badge badge-important"><%= package.quantity %></span>
   </li>  
   <% first=false %>
 <% end %>
@@ -58,6 +59,7 @@
       <li class="">
         <a href="#p<%= s.id %>" data-toggle='tab'>
           小包：<%= s.name %>
+          <span class="badge badge-important"><%= s.quantity %></span>
         </a>
       </li>
       <% end %>
