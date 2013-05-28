@@ -34,8 +34,9 @@
 <% @toy.packages.each do |package| %>
 
   <li  <%= "class='active'" if first %> >
-  	<a href="#<%= package.id %>">零件包：<%= package.name %></a>
-    <span class="badge badge-important"><%= package.quantity %></span>
+  	<a href="#<%= package.id %>">零件包：<%= package.name %>
+    <span class="badge badge-important pull-right" style=""><%= package.quantity %></span>
+    </a>
   </li>  
   <% first=false %>
 <% end %>
