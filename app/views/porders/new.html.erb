@@ -18,7 +18,7 @@
           
         </div>
         <div class="content noPad">
-          <div style="padding: 15px;">
+          <div style="padding: 15px;height:30px;">
             
             <%= form_for(@porder,:html=>{:class=>"form-inline pull-left"} ) do |f| %>
               
@@ -47,9 +47,26 @@
             </script>
 
           </div>
+          <div style="padding: 5px 0 15px 15px;">
+            <% @toy.packages.each do |package| %>
+
+              <label class="checkbox inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true > 零件包：<%= package.name %>
+              </label>
+              <% package.children.each do |sp| %>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true>零件小包： <%= sp.name %>
+                </label>
+              <% end %>
+            <% end %>
+          </div>
           <table id="DataTables_Table_0" class="responsive table table-bordered ">
             <thead>
               <tr>
+                <th></th>
+                <th>
+                  零件包
+                </th>
                 <th>#</th>
                 <th>单个重量</th>
                 <th>数量</th>
@@ -61,7 +78,12 @@
             <tbody id="parts">
               <% @parts.each do |part| %>
               <tr>
-              	
+              	<td>
+                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true />
+                </td>
+                <td>
+                  <%= part.package.parent_id ?  "#{part.package.parent.name}--[#{part.package.name}]" : "#{part.package.name}"  %>
+                </td>
               	<td>
               		<%= part.spec.bh %>
               	</td>
