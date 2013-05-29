@@ -55,7 +55,7 @@ gem 'simple_form', "2.0.2"
 # 上传组件
 gem 'carrierwave', '0.6.2'
 
-#gem 'mini_magick','3.3', :require => false
+gem 'mini_magick','3.3', :require => false
 
 
 group :development, :test do

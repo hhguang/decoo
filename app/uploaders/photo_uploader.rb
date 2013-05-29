@@ -2,7 +2,7 @@
 
 require "digest/md5"
 class PhotoUploader < CarrierWave::Uploader::Base
-
+  include CarrierWave::MiniMagick
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -14,6 +14,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
+
+  # version :thumb do                                 #版本名为thumb
+    
+  #   process :resize_to_fill => [70,60]      #想图片处理成200*200大小
+  # end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -60,4 +65,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
       "#{@name}.#{file.extension}"
     end
   end
+
+  
 end
