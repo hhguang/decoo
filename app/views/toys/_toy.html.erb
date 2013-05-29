@@ -1,13 +1,18 @@
 
 
 <li class="span2" id="pic" >
-      <div class="thumbnail">
-        <img src="<%= toy.photo.url %>" alt="" style="width:auto;height: 60px;">
-        
+      <div class="thumbnail" style="height:170px;">
+        <a title="<%= toy.name %>" rel="prettyPhoto" href="<%= toy.photo.url %>">
+        <img src="<%= toy.photo.url %>" alt="" style="width:auto;height: 60px;" class="img-polaroid">
+        </a>
         <p>
           <strong>
             <%= link_to toy.name ,toy_path(toy) %>
-          </strong>
+          </strong>          
+        <br/>
+        <strong>
+          零件总数：<%= toy.parts.size %>
+        </strong>
         <br/>
           <%= link_to '查看',toy_path(toy) %> |
 		<% if can? :manage, @toy %>
