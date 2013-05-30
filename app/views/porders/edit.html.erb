@@ -18,15 +18,81 @@
           
         </div>
         <div class="content noPad">
-          	<div style="padding: 15px;">
-				<%= render 'form' %>
-			</div>
-			<table id="DataTables_Table_0" class="responsive table table-bordered ">
+        <div style="padding: 15px;height:30px;">
+            
+            <%= form_for(@porder,:html=>{:class=>"form-inline pull-left"} ) do |f| %>
+              
+                <span>
+                  成品名称：<%= @toy.name %>
+                </span>
+                <%= f.label :quantity,"数量" %>        
+                <%= f.text_field :quantity %>
+                <%= f.hidden_field :toy_id %>
+                <a  class="btn" href="#" id='js'>计算</a>
+                <button type="submit" class="btn btn-success">下单</button>
+              
+            
+            
+            <script type="text/javascript">
+              $("a#js").on( "click", function( event ) {
+
+                var q=$("input#porder_quantity").val();
+                $("tbody#parts tr").each(function(index){
+                  $(this).children("#zs").text(parseInt($(this).find("#sl").text())*q);
+                  $(this).children("#zzl").text( Math.round(parseInt($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text())*100)/100 );
+                }) ;
+
+              }
+              )
+            </script>
+
+          </div>
+          <div style="padding: 5px 0 15px 15px;">
+            <% @toy.packages.each do |package| %>
+
+              <label class="checkbox inline">
+                <input type="checkbox" id="inlineCheckbox1" value="<%= package.id %>" checked=true class="parent_package" > 零件包：<%= package.name %>
+              </label>
+              <% package.children.each do |sp| %>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="<%= sp.id %>" checked=true class="child_package">零件小包： <%= sp.name %>
+                </label>
+              <% end %>
+            <% end %>
+            <SCRIPT TYPE="text/javascript">
+            $(".parent_package").on("click",function(event){
+            console.log($(this).val());
+            v=$(this).val();
+            if($(this).attr("checked")) {
+            $("[parent='"+v+"']").attr("checked",'true');
+            }else{
+            $("[parent='"+v+"']").removeAttr("checked");
+            }
+
+            })
+            $(".child_package").on("click",function(event){
+            console.log($(this).val());
+            v=$(this).val();
+            if($(this).attr("checked")) {
+            $("[child='"+v+"']").attr("checked",'true');
+            }else{
+            $("[child='"+v+"']").removeAttr("checked");
+            }
+
+            })
+            </SCRIPT>
+          </div>
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
             <thead>
               <tr>
-                <th>#</th>
+                <th></th>
+                <th>
+                  零件包
+                </th>                
+                <th>零件编号</th>
                 <th>单个重量</th>
-                <th>数量</th>
+                <th>每包数量</th>
+                <th>每个成品零件总数</th>
                 <th>总件数</th>
                 <th>总重量</td>
                 <th>库存</th>
@@ -34,30 +100,49 @@
             </thead>
             <tbody id="parts">
               <% @parts.each do |part| %>
+              <%
+                pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
+                
+              %>
               <tr>
-              	
-              	<td>
-              		<%= part.spec.bh %>
-              	</td>
+                <td>
+                  <% if @part_ids.include?(part.id) %>
+                  <input type="checkbox" id="inlineCheckbox1" name="part_ids[]" value="<%= part.id %>" checked=true  id="" <%= part.package.parent ? "parent=#{part.package.parent.id} child=#{part.package.id}" : "parent=#{part.package.id} " %> />
+                  <% else %>
+                  <input type="checkbox" id="inlineCheckbox1" name="part_ids[]" value="<%= part.id %>"  id="" <%= part.package.parent ? "parent=#{part.package.parent.id} child=#{part.package.id}" : "parent=#{part.package.id} " %> />
+                  <% end %>
+                </td>
+                <td>
+                  <%= part.package.parent_id ?  "#{part.package.parent.name}--[#{part.package.name}]" : "#{part.package.name}"  %>
+                </td>                
+                <td>
+                  <%= part.spec.bh %>
+                </td>
                 <td id="zl">
                   <%= part.spec.product.weight || "未知" %>
                 </td>
-              	<td id="sl">
-              		<%= part.quantity %>
-              	</td>
-              	<td id='zs'>
-              		<%= part.quantity*@porder.quantity %>
-              	</td>
-              	<td id="zzl">
-              		<%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*@porder.quantity*part.spec.product.weight) %>
-              	</td>
-              	<td>
-              		<%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
-              	</td>
+                <td >
+                  <%= part.quantity %>
+                </td>
+                <td id="sl">
+                  <%= part.quantity*pg %>
+                </td>
+                <td id='zs'>
+                  <%= part.quantity*pg*@porder.quantity %>
+                </td>
+                <td id="zzl">
+                  <%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*pg*@porder.quantity*part.spec.product.weight) %>
+                </td>
+                <td>
+                  <%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
+                </td>
               </tr>
               <% end %>
             </tbody>
           </table>
+
+
+          <% end %>
 <div class="row-fluid" style="padding: 10px;">
             
               

@@ -3,7 +3,7 @@ class Porder < ActiveRecord::Base
 
   belongs_to :toy
   belongs_to :user
-  has_many 	 :porder_items
+  has_many 	 :porder_items,:dependent=>:destroy
 
   accepts_nested_attributes_for :porder_items,:reject_if => lambda { |a| a[:part_id].blank? },:allow_destroy => true
 
