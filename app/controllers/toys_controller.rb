@@ -4,9 +4,9 @@ class ToysController < ApplicationController
   def index
    
     if params[:search] 
-      @toys=Toy.where('name like ?',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 18).order('updated_at desc')
+      @toys=Toy.where('name like ?',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 18).order('name+0')
     else
-       @toys = Toy.paginate(:page => params[:page], :per_page => 18).order('updated_at desc')
+       @toys = Toy.paginate(:page => params[:page], :per_page => 18).order("name+0")
     end
 
     respond_to do |format|
