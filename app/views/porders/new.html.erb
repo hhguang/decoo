@@ -51,14 +51,36 @@
             <% @toy.packages.each do |package| %>
 
               <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true > 零件包：<%= package.name %>
+                <input type="checkbox" id="inlineCheckbox1" value="<%= package.id %>" checked=true class="parent_package" > 零件包：<%= package.name %>
               </label>
               <% package.children.each do |sp| %>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true>零件小包： <%= sp.name %>
+                  <input type="checkbox" id="inlineCheckbox1" value="<%= sp.id %>" checked=true class="child_package">零件小包： <%= sp.name %>
                 </label>
               <% end %>
             <% end %>
+            <SCRIPT TYPE="text/javascript">
+            $(".parent_package").on("click",function(event){
+            console.log($(this).val());
+            v=$(this).val();
+            if($(this).attr("checked")) {
+            $("[parent='"+v+"']").attr("checked",'true');
+            }else{
+            $("[parent='"+v+"']").removeAttr("checked");
+            }
+
+            })
+            $(".child_package").on("click",function(event){
+            console.log($(this).val());
+            v=$(this).val();
+            if($(this).attr("checked")) {
+            $("[child='"+v+"']").attr("checked",'true');
+            }else{
+            $("[child='"+v+"']").removeAttr("checked");
+            }
+
+            })
+            </SCRIPT>
           </div>
           <table id="DataTables_Table_0" class="responsive table table-bordered ">
             <thead>
@@ -66,10 +88,11 @@
                 <th></th>
                 <th>
                   零件包
-                </th>
-                <th>#</th>
+                </th>                
+                <th>零件编号</th>
                 <th>单个重量</th>
-                <th>数量</th>
+                <th>每包数量</th>
+                <th>每个成品零件总数</th>
                 <th>总件数</th>
                 <th>总重量</td>
                 <th>库存</th>
@@ -77,27 +100,33 @@
             </thead>
             <tbody id="parts">
               <% @parts.each do |part| %>
+              <%
+                pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
+              %>
               <tr>
               	<td>
-                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true />
+                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true  id="" <%= part.package.parent ? "parent=#{part.package.parent.id} child=#{part.package.id}" : "parent=#{part.package.id} " %> />
                 </td>
                 <td>
                   <%= part.package.parent_id ?  "#{part.package.parent.name}--[#{part.package.name}]" : "#{part.package.name}"  %>
-                </td>
+                </td>                
               	<td>
               		<%= part.spec.bh %>
               	</td>
                 <td id="zl">
                   <%= part.spec.product.weight || "未知" %>
                 </td>
-              	<td id="sl">
+              	<td >
               		<%= part.quantity %>
               	</td>
+                <td id="sl">
+                  <%= part.quantity*pg %>
+                </td>
               	<td id='zs'>
-              		<%= part.quantity*@quantity %>
+              		<%= part.quantity*pg*@quantity %>
               	</td>
               	<td id="zzl">
-              		<%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*@quantity*part.spec.product.weight) %>
+              		<%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*pg*@quantity*part.spec.product.weight) %>
               	</td>
               	<td>
               		<%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
