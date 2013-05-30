@@ -4,6 +4,7 @@ class Part < ActiveRecord::Base
 
   belongs_to :package
   belongs_to :spec  
+  has_many   :porder_items
 
   validates_presence_of :spec_id
   validates :quantity,:presence => true

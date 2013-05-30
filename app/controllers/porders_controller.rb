@@ -52,6 +52,13 @@ class PordersController < ApplicationController
     @porder = Porder.new(params[:porder])
     @porder.user_id=current_user.id
     @porder.name="p"+Time.now.strftime("%Y%m%d%H%M%S ")
+    
+    @part_ids=params[:part_ids]
+    @part_ids.each do |part_id|
+      part=Part.find(part_id)
+      pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
+      @porder.porder_items.build(:part_id=>part_id,:quantity=>@porder.quantity*part.quantity*pg)
+    end
     respond_to do |format|
       if @porder.save
         format.html { redirect_to @porder, notice: 'Porder was successfully created.' }

@@ -31,7 +31,7 @@
                 <a  class="btn" href="#" id='js'>计算</a>
                 <button type="submit" class="btn btn-success">下单</button>
               
-            <% end %>
+            
             
             <script type="text/javascript">
             	$("a#js").on( "click", function( event ) {
@@ -102,10 +102,12 @@
               <% @parts.each do |part| %>
               <%
                 pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
+                
               %>
               <tr>
               	<td>
-                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked=true  id="" <%= part.package.parent ? "parent=#{part.package.parent.id} child=#{part.package.id}" : "parent=#{part.package.id} " %> />
+                  
+                  <input type="checkbox" id="inlineCheckbox1" name="part_ids[]" value="<%= part.id %>" checked=true  id="" <%= part.package.parent ? "parent=#{part.package.parent.id} child=#{part.package.id}" : "parent=#{part.package.id} " %> />
                 </td>
                 <td>
                   <%= part.package.parent_id ?  "#{part.package.parent.name}--[#{part.package.name}]" : "#{part.package.name}"  %>
@@ -136,6 +138,8 @@
             </tbody>
           </table>
 
+
+          <% end %>
           <div class="row-fluid" style="padding: 10px;">
             
               

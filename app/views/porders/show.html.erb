@@ -68,7 +68,8 @@
             </thead>
             <tbody>
 
-              <% @porder.toy.parts.each do |item|  %>
+              <% @porder.porder_items.each do |p|  %>
+              <% item=p.part %>
 
               <tr>
                 <td>
@@ -84,10 +85,10 @@
                   <%= item.spec.material if item.spec %>
                 </td>
                 <td>
-                  <%= item.spec.product.weight*item.quantity*@porder.quantity %>
+                  <%= item.spec.product.weight*p.quantity %>
                 </td>
                 <td>
-                  <%= item.quantity*@porder.quantity %>
+                  <%= p.quantity %>
                 </td>
               </tr>
               <% end %>

@@ -52,7 +52,7 @@ class ToysController < ApplicationController
   # POST /toys.json
   def create
     @toy = Toy.new(params[:toy])
-
+    
     respond_to do |format|
       if @toy.save
         format.html { redirect_to @toy, notice: 'Toy was successfully created.' }
