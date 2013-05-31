@@ -15,4 +15,8 @@ class Package < ActiveRecord::Base
   				:dependent=>:destroy
   accepts_nested_attributes_for :parts,:reject_if => lambda { |a| a[:spec_bh].blank? && a[:spec_id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :children, :reject_if => lambda { |a| a[:name].blank? },:allow_destroy => true
+
+  def count_for_part
+    self.parts.sum{|part| part.count_in_toy } 
+  end
 end

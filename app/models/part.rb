@@ -22,6 +22,10 @@ class Part < ActiveRecord::Base
     self.spec.bh if self.spec
   end 
 
+  def count_in_toy
+    self.package.parent ? self.package.parent.quantity*self.package.quantity*self.quantity : self.package.quantity*self.quantity
+  end
+
   
   
 end

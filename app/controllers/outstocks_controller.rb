@@ -53,6 +53,7 @@ class OutstocksController < ApplicationController
         
       end
       
+      
       respond_to do |format|
         format.html { redirect_to @outstock, notice: '出库单已成功创建.' }
       end
@@ -120,8 +121,9 @@ class OutstocksController < ApplicationController
     @porder=Porder.find(params[:id])
     @outstock = Outstock.new
     # @outstock.outstock_items.build
-    @porder.toy.parts.each do |part|
-      @outstock.outstock_items.build(:spec_id=>part.spec_id,:weight=>(part.quantity*part.spec.product.weight*@porder.quantity),:quantity=>part.quantity*@porder.quantity)
+    @porder.porder_items.each do |item|
+      part=item.part
+      @outstock.outstock_items.build(:spec_bh=>part.spec.bh,:spec_id=>part.spec_id,:weight=>(part.quantity*part.spec.product.weight*@porder.quantity),:quantity=>part.quantity*@porder.quantity)
     end
   end
   

@@ -36,8 +36,20 @@
             <script type="text/javascript">
               $("a#js").on( "click", function( event ) {
 
-                var q=$("input#porder_quantity").val();
+               var q=$("input#porder_quantity").val();
+                var zs=0;
+                var kc=0;
+                var ky=0;
                 $("tbody#parts tr").each(function(index){
+                  zs=parseInt($(this).find("#sl").text())*q;
+                  kc=parseInt($(this).find("#kc").text());
+                  ky=kc-zs;
+                  if(ky<=0){
+                    $(this).children("#ky").text(ky);
+                  }else{
+                    $(this).children("#ky").text('');
+                  }
+                  ;
                   $(this).children("#zs").text(parseInt($(this).find("#sl").text())*q);
                   $(this).children("#zzl").text( Math.round(parseInt($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text())*100)/100 );
                 }) ;
@@ -93,9 +105,10 @@
                 <th>单个重量</th>
                 <th>每包数量</th>
                 <th>每个成品零件总数</th>
-                <th>总件数</th>
                 <th>总重量</td>
+                <th>总件数</th>
                 <th>库存</th>
+                <th>库存不足</th>
               </tr>
             </thead>
             <tbody id="parts">
@@ -127,14 +140,18 @@
                 <td id="sl">
                   <%= part.quantity*pg %>
                 </td>
-                <td id='zs'>
-                  <%= part.quantity*pg*@porder.quantity %>
-                </td>
                 <td id="zzl">
-                  <%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*pg*@porder.quantity*part.spec.product.weight) %>
+                  <%= part.spec.product.weight.nil? ? "未知" : number_with_precision(part.quantity*pg*@quantity*part.spec.product.weight) %>
                 </td>
-                <td>
-                  <%= part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
+                <td id='zs'>
+                  <%= part.quantity*pg*@quantity %>
+                </td>
+                
+                <td id="kc">
+                  <%= kc=part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
+                </td>
+                <td id="ky">
+                  <%= kc-part.count_in_toy*@quantity if kc-part.count_in_toy*@quantity<=0 %>
                 </td>
               </tr>
               <% end %>

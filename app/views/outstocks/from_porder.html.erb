@@ -26,7 +26,7 @@
 
             <%= simple_form_for(@outstock,:html=>{:class=>"form-horizontal"}) do |f| %>
               <%= f.error_notification %>
-
+              <%= hidden_field_tag :porder_id,@porder.id %>
               <div class="form-inputs" >
                 <%= f.input :taker %>
                 <%= f.input :memo ,input_html: { :rows=>2 } %>
@@ -49,9 +49,11 @@
               <tbody id="outstock_items">
                 <%#= render(@outstock.outstock_items) %>
                 <%= f.simple_fields_for :outstock_items do |builder|  %>
+
                   <tr>
                     <td>
                       <%= builder.object.spec.bh %>
+                      <%= builder.input :spec_bh,as: :hidden %>
                     </td>
                     <td style="background-color: <%= builder.object.spec.color.value if builder.object.spec %>"></td>
                     <td>

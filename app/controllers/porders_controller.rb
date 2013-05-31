@@ -44,6 +44,7 @@ class PordersController < ApplicationController
   def edit
     @porder = Porder.find(params[:id])
     @toy=@porder.toy
+    @quantity=@porder.quantity
     @parts=@porder.toy.parts
     @porder_items=@porder.porder_items
     @part_ids=@porder_items.map{|p|p.part.id}

@@ -70,7 +70,7 @@
       
       <div class="tab-content" id="package_content">
         <div class="tab-pane active" id="p<%= package.id %>">
-          零件数：<%= package.parts.size %>
+          零件数：<%= package.count_for_part %>
         	<ul class="thumbnails center" id="itemContainer">
         		<% package.parts.each do |part| %>
             <% @part=part %>
@@ -82,7 +82,7 @@
         </div>
         <% package.children.each do |s| %>
           <div class="tab-pane " id="p<%= s.id %>">
-            零件数：<%= s.parts.size %>
+            零件数：<%= s.count_for_part %>
             <ul class="thumbnails center" id="itemContainer">
               <% s.parts.each do |part| %>
                <% @part=part %>
