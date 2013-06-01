@@ -40,10 +40,12 @@
                 var zs=0;
                 var kc=0;
                 var ky=0;
+                var wait_for_out=0;
             		$("tbody#parts tr").each(function(index){
                   zs=parseInt($(this).find("#sl").text())*q;
                   kc=parseInt($(this).find("#kc").text());
-                  ky=kc-zs;
+                  wait_for_out=parseInt($(this).find("#wait_for_out").text());
+                  ky=kc-zs-wait_for_out;
                   if(ky<=0){
                     $(this).children("#ky").text(ky);
                   }else{
@@ -148,11 +150,11 @@
               	<td id="kc">
               		<%= kc=part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
               	</td>
-                <td>
-                  <%= part.spec.parts.sum{|part| part.porder_items.sum{|item| item.quantity } } %>
+                <td id="wait_for_out">
+                  <%= w=part.spec.parts.sum{|part| part.porder_items.sum{|item| item.quantity } } %>
                 </td>
                 <td id="ky">
-                  <%= kc-part.count_in_toy*@quantity if kc-part.count_in_toy*@quantity<=0 %>
+                  <%= kc-part.count_in_toy*@quantity-w if kc-part.count_in_toy*@quantity-w<=0 %>
                 </td>
               </tr>
               <% end %>
