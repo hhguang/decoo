@@ -151,7 +151,7 @@
               		<%= kc=part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
               	</td>
                 <td id="wait_for_out">
-                  <%= w=part.spec.parts.sum{|part| part.porder_items.sum{|item| item.quantity } } %>
+                  <%= w=part.spec.parts.sum{|part| part.porder_items.sum{|item| item.porder.outstock.nil? ? item.quantity : 0 } } %>
                 </td>
                 <td id="ky">
                   <%= kc-part.count_in_toy*@quantity-w if kc-part.count_in_toy*@quantity-w<=0 %>

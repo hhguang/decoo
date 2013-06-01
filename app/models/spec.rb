@@ -63,6 +63,8 @@ class Spec < ActiveRecord::Base
     self.material.split(/[\,]/) if self.material
   end
 
-
+  def wait_for_out
+    self.parts.sum{|part| part.porder_items.sum{|item| item.porder.outstock.nil? ? item.quantity : 0  } }
+  end
   
 end

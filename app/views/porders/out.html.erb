@@ -52,9 +52,13 @@
                     <td><%= link_to porder.toy.name,toy_path(porder.toy_id) %></td>
                     <td><%= porder.quantity %></td>
                     <td><%= porder.created_at.strftime("%Y-%m-%d ") %></td>
-                    <td><%= porder.outstock_id.nil? ? "未领料" : "已领料" %></td>
-                    <td><%= link_to '出库', :controller=>'outstocks',:action=>'from_porder',:id=>porder %></td>
-                    
+                    <% if porder.outstock.nil? %>
+                    <td>未领料</td>
+                    <td><%= link_to '出库', :controller=>'outstocks',:action=>'from_porder',:id=>porder  %></td>
+                    <% else %>
+                    <td><%= "#{porder.outstock.created_at.to_s(:db) }已领料" %></td>
+                    <td><%= link_to '查看', outstock_path(porder.outstock)  %></td>
+                    <% end %>
                   </tr>
                 <% end %>
 

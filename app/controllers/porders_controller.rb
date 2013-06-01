@@ -23,6 +23,11 @@ class PordersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @porder }
+      format.csv {
+        send_data("",
+          :type => "text/excel;charset=utf-8; header=present",
+          :filename => "#{@porder.name}.csv")
+      }
     end
   end
 
