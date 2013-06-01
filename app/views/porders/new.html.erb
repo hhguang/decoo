@@ -108,6 +108,7 @@
                 <th>总重量</td>
                 <th>总件数</th>
                 <th>库存</th>
+                <th>等待出库</th>
                 <th>库存不足</th>
               </tr>
             </thead>
@@ -147,6 +148,9 @@
               	<td id="kc">
               		<%= kc=part.spec.stock.nil? ? 0 : part.spec.stock.quantity %>
               	</td>
+                <td>
+                  <%= part.spec.parts.sum{|part| part.porder_items.sum{|item| item.quantity } } %>
+                </td>
                 <td id="ky">
                   <%= kc-part.count_in_toy*@quantity if kc-part.count_in_toy*@quantity<=0 %>
                 </td>
