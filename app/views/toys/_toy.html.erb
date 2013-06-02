@@ -10,6 +10,8 @@
             <%= link_to toy.name ,toy_path(toy) %>
           </strong>          
         <br/>
+        <%= toy.title if toy.title %>
+        <br/>
         <strong>
           零件总数：<%= toy.count_for_part %>
         </strong>

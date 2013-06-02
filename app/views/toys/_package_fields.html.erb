@@ -23,7 +23,7 @@
           {
           var new_id = new Date().getTime();
           var regexp = new RegExp("new_part" , "g");
-          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id+i));
+          $(".tab-content .active #package_content .active #fields").prepend("<%= escape_javascript(fields) %>".replace(regexp, new_id+i.toString() ));
           }
         });
 
