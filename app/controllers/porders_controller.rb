@@ -35,9 +35,14 @@ class PordersController < ApplicationController
   # GET /porders/new.json
   def new
     @toy=Toy.find(params[:toy_id]) if params[:toy_id]
-    
+
     @quantity=params[:quantity] || 1
     @parts=@toy.parts
+    if params[:package_id]
+      @package=Package.find(params[:package_id]) 
+      @toy=@package.toy || @package.parent.toy
+      @parts=@package.parts
+    end
     @porder = @toy.porders.build(:quantity=>@quantity)
     respond_to do |format|
       format.html # new.html.erb

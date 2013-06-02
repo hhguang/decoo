@@ -62,15 +62,29 @@
 
           </div>
           <div style="padding: 5px 0 15px 15px;">
-            <% @toy.packages.each do |package| %>
+            <% if @package %>
+              
 
-              <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox1" value="<%= package.id %>" checked=true class="parent_package" > 零件包：<%= package.name %>
-              </label>
-              <% package.children.each do |sp| %>
-                <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="<%= sp.id %>" checked=true class="child_package">零件小包： <%= sp.name %>
+                <!-- <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="<%#= @package.id %>" checked=true class="parent_package" > 零件包：<%#= package.name %>
                 </label>
+                <%# @package.children.each do |sp| %>
+                  <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox1" value="<%#= sp.id %>" checked=true class="child_package">零件小包： <%#= sp.name %>
+                  </label>
+                <%# end %> -->
+              
+            <% else %>
+              <% @toy.packages.each do |package| %>
+
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="<%= package.id %>" checked=true class="parent_package" > 零件包：<%= package.name %>
+                </label>
+                <% package.children.each do |sp| %>
+                  <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox1" value="<%= sp.id %>" checked=true class="child_package">零件小包： <%= sp.name %>
+                  </label>
+                <% end %>
               <% end %>
             <% end %>
             <SCRIPT TYPE="text/javascript">
