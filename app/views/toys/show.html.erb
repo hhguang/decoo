@@ -72,7 +72,9 @@
       <div class="tab-content" id="package_content">
         <div class="tab-pane active" id="p<%= package.id %>">
           零件数：<%= package.count_for_part %>
+          <% if can? :manage, @toy %>
           <%= link_to '生产下单',:controller=>'porders',:action=>'new',:toy_id=>@toy,:package_id=>package %>
+          <% end %>
         	<ul class="thumbnails center" id="itemContainer">
         		<% package.parts.each do |part| %>
             <% @part=part %>
@@ -85,7 +87,9 @@
         <% package.children.each do |s| %>
           <div class="tab-pane " id="p<%= s.id %>">
             零件数：<%= s.count_for_part %>
+            <% if can? :manage, @toy %>
             <%= link_to '生产下单',:controller=>'porders',:action=>'new',:toy_id=>@toy,:package_id=>s %>
+            <% end %>
             <ul class="thumbnails center" id="itemContainer">
               <% s.parts.each do |part| %>
                <% @part=part %>

@@ -7,8 +7,9 @@
         <a href="/porders" role="button"  class="btn  ">
           所有生产单
         </a>
-        
+        <% if can? :manage, @porder %>
         <%=  link_to "修改",edit_porder_path(@porder),:class=>'btn' %>
+        <% end %>
         <a href="#" onclick="pr($('#printg1').html());" class="btn" >打印</a>
       </div>
     </div>

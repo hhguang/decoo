@@ -48,7 +48,7 @@ class Ability
         can :manage, OutstockItem
       elsif user.has_role?(:produce_manager)
         can :read,Toy
-        can :read,Porder
+        can :manage,Porder
       else
             cannot :manage,:all
 
