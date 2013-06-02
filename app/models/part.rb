@@ -9,9 +9,8 @@ class Part < ActiveRecord::Base
   validates_presence_of :spec_id
   validates :quantity,:presence => true
   validates :quantity,:numericality=>{:greater_than=>0}
-  validates_uniqueness_of :spec_id, :scope =>:package_id
 
-
+  
   def spec_bh=(bh_field)          
     self.spec_id=Spec.find_by_bh!(bh_field.strip).id
     rescue ActiveRecord::RecordNotFound
