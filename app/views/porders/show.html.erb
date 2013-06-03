@@ -86,7 +86,7 @@
                   <%= item.spec.material if item.spec %>
                 </td>
                 <td>
-                  <%= item.spec.product.weight*p.quantity %>
+                  <%= item.spec.product.weight*p.quantity if item.spec.product && item.spec.product.weight %>
                 </td>
                 <td>
                   <%= p.quantity %>
