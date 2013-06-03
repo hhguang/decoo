@@ -1,4 +1,5 @@
 class PordersController < ApplicationController
+  load_and_authorize_resource
   # GET /porders
   # GET /porders.json
   def index

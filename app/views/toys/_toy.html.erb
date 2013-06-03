@@ -20,9 +20,11 @@
 		<% if can? :manage, @toy %>
 		<%= link_to '编辑',edit_toy_path(toy) %> |		
 		<%= link_to "删除", toy, 'data-confirm' => "确定要删除吗？", :method => :delete, :title => "确定要删除吗？"%> |
-		<%= link_to '生产',new_toy_porder_path(toy) %>
+		
 		<% end %>
-        
+        <% if can? :manage, Porder %>
+        <%= link_to '生产',new_toy_porder_path(toy) %>
+        <% end %>
          </p>
         
       </div>

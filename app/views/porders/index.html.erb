@@ -46,7 +46,7 @@
                     <td><%= porder.created_at.strftime("%Y-%m-%d ") %></td>
                     <td><%= porder.outstock.nil? ? "未领料" : "#{porder.outstock.created_at.to_s(:db)}已领料" %></td>
                     <td><%= link_to '查看', porder %></td>
-                    <% if can? :manage, @porder %>
+                    <% if can? :manage, Porder %>
                     <td><%= link_to '修改', edit_porder_path(porder) %></td>
                     <td><%= link_to '删除', porder, confirm: 'Are you sure?', method: :delete %></td>
                     <% end %>

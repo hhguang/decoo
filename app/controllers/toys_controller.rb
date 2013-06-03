@@ -1,4 +1,5 @@
 class ToysController < ApplicationController
+  load_and_authorize_resource
   # GET /toys
   # GET /toys.json
   def index
