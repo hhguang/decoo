@@ -1,5 +1,6 @@
 # encoding: utf-8
 <% part=f.object %>
+<% if part.spec %>
 <li class="span2" id="pic" >
       <div class="thumbnail">
         <img src="/products/<%= part.spec.product.image_url%>" alt="" style="width:auto;height: 60px;">
@@ -28,3 +29,4 @@
       </div>
       
 </li>
+<% end %>
