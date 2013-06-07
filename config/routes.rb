@@ -47,7 +47,9 @@ Decoo::Application.routes.draw do
 
   resources :in_stocks
 
-  resources :stocks
+  resources :stocks do
+    get :list,:on=>:member
+  end
 
   resources :colors
 
@@ -57,6 +59,7 @@ Decoo::Application.routes.draw do
 
   get "main/index"
   post "outstocks/find_stock"
+
   
 
   resources :photos

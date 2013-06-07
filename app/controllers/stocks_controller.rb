@@ -86,4 +86,10 @@ class StocksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def list
+    @stock=Stock.find(params[:id])
+    @instock_items=@stock.spec.in_stock_items
+    @outstock_items=@stock.spec.outstock_items
+  end
 end
