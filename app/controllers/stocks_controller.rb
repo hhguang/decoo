@@ -89,7 +89,7 @@ class StocksController < ApplicationController
 
   def list
     @stock=Stock.find(params[:id])
-    @instock_items=@stock.spec.in_stock_items
-    @outstock_items=@stock.spec.outstock_items
+    @instock_items=@stock.spec.in_stock_items.order('created_at desc')
+    @outstock_items=@stock.spec.outstock_items.order('created_at desc')
   end
 end

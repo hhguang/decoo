@@ -44,6 +44,7 @@
                   <th>重量</th>
                   <th>数量</th>
                   <th>库存</th>
+                  <th>实际出库重量</th>
                 </tr>
               </thead>
               <tbody id="outstock_items">
@@ -64,7 +65,7 @@
                     </td>
                     <td>
                       <%= builder.object.weight %>
-                      <%= builder.input :weight,as: :hidden %>
+                      
                     </td>
                     <td>
                       <%= builder.object.quantity %>
@@ -72,6 +73,9 @@
                     </td>
                     <td>
                       <%= builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
+                    </td>
+                    <td>
+                      <%= builder.input :weight,label: false,input_html: { class: 'input-mini' } %>
                     </td>
                   </tr>
                 <% end %>
