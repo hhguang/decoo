@@ -43,14 +43,18 @@
           <div class="you">
             <ul class="unstyled">
               <li><h3>成品</h3></li>
-              <li><span class="icon12 typ-icon-arrow-right"></span><%= @porder.toy.name %></li>
-              
+              <li>
+                <h3><span class="icon12 typ-icon-arrow-right"></span><%= @porder.toy.name %></h3>
+              </li>
+              <li><h5>
+                领料部门签名：________________________     领料员签名：________________________
+              </h5>
+              </li>              
           </div>
           <div class="client">
             <ul class="unstyled">
               <li><h3>下单</h3></li>
-              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@porder.user.name}" if @porder.user_id %></li>
-              
+              <li><span class="icon12 typ-icon-arrow-right"></span><%= "#{@porder.user.name}" if @porder.user_id %></li>              
 
             </ul>
           </div>
@@ -65,6 +69,7 @@
                 <th>材料</th>
                 <th>重量</th>
                 <th>数量</th>
+                <th>实际出库</th>
               </tr>
             </thead>
             <tbody>
@@ -90,6 +95,8 @@
                 </td>
                 <td>
                   <%= p.quantity %>
+                </td>
+                <td>
                 </td>
               </tr>
               <% end %>
