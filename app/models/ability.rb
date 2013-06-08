@@ -49,6 +49,7 @@ class Ability
       elsif user.has_role?(:produce_manager)
         can :read,Toy
         can :manage,Porder
+        can :read,Stock
       else
             cannot :manage,:all
 
