@@ -7,9 +7,9 @@
         <%= f.text_field :quantity %>
         <%= f.label :_destroy,"移除" %>
         <%= f.check_box :_destroy %>
-        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
-        <%= render 'part_fields', :f => sb %>
-        <% end %>  
+        <%#= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+        <%#= render 'part_fields', :f => sb %>
+        <%# end %>  
     </div>
     
     <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_part_#{p}" %>

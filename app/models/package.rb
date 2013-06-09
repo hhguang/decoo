@@ -22,6 +22,7 @@ class Package < ActiveRecord::Base
   validate :validate_unique_parts
 
   def validate_unique_parts
+    
     validate_uniqueness_of_in_memory(
       parts, [:spec_bh], '零件包中零件重复')
   end

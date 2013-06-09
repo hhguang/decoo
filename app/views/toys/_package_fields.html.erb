@@ -60,7 +60,7 @@
       </li>
       
       <%= f.fields_for :children do  |builder| %>
-      <li><a href='#ptab<%= builder.object.name %>' data-toggle='tab'><%= builder.object.name %></a></li>
+      <li><a href='#sptab<%= builder.object.name %>' data-toggle='tab'><%= builder.object.name %></a></li>
       <% end %>
       </ul>  
         
@@ -85,7 +85,7 @@
         
         <%= f.fields_for :children do |builder| %>
           
-          <div class='tab-pane ' id='ptab<%= builder.object.name %>'>
+          <div class='tab-pane ' id='sptab<%= builder.object.name %>'>
             <%= render 'child_fields',:f=>builder %>
           </div>          
         <% end %>
