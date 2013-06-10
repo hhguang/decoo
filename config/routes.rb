@@ -49,6 +49,7 @@ Decoo::Application.routes.draw do
 
   resources :stocks do
     get :list,:on=>:member
+    get :analysis,:on=>:collection
   end
 
   resources :colors

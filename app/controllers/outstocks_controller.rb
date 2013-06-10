@@ -127,4 +127,11 @@ class OutstocksController < ApplicationController
     end
   end
   
+  def analysis
+    # @items=[]
+    # Porder.where(:outstock_id=>nil ).each do |list|
+    #   @items<<list.porder_items      
+    # end
+  end
+
 end
