@@ -7,9 +7,18 @@
         
         <%= f.label :_destroy,"移除" %>
         <%= f.check_box :_destroy %>
-        <%= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
-        <%= render 'part_fields', :f => sb %>
-        <% end %>  
+        <%#= f.fields_for :parts,:child_index => "new_parts"  do |sb| %>
+        <%#= render 'part_fields', :f => sb %>
+        <%# end %>  
+        <%
+        association=:parts
+        new_object = Part.new
+        
+            fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+              render(association.to_s.singularize + "_fields", :f => builder)
+            end
+        %>
+        <%= fields %>
     </DIV>
 </div>  
     <div>
