@@ -1,0 +1,28 @@
+<% @items=[] %>
+<% Porder.wait_for_out.each do |list| %>
+	<% @items+=list.porder_items if list.outstock.nil? %>
+	<%= list.name  %><br/>
+	<% list.porder_items.each do |item| %>
+		<%= item.part.spec.bh %><br/>
+	<% end %>
+	<% end %>
+<% groups=@items.group_by{ |item| item.part.spec }%>
+	数量：<%= groups.size %><br/>
+	<% 
+		arr=[]
+	 %>
+<% groups.each do |key,value| %>
+<%
+	hash={}
+	hash[:id]=key.id
+	hash[:bh]=key.bh
+	hash[:wait_for_out]=value.sum{|t| t.quantity }
+	hash[:stock_quantity]=key.stock.quantity 
+	hash[:stock_left]=hash[:stock_quantity]-hash[:wait_for_out]
+	arr<<hash
+%>
+<%= key.bh %>:<%= value.sum{|t| t.quantity } %>:<%= key.stock.quantity %><br/>
+<% end %>
+<% arr.sort_by{|a|a[:stock_left]}.each do |t| %>
+<%= "#{t[:bh]}:#{t[:wait_for_out]}:#{t[:stock_quantity]}:#{t[:stock_left]}" %><br/>
+<% end %>
