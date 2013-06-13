@@ -50,6 +50,13 @@ class Ability
         can :read,Toy
         can :manage,Porder
         can :read,Stock
+        can :list,Stock
+        can :read,Product
+        can :read,Color
+        can :read, Spec
+        can :read, InStockItem
+        can :read, Outstock
+        can :read, OutstockItem
       else
             cannot :manage,:all
 
