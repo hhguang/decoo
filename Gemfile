@@ -67,6 +67,10 @@ end
 #gem "eventmachine"
 #gem "therubyracer", :require => 'v8'
 
+group :production do
+	gem "eventmachine"
+end
+
 # permission
 gem "cancan", "~> 1.6.7"
 

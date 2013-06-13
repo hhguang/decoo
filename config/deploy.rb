@@ -3,22 +3,26 @@ require 'bundler/capistrano'
 
 default_run_options[:pty] = true
 
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))  
+
 require "rvm/capistrano"
-set :rvm_ruby_string, 'ruby-1.9.3-p392'
-set :rvm_type, :system
+set :rvm_ruby_string, 'ruby-1.9.2-p320'
+set :rvm_type, :user
+
 
 set :application, "decool"
 set :repository,  "git://github.com/hhguang/decoo.git"
 set :branch, "master"
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :user, "rails"
-set :deploy_to, "/data/www/#{application}"
-set :runner, "rails"
+set :user, "railsu"
+set :deploy_to, "/www-data/#{application}"
+set :runner, "railsu"
+set :use_sudo, false
 
-role :web, "42.120.19.221"                          # Your HTTP server, Apache/etc
-role :app, "42.120.19.221"                          # This may be the same as your `Web` server
-role :db,  "42.120.19.221", :primary => true # This is where Rails migrations will run
+role :web, "198.199.104.4"                          # Your HTTP server, Apache/etc
+role :app, "198.199.104.4"                          # This may be the same as your `Web` server
+role :db,  "198.199.104.4", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
 # if you're still using the script/reaper helper you will need
