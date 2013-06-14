@@ -37,3 +37,13 @@ role :db,  "198.199.104.4", :primary => true # This is where Rails migrations wi
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
  end
+
+ namespace :bundle do
+
+  desc "run bundle install and ensure all gem requirements are met"
+  task :install do
+    run "cd #{current_path} && bundle install  --without test "
+  end
+
+end
+before "deploy:restart", "bundle:install"

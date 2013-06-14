@@ -13,7 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-gemfile.lock
+Gemfile.lock
 /public/products
 /nbproject
-/nbproject/private/*.*
+/nbproject/private
