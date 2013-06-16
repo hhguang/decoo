@@ -462,6 +462,24 @@ $(document).ready(function() {
 		 enableDrag: false
 	});
 
+	// add by varro 2013.6.16
+	$(".ibuttonCheck1").iButton({
+		 labelOn: "全部",
+		 labelOff: "不足",
+		 enableDrag: false
+		  , change: function ($input){
+	      // update the text based on the status of the checkbox
+	      // $("#send-email").html($input.is(":checked") ? "Yes, send me more e-mail!" : "Ugh... no more e-mail already!");
+	      if($input.is(":checked")){
+	      	$(".enough").show();
+	      }
+	      else{
+	      	$(".enough").hide();	
+	      };
+    	}
+	}).trigger("change");
+
+
 
 	//------------- Check all checkboxes  -------------//
 	

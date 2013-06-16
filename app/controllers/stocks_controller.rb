@@ -92,4 +92,26 @@ class StocksController < ApplicationController
     @instock_items=@stock.spec.in_stock_items.order('created_at desc')
     @outstock_items=@stock.spec.outstock_items.order('created_at desc')
   end
+
+  def analysis
+    @items=[]
+    Porder.wait_for_out.each do |list| 
+      @items+=list.porder_items 
+    end
+    arr=[]
+    groups=@items.group_by{ |item| item.part.spec }
+      
+    groups.each do |key,value| 
+      hash={}
+      hash[:spec]=key
+      hash[:id]=key.id
+      hash[:bh]=key.bh
+      hash[:wait_for_out]=value.sum{|t| t.quantity }
+      hash[:stock_quantity]=key.stock ? key.stock.quantity : 0
+      hash[:stock_left]=hash[:stock_quantity]-hash[:wait_for_out]
+      arr<<hash
+    end
+    @wait_items=arr.sort_by!{|a|a[:stock_left]}
+  end
+
 end

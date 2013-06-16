@@ -1,28 +1,81 @@
-<% @items=[] %>
-<% Porder.wait_for_out.each do |list| %>
-	<% @items+=list.porder_items if list.outstock.nil? %>
-	<%= list.name  %><br/>
-	<% list.porder_items.each do |item| %>
-		<%= item.part.spec.bh %><br/>
-	<% end %>
-	<% end %>
-<% groups=@items.group_by{ |item| item.part.spec }%>
-	数量：<%= groups.size %><br/>
-	<% 
-		arr=[]
-	 %>
-<% groups.each do |key,value| %>
-<%
-	hash={}
-	hash[:id]=key.id
-	hash[:bh]=key.bh
-	hash[:wait_for_out]=value.sum{|t| t.quantity }
-	hash[:stock_quantity]=key.stock.quantity 
-	hash[:stock_left]=hash[:stock_quantity]-hash[:wait_for_out]
-	arr<<hash
-%>
-<%= key.bh %>:<%= value.sum{|t| t.quantity } %>:<%= key.stock.quantity %><br/>
-<% end %>
-<% arr.sort_by{|a|a[:stock_left]}.each do |t| %>
-<%= "#{t[:bh]}:#{t[:wait_for_out]}:#{t[:stock_quantity]}:#{t[:stock_left]}" %><br/>
-<% end %>
+
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'库存管理',:here=>'库存分析' %>  
+
+  <div class="row-fluid" >
+    <div class="span12">
+      
+    </div>
+  </div>
+
+  <div class="box">
+        <div class="title">
+          <h4 class="clearfix">
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>库存分析</span>
+            <form class="box-form right" action="" />
+                                            <input type="checkbox" id="inlineCheckbox4" checked="checked" class="ibuttonCheck1" /> 
+                                        </form>
+          </h4>
+        </div>
+        <div class="content noPad">
+          
+              
+              <table id="DataTables_Table_0" class="responsive table table-bordered ">
+                <thead>
+                  <tr>
+                    <th>#</th>                    
+                    <th>图片</th>                    
+                    <th>货号</th>                    
+                    <th colspan="2">颜色</th>
+                    <th>等待出库</th>
+                    <th>库存</th>                    
+                    <th>预计余额</th>
+                  </tr>
+                </thead>
+                <tbody id="items">
+                  <% @wait_items.each do |item| %>
+                  <tr class="<%= 'enough' if item[:stock_left]>0 %>">
+                    <td>
+                      <%= item[:id] %>
+                    </td>
+                    <td>
+                      <a title="" rel="prettyPhoto" href="/products/<%= item[:spec].product.image_url %>">
+					      <img src="/products/<%= item[:spec].product.image_url %>" class="img-polaroid" style="width:auto;height: 60px;"/>
+					   </a>
+                    </td>                    
+                    <td>
+                    	<%= item[:spec].bh %>
+                    </td>
+                    <td style="background-color: <%= item[:spec].color.value %>">
+    
+					 </td>
+					 <td>
+					   <%= item[:spec].color.name %>
+					 </td>
+                    <td>
+                      <%= item[:wait_for_out] %>
+                    </td>
+                    <td >
+                      <%= item[:stock_quantity] %>
+                    </td>
+                    <td>
+                    	<span class="label <%= 'badge-warning' if item[:stock_left]<=0 %>">
+                      <%= item[:stock_left] %>
+                  		</span>
+                    </td>
+                    
+
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+               <%#= will_paginate @stocks, :inner_window => 2,:params=>{:search=>@search} %>   
+
+          
+        </div>
+  </div>
+
+</div>
+
+

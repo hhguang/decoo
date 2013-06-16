@@ -1,12 +1,12 @@
 class Porder < ActiveRecord::Base
-  attr_accessible :name, :outstock_id, :quantity, :toy_id, :user_id
+  attr_accessible :name, :outstock_id, :quantity, :toy_id, :user_id,:is_out
 
   belongs_to :toy
   belongs_to :user
   has_many 	 :porder_items,:dependent=>:destroy
   has_one	 :outstock
 
-  scope :wait_for_out,where(:outstock_id=>nil ).includes(:porder_items)
+  scope :wait_for_out,where(:is_out=>false ).includes(:porder_items)
 
   accepts_nested_attributes_for :porder_items,:reject_if => lambda { |a| a[:part_id].blank? },:allow_destroy => true
 

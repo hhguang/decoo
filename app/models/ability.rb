@@ -52,6 +52,7 @@ class Ability
         can :manage,Porder
         can :read,Stock
         can :list,Stock
+        can :analysis,Stock
         can :read,Product
         can :read,Color
         can :read, Spec
