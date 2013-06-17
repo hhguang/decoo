@@ -14,7 +14,7 @@
             <span class="icon16 brocco-icon-grid"></span>
             <span>库存分析</span>
             <form class="box-form right" action="" />
-                                            <input type="checkbox" id="inlineCheckbox4" checked="checked" class="ibuttonCheck1" /> 
+                                            <input type="checkbox" id="inlineCheckbox4"  class="ibuttonCheck1" /> 
                                         </form>
           </h4>
         </div>
@@ -35,7 +35,7 @@
                 </thead>
                 <tbody id="items">
                   <% @wait_items.each do |item| %>
-                  <tr class="<%= 'enough' if item[:stock_left]>0 %>">
+                  <tr <%= "class=enough style=display:none " if item[:stock_left]>0 %> >
                     <td>
                       <%= item[:id] %>
                     </td>
