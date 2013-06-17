@@ -42,7 +42,7 @@ class PordersController < ApplicationController
     if params[:package_id]
       @package=Package.find(params[:package_id]) 
       @toy=@package.toy || @package.parent.toy
-      @parts=@package.parts
+      @parts=@package.all_parts
     end
     @porder = @toy.porders.build(:quantity=>@quantity)
     respond_to do |format|

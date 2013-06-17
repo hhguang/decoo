@@ -31,6 +31,13 @@ class Package < ActiveRecord::Base
   def count_for_part
     self.parts.sum{|part| part.count_in_toy } 
   end
+
+  def all_parts
+    packages_ids=[self.id]
+    packages_ids<<self.children.map{|p| p.id } 
+    Part.find_all_by_package_id(packages_ids)
+  end
+
 end
 
 module ActiveRecord
