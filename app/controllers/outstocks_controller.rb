@@ -123,7 +123,7 @@ class OutstocksController < ApplicationController
     # @outstock.outstock_items.build
     @porder.porder_items.each do |item|
       part=item.part
-      @outstock.outstock_items.build(:spec_bh=>part.spec.bh,:spec_id=>part.spec_id,:weight=>(part.quantity*part.spec.product.weight*@porder.quantity),:quantity=>part.quantity*@porder.quantity)
+      @outstock.outstock_items.build(:spec_bh=>part.spec.bh,:spec_id=>part.spec_id,:weight=>'',:quantity=>part.quantity*@porder.quantity)
     end
   end
   

@@ -69,8 +69,10 @@
                       
                     </td>
                     <td>
+                      <span class="label label-info">
                       <%= builder.object.quantity %>
-                      <%= builder.input :quantity,as: :hidden %>
+                      <%#= builder.input :quantity,as: :hidden %>
+                      </span>
                     </td>
                     <td>
                       <% q=builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
