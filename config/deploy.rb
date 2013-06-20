@@ -46,4 +46,4 @@ role :db,  "198.199.104.4", :primary => true # This is where Rails migrations wi
   end
 
 end
-before "deploy:restart", "bundle:install"
+# before "deploy:restart", "bundle:install"
