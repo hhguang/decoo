@@ -44,6 +44,7 @@
                   <th>重量</th>
                   <th>数量</th>
                   <th>库存</th>
+                  <th>库存重量</th>
                   <th>实际出库重量</th>
                 </tr>
               </thead>
@@ -72,7 +73,13 @@
                       <%= builder.input :quantity,as: :hidden %>
                     </td>
                     <td>
+                      <% q=builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
+                      <span class="label <%= q-builder.object.quantity<0 ? 'label-warning' : 'label-info' %>">
                       <%= builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
+                      </span>
+                    </td>
+                    <td>
+                      <%= builder.object.spec.stock.nil? ? 0 : number_with_precision(builder.object.spec.stock.weight) %>
                     </td>
                     <td>
                       <%= builder.input :weight,label: false,input_html: { class: 'input-mini' } %>

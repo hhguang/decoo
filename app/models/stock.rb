@@ -20,6 +20,10 @@ class Stock < ActiveRecord::Base
     self.product_id=spec.product.id
   end
 
+  def weight
+    self.quantity*self.product.weight
+  end
+
 #  def self.outstock(outstock_list)
 #    Stock.transaction do
 #      outstock_list.outstock_items.each do |item|
