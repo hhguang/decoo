@@ -4,7 +4,7 @@ class Outstock < ActiveRecord::Base
   has_many :outstock_items, :dependent => :destroy
   belongs_to :user
   belongs_to :porder
-  accepts_nested_attributes_for :outstock_items
+  accepts_nested_attributes_for :outstock_items,:reject_if => lambda { |a| a[:weight].blank? || a[:weight]=='0'  }
 
   before_create :add_bh
   after_save :set_from_porder
