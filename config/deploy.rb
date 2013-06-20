@@ -30,7 +30,12 @@ role :db,  "198.199.104.4", :primary => true # This is where Rails migrations wi
 
 # If you are using Passenger mod_rails uncomment this:
  namespace :deploy do
-   
+    task :update_symlink do
+	    run "ln -s #{shared_path}/public/assets #{current_path}/public/assets"
+	    run "ln -s #{shared_path}/public/products #{current_path}/public/products"
+	    run "ln -s #{shared_path}/public/uploads #{current_path}/public/uploads"
+	end
+
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
@@ -47,3 +52,5 @@ role :db,  "198.199.104.4", :primary => true # This is where Rails migrations wi
 
 end
 # before "deploy:restart", "bundle:install"
+
+after "deploy:finalize_update", "deploy:update_symlink" 
