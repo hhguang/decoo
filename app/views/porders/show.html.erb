@@ -42,9 +42,9 @@
         <div class="content">
           <div class="you">
             <ul class="unstyled">
-              <li><h3>成品</h3></li>
+              <li><h3>成品:<%= @porder.toy.name %>  </h3></li>
               <li>
-                <h3><span class="icon12 typ-icon-arrow-right"></span><%= @porder.toy.name %></h3>
+                <h3>数量：<%= @porder.quantity %></h3>
               </li>
               <li><h5>
                 领料部门：________________________     配料员：________________________
@@ -63,7 +63,7 @@
           <table class="responsive table table-bordered" id="t">
             <thead>
               <tr>
-                
+                <th>零件包</th>
                 <th>货号</th>
                 <th colspan="2">颜色</th>
                 <th>材料</th>
@@ -78,6 +78,9 @@
               <% item=p.part %>
 
               <tr>
+                <td>
+                  <%= item.package.parent_id ?  "#{item.package.parent.name}--[#{item.package.name}]" : "#{item.package.name}"  %>
+                </td>
                 <td>
                   <%= item.spec.bh if item.spec %>
                 </td>
