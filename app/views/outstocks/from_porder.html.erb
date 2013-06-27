@@ -84,7 +84,7 @@
                       <%= builder.object.spec.stock.nil? ? 0 : number_with_precision(builder.object.spec.stock.weight) %>
                     </td>
                     <td>
-                      <%= builder.input :weight,label: false,input_html: { class: 'input-mini' } %>
+                      <%= builder.input :weight,label: false,as: :string,input_html: { class: 'input-mini' } %>
                     </td>
                   </tr>
                 <% end %>
