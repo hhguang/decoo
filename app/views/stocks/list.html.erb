@@ -118,7 +118,7 @@
                       <%= item.outstock.taker if item.outstock.taker %>
                     </td>
                     <td>
-                      <%= item.created_at.to_s(:db) %>
+                      <%= item.created_at.strftime("%Y-%m-%d %H:%M:%S")  %>
                     </td>
 
                   </tr>
