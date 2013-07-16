@@ -1,5 +1,5 @@
 class Porder < ActiveRecord::Base
-  attr_accessible :name, :outstock_id, :quantity, :toy_id, :user_id,:is_out
+  attr_accessible :name, :outstock_id, :quantity, :toy_id, :user_id,:is_out,:porder_items_attributes
 
   belongs_to :toy
   belongs_to :user

@@ -58,7 +58,7 @@
               <% @porders.each do |porder| %>
                   <tr>
                     <td><%= porder.name %></td>
-                    <td><%= link_to porder.toy.name,toy_path(porder.toy_id) %></td>
+                    <td><%= link_to porder.toy.name,toy_path(porder.toy_id) if porder.toy %></td>
                     <td><%= porder.quantity %></td>
                     <td><%= porder.created_at.strftime("%Y-%m-%d ") %></td>
                     <td><%= porder.outstock.nil? ? "未领料" : "#{porder.outstock.created_at.to_s(:db)}已领料" %></td>

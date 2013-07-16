@@ -2,7 +2,8 @@ Decoo::Application.routes.draw do
 
   resources :porders do
     get :out,:on=>:collection
-    
+    get :new_alone,:on=>:collection
+
   end
 
   resources :parts do

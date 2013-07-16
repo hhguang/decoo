@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130615082943) do
+ActiveRecord::Schema.define(:version => 20130716083644) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -84,10 +84,8 @@ ActiveRecord::Schema.define(:version => 20130615082943) do
     t.integer  "toy_id"
     t.integer  "spec_id"
     t.integer  "quantity"
-    t.integer  "parent_id"
-    t.string   "small_package_name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "porder_items", :force => true do |t|
@@ -96,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20130615082943) do
     t.integer  "porder_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "spec_id"
   end
 
   create_table "porders", :force => true do |t|
@@ -104,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20130615082943) do
     t.integer  "quantity"
     t.integer  "user_id"
     t.integer  "outstock_id"
+    t.text     "memo"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "is_out",      :default => false

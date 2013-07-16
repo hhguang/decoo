@@ -42,10 +42,12 @@
         <div class="content">
           <div class="you">
             <ul class="unstyled">
+              <% if @porder.toy %>
               <li><h3>成品:<%= @porder.toy.name %>  </h3></li>
               <li>
                 <h3>数量：<%= @porder.quantity %></h3>
               </li>
+              <% end %>
               <li><h5>
                 领料部门：________________________     配料员：________________________
               </h5>
