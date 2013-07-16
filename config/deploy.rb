@@ -1,7 +1,7 @@
 #$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require 'bundler/capistrano'
 
-default_run_options[:pty] = true
+# default_run_options[:pty] = true
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  
 
@@ -20,9 +20,12 @@ set :deploy_to, "/www-data/#{application}"
 set :runner, "railsu"
 set :use_sudo, false
 
-role :web, "198.199.104.4"                          # Your HTTP server, Apache/etc
-role :app, "198.199.104.4"                          # This may be the same as your `Web` server
-role :db,  "198.199.104.4", :primary => true # This is where Rails migrations will run
+role :web, "10.3.3.229"                          # Your HTTP server, Apache/etc
+role :app, "10.3.3.229"                          # This may be the same as your `Web` server
+role :db,  "10.3.3.229", :primary => true # This is where Rails migrations will run
+# role :web, "198.199.104.4"                          # Your HTTP server, Apache/etc
+# role :app, "198.199.104.4"                          # This may be the same as your `Web` server
+# role :db,  "198.199.104.4", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
 # if you're still using the script/reaper helper you will need
@@ -47,10 +50,14 @@ role :db,  "198.199.104.4", :primary => true # This is where Rails migrations wi
 
   desc "run bundle install and ensure all gem requirements are met"
   task :install do
+    #run "cd #{current_path} && bundle install  --without test "
+  end
+
+  task :t_install do
     run "cd #{current_path} && bundle install  --without test "
   end
 
 end
 # before "deploy:restart", "bundle:install"
 
-after "deploy:finalize_update", "deploy:update_symlink" 
+# after "deploy:finalize_update", "deploy:update_symlink" 

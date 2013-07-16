@@ -3,10 +3,21 @@ class PordersController < ApplicationController
   # GET /porders
   # GET /porders.json
   def index
-    if params[:search] 
-      @porders=Porder.joins(:toy).where('porders.name like ? or toys.name like ? ',"%"+params[:search]+"%","%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    if ! params[:filter] or params[:filter]=="all"
+      @filter_str="all"
+      filter="1=1"
+    elsif params[:filter]=="done"
+      filter={:is_out=>true}
+      @filter_str="done"
     else
-       @porders = Porder.paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+      filter={:is_out=>false}
+      @filter_str="none"
+    end
+    if params[:search] 
+      @search=params[:search]
+      @porders=Porder.joins(:toy).where(filter).where('porders.name like ? or toys.name like ? ',"%"+params[:search]+"%","%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    else
+       @porders = Porder.where(filter).paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
     end
     
 

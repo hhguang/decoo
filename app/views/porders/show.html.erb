@@ -138,10 +138,14 @@
 <script>
 
 function pr(content){
-  bdhtml=window.document.body.innerHTML;
+  // bdhtml=window.document.body.innerHTML;
+  bdhtml=$("body").clone(true);
   window.document.body.innerHTML=content;
   window.print();
-  window.document.body.innerHTML=bdhtml;
+  // window.document.body.innerHTML=bdhtml;
+  // $("body").replaceWith(bdhtml);
+  $("body").empty();
+  bdhtml.appendTo($("body"));
 }
 
 

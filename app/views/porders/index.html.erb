@@ -20,11 +20,28 @@
         <div class="content noPad">
           <div style="padding: 15px;">
             
-            <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  porders_path %>">
+            <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  porders_path %>" id="search">
+              <label class="radio">
+                <input type="radio" name="filter" id="optionsRadios1" value="all" <%= 'checked' if @filter_str=="all" %>  >
+                全部
+              </label>
+              <label class="radio">
+                <input type="radio" name="filter" id="optionsRadios2" value="done" <%= 'checked' if @filter_str=="done" %> >
+                已领料
+              </label>
+              <label class="radio">
+                <input type="radio" name="filter" id="optionsRadios3" value="none" <%= 'checked' if @filter_str=="none" %> >
+                未领料
+              </label>
               <input type="text" class="input-medium search-query" name="search"/>
               <button type="submit" class="btn">搜索</button>
             </form>
-
+            <script type="text/javascript">
+              $("#search :radio").click(function(){
+                $("#search").submit();
+                
+              })
+            </script>
           </div>
           <table id="DataTables_Table_0" class="responsive table table-bordered ">
             <thead>
@@ -58,7 +75,7 @@
 
           <div class="row-fluid" style="padding: 10px;">
             
-              <%= will_paginate @porders, :inner_window => 2 %>
+              <%= will_paginate @porders, :inner_window => 2,:params=>{:search=>@search,:filter=>@filter_str}  %>
             </div>
                         
           </div>
