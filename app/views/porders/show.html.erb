@@ -47,6 +47,8 @@
               <li>
                 <h3>数量：<%= @porder.quantity %></h3>
               </li>
+              <% else %>
+              <li><h3>非成品生产单</h3></li>
               <% end %>
               <li><h5>
                 领料部门：________________________     配料员：________________________
@@ -61,7 +63,7 @@
             </ul>
           </div>
           <div class="clearfix"></div>
-
+          <% if @porder.toy %>
           <table class="responsive table table-bordered" id="t">
             <thead>
               <tr>
@@ -77,11 +79,14 @@
             <tbody>
 
               <% @porder.porder_items.each do |p|  %>
+              
               <% item=p.part %>
 
               <tr>
                 <td>
-                  <%= item.package.parent_id ?  "#{item.package.parent.name}--[#{item.package.name}]" : "#{item.package.name}"  %>
+                  
+                  <%= item.package.parent_id ?  "#{item.package.parent.name}--[#{item.package.name}]" : "#{item.package.name}"   %>
+                  
                 </td>
                 <td>
                   <%= item.spec.bh if item.spec %>
@@ -104,10 +109,53 @@
                 <td>
                 </td>
               </tr>
+              
               <% end %>
             </tbody>
           </table>
-
+          <% else %>
+          <table class="responsive table table-bordered" id="t">
+            <thead>
+              <tr>                
+                <th>货号</th>
+                <th colspan="2">颜色</th>
+                <th>材料</th>
+                <th>重量</th>
+                <th>数量</th>
+                <th>实际出库</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @porder.porder_items.each do |item|  %>              
+              
+              <tr>
+                <td>
+                  <%= item.spec.bh if item.spec %>
+                </td>
+                <td style="background-color:<%= item.spec.color.value if item.spec %> " >
+                  
+                </td>
+                <td>
+                  <%= item.spec.color.name if item.spec %>
+                </td>
+                <td>
+                  <%= item.spec.material if item.spec %>
+                </td>
+                <td>
+                  <%= number_with_precision(item.spec.product.weight*item.quantity) if item.spec.product && item.spec.product.weight %>
+                </td>
+                <td>
+                  <%= item.quantity  %>
+                </td>
+                <td>
+                </td>
+              </tr>
+              
+              
+              <% end %>
+            </tbody>
+          </table>
+          <% end %>
           <!-- <div class="payment">
             <ul class="unstyled">
               <li><h3>备注</h3></li>

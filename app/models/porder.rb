@@ -8,7 +8,7 @@ class Porder < ActiveRecord::Base
 
   scope :wait_for_out,where(:is_out=>false ).includes(:porder_items)
 
-  accepts_nested_attributes_for :porder_items,:reject_if => lambda { |a| a[:part_id].blank? },:allow_destroy => true
+  accepts_nested_attributes_for :porder_items,:reject_if => lambda { |a| a[:part_id].blank? && a[:spec_bh].blank? },:allow_destroy => true
 
   validates :quantity,:presence => true,
                     :numericality=>{:greater_than=>0}

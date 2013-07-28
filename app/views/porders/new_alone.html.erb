@@ -26,34 +26,6 @@
                 
                 <button type="submit" class="btn btn-success">下单</button>
               
-            
-            
-            <script type="text/javascript">
-            	$("a#js").on( "click", function( event ) {
-
-                var q=$("input#porder_quantity").val();
-                var zs=0;
-                var kc=0;
-                var ky=0;
-                var wait_for_out=0;
-            		$("tbody#parts tr").each(function(index){
-                  zs=parseInt($(this).find("#sl").text())*q;
-                  kc=parseInt($(this).find("#kc").text());
-                  wait_for_out=parseInt($(this).find("#wait_for_out").text());
-                  ky=kc-zs-wait_for_out;
-                  if(ky<=0){
-                    $(this).children("#ky").text(ky);
-                  }else{
-                    $(this).children("#ky").text('');
-                  }
-                  ;
-            			$(this).children("#zs").text(parseInt($(this).find("#sl").text())*q);
-                  $(this).children("#zzl").text( Math.round(parseInt($(this).find("#sl").text())*q*parseFloat($(this).find("#zl").text())*100)/100 );
-            		}) ;
-
-            	}
-            	)
-            </script>
 
           </div>
           
@@ -64,10 +36,10 @@
                 <th>零件编号</th>                         
                 
                 <th>件数</th>
-                <th>重量</td>
+                <!-- <th>重量</td>
                 <th>库存</th>
                 <th>等待出库</th>
-                <th>库存不足</th>
+                <th>库存不足</th> -->
               </tr>
             </thead>
             <tbody id="parts">
