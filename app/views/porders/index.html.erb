@@ -18,8 +18,11 @@
           
         </div>
         <div class="content noPad">
-          <div style="padding: 15px;">
-            
+          <div style="padding: 15px;">            
+            <a href="/porders/new_alone"  class="btn btn-success "  >
+              <span class="icon14 iconic-icon-plus white"></span>
+              独立生产下单
+            </a>
             <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  porders_path %>" id="search">
               <label class="radio">
                 <input type="radio" name="filter" id="optionsRadios1" value="all" <%= 'checked' if @filter_str=="all" %>  >

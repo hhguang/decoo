@@ -78,7 +78,7 @@
             </thead>
             <tbody>
 
-              <% @porder.porder_items.each do |p|  %>
+              <% @porder.porder_items.order('part_id').each do |p|  %>
               
               <% item=p.part %>
 
