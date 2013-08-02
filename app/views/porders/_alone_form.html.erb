@@ -1,0 +1,69 @@
+<%= form_for(@porder,:html=>{:class=>""},:action=>'update' ) do |f| %>
+  <% if @porder.present? && @porder.errors.any? %>  
+  <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss='alert' href="#">×</a>
+      <p><strong>有 <%= @porder.errors.count %> 处问题导至无法提交:</strong></p>
+    <ul>  
+      <% @porder.errors.full_messages.each do |msg| %>  
+        <li><%= msg %></li>  
+      <% end %>  
+    </ul>  
+  </div>
+  <% end %>  
+          <div style="padding: 15px;height:30px;">
+            
+            
+              
+                <%= f.hidden_field :quantity,:value=>1 %>
+                
+                <button type="submit" class="btn btn-success">下单</button>
+              <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_item" %>
+                <%
+                association=:porder_items
+                new_object = f.object.class.reflect_on_association(association).klass.new
+                 
+                    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+                      render("porder_items_fields", :f => builder)
+                    end
+                %>
+                <SCRIPT TYPE="text/javascript">
+                $("a#new_item").on( "click", function( event ) {       
+                  event.preventDefault();
+                  for (var i=0; i<10; i++)
+                  {
+                  var new_id = new Date().getTime();
+                  var regexp = new RegExp("new_porder_items" , "g");
+                  $("#items").append("<%= escape_javascript(fields) %>".replace(regexp, new_id+i.toString() ));
+                  }
+                });
+
+                </SCRIPT>
+
+          </div>
+          
+          <table id="DataTables_Table_0" class="responsive table table-bordered ">
+            <thead>
+              <tr>                      
+                <th>零件编号</th>                                         
+                <th>件数</th>
+                <!-- <th>重量</td>
+                <th>库存</th>
+                <th>等待出库</th>
+                <th>库存不足</th> -->
+                <th>移除</th>
+              </tr>
+            </thead>
+            <tbody id="items">
+              <%= f.fields_for :porder_items do |builder| %>
+              <%= render 'porder_items_fields', :f=>builder %>
+              <% end %>
+            </tbody>
+          </table>
+
+
+          
+          <div class="row-fluid" style="padding: 10px;">
+            
+              
+            </div>
+                      <% end %>

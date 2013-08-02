@@ -70,11 +70,12 @@ class PordersController < ApplicationController
   # GET /porders/1/edit
   def edit
     @porder = Porder.find(params[:id])
-    @toy=@porder.toy
-    @quantity=@porder.quantity
-    @parts=@porder.toy.parts
-    @porder_items=@porder.porder_items
-    @part_ids=@porder_items.map{|p|p.part.id}
+    if @toy=@porder.toy
+      @quantity=@porder.quantity
+      @parts=@porder.toy.parts
+      @porder_items=@porder.porder_items
+      @part_ids=@porder_items.map{|p|p.part.id}
+    end
   end
 
   # POST /porders
@@ -109,12 +110,14 @@ class PordersController < ApplicationController
 
     respond_to do |format|
       if @porder.update_attributes(params[:porder])
-        @porder.porder_items.clear
-        @part_ids=params[:part_ids]
-        @part_ids.each do |part_id|
-          part=Part.find(part_id)
-          pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
-          @porder.porder_items.create(:part_id=>part_id,:quantity=>@porder.quantity*part.quantity*pg)
+        if @porder.toy
+          @porder.porder_items.clear
+          @part_ids=params[:part_ids]
+          @part_ids.each do |part_id|
+            part=Part.find(part_id)
+            pg=part.package.parent_id ?  part.package.parent.quantity*part.package.quantity : part.package.quantity
+            @porder.porder_items.create(:part_id=>part_id,:quantity=>@porder.quantity*part.quantity*pg)
+          end
         end
         format.html { redirect_to @porder, notice: 'Porder was successfully updated.' }
         format.json { head :no_content }
