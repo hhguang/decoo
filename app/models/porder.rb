@@ -3,7 +3,7 @@ class Porder < ActiveRecord::Base
 
   belongs_to :toy
   belongs_to :user
-  has_many 	 :porder_items,:dependent=>:destroy
+  has_many 	 :porder_items,:dependent=>:destroy,:order=>'parts.package_id',:include=>:part
   has_one	 :outstock
 
   scope :wait_for_out,where(:is_out=>false ).includes(:porder_items)

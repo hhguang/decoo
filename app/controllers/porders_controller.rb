@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PordersController < ApplicationController
   load_and_authorize_resource
   # GET /porders
@@ -47,15 +48,21 @@ class PordersController < ApplicationController
   # GET /porders/new.json
   def new
     @toy=Toy.find(params[:toy_id]) if params[:toy_id]
-
-    @quantity=params[:quantity] || 1
-    @parts=@toy.parts
-    if params[:package_id]
-      @package=Package.find(params[:package_id]) 
-      @toy=@package.toy || @package.parent.toy
-      @parts=@package.all_parts
+    if @toy 
+      @title="成品生产下单"
+      @quantity=params[:quantity] || 1
+      @parts=@toy.parts
+      if params[:package_id]
+        @package=Package.find(params[:package_id]) 
+        @toy=@package.toy || @package.parent.toy
+        @parts=@package.all_parts
+      end
+      @porder = @toy.porders.build(:quantity=>@quantity)
+    else
+      @title="独立生产下单"
+      @porder=Porder.new
+      5.times{@porder.porder_items.build}
     end
-    @porder = @toy.porders.build(:quantity=>@quantity)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @porder }

@@ -1,5 +1,5 @@
 <div class="contentwrapper"><!--Content wrapper-->
-  <%= render '/share/head',:title=>'生产管理',:here=>'生产下单' %>
+  <%= render '/share/head',:title=>'生产管理',:here=>@title %>
 
   <div class="row-fluid">
     <div class="span12" id="msg">
@@ -13,11 +13,12 @@
         <div class="title">
           <h4>
             <span class="icon16 brocco-icon-grid"></span>
-            <span>生产下单</span>
+            <span><%= @title %></span>
           </h4>
           
         </div>
         <div class="content noPad">
+          <% if @porder.toy %> 
           <div style="padding: 15px;height:30px;">
             
             <%= form_for(@porder,:html=>{:class=>"form-inline pull-left"} ) do |f| %>
@@ -177,14 +178,13 @@
 
 
           <% end %>
-          <div class="row-fluid" style="padding: 10px;">
-            
-              
-            </div>
+          <div class="row-fluid" style="padding: 10px;">           
+             
                         
           </div>
-          
-          
+          <% else %>
+          <%= render "alone_form" %>
+          <% end %>
         </div>
 
       </div><!-- End .box -->

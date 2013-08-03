@@ -135,7 +135,7 @@
                   <%= part.spec.bh %>
                 </td>
                 <td id="zl">
-                  <%= part.spec.product.weight || "未知" %>
+                  <%= number_with_precision(part.spec.product.weight) || "未知" %>
                 </td>
                 <td >
                   <%= part.quantity %>
