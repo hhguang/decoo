@@ -119,6 +119,7 @@
                   零件包
                 </th>                
                 <th>零件编号</th>
+                <th>图片</th>
                 <th>单个重量</th>
                 <th>每包数量</th>
                 <th>每个成品零件总数</th>                
@@ -146,6 +147,9 @@
               	<td>
               		<%= part.spec.bh %>
               	</td>
+                <td>
+                  <img src="/products/<%= part.spec.product.image_url %>" class="img-polaroid" style="width:auto;height: 60px;"/>
+                </td>
                 <td id="zl">
                   <%= part.spec.product.weight ? number_with_precision(part.spec.product.weight) : "未知" %>
                 </td>

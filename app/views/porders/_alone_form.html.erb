@@ -1,4 +1,4 @@
-<%= form_for(@porder,:html=>{:class=>""},:action=>'update' ) do |f| %>
+<%= form_for(@porder,:html=>{:class=>""} ) do |f| %>
   <% if @porder.present? && @porder.errors.any? %>  
   <div class="alert alert-block alert-error">
       <a class="close" data-dismiss='alert' href="#">×</a>
@@ -10,13 +10,11 @@
     </ul>  
   </div>
   <% end %>  
-          <div style="padding: 15px;height:30px;">
-            
-            
-              
-                <%= f.hidden_field :quantity,:value=>1 %>
-                
-                <button type="submit" class="btn btn-success">下单</button>
+          <div style="padding: 15px;height:30px;">                                       
+              <%= f.hidden_field :quantity,:value=>1 %>
+              <lable>备注：</label>
+              <%= f.text_field :memo %>
+              <button type="submit" class="btn btn-success">下单</button>
               <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_item" %>
                 <%
                 association=:porder_items
