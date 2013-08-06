@@ -99,7 +99,7 @@ class StocksController < ApplicationController
       @items+=list.porder_items 
     end
     arr=[]
-    groups=@items.group_by{ |item| item.part.spec }
+    groups=@items.group_by{ |item| item.spec || item.part.spec }
       
     groups.each do |key,value| 
       hash={}

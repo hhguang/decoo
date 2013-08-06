@@ -35,7 +35,7 @@ class Package < ActiveRecord::Base
   def all_parts
     packages_ids=[self.id]
     packages_ids<<self.children.map{|p| p.id } 
-    Part.find_all_by_package_id(packages_ids)
+    Part.where(:package_id=>packages_ids).order("package_id")
   end
 
 end

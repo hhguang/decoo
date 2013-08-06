@@ -20,5 +20,9 @@ class PorderItem < ActiveRecord::Base
   def spec_bh
   	Spec.find(self.spec_id).bh if spec_id
   end
+
+  def rspec
+    self.spec || self.part.spec
+  end
   
 end
