@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @goods_category.name %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%= @goods_category.parent_id %>
+</p>
+
+<p>
+  <b>Limite:</b>
+  <%= @goods_category.limite %>
+</p>
+
+
+<%= link_to 'Edit', edit_goods_category_path(@goods_category) %> |
+<%= link_to 'Back', goods_categories_path %>

@@ -1,0 +1,28 @@
+
+<div class="box">
+	<div class="title">
+        <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>
+                <%= @goods_category.new_record? ? "增加" : "编辑" %>
+            </span>
+        </h4>
+                                    
+    </div>
+    <div class="content">
+<%= simple_form_for(@goods_category) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name,:label=>"名称" %>
+    <%#= f.input :parent_id %>
+    <%= f.input :limit,:label=>"预警下限" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,:value=>"保存" %>
+  </div>
+<% end %>
+
+	</div>
+</div>

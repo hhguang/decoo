@@ -245,7 +245,7 @@
               </li>
 
               <li>
-                <a href="#"><span class="icon16 minia-icon-list-4"></span>库存管理</a>
+                <a href="#"><span class="icon16 minia-icon-list-4"></span>零件库存管理</a>
                 <ul class="sub">
                   <li>
                     <a href="/stocks" <%= 'class="current"' if controller_name.in?(['stocks']) %> >
@@ -263,6 +263,31 @@
                       <span class="icon16 icomoon-icon-paper"></span>库存分析</a></li>
                 </ul>
               </li>
+
+              <li>
+                <a href="#"><span class="icon16 minia-icon-list-4"></span>货物库存管理</a>
+                <ul class="sub">
+                  <li>
+                    <a href="/stocks" <%= 'class="current"' if controller_name.in?(['stocks']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>库存查询
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/in_stock_items" <%= 'class="current"' if controller_name.in?(['in_stock_items']) %>>
+                      <span class="icon16 icomoon-icon-paper"></span>入库
+                    </a>
+                  </li>
+                  <li><a href="/outstocks" <%= 'class="current"' if controller_name.in?(['outstocks']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>出库</a></li>
+                  <li><a href="/goods_categories/" <%= 'class="current"' if controller_name.in?(['goods_categories']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>分类管理</a></li>
+                  <li><a href="/store_houses" <%= 'class="current"' if controller_name.in?(['store_houses']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>仓库管理</a>
+                  </li>
+
+                </ul>
+              </li>
+
               <li>
                 <a href="#" ><span class="icon16 silk-icon-columns"></span>生产管理</a>
                 <ul class="sub">
