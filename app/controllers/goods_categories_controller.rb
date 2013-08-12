@@ -2,7 +2,7 @@ class GoodsCategoriesController < ApplicationController
   # GET /goods_categories
   # GET /goods_categories.json
   def index
-    @goods_categories = GoodsCategory.all
+    @goods_categories = GoodsCategory.roots
     @goods_category = GoodsCategory.new
     respond_to do |format|
       format.html # index.html.erb
@@ -24,17 +24,29 @@ class GoodsCategoriesController < ApplicationController
   # GET /goods_categories/new
   # GET /goods_categories/new.json
   def new
+    @goods_categories = GoodsCategory.roots
     @goods_category = GoodsCategory.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {render action: "index"}
+      format.json { render json: @goods_category }
+    end
+  end
+
+  def new_child
+    @goods_categories = GoodsCategory.roots
+    @goods_category = GoodsCategory.new(:parent_id=>params[:id])
+    respond_to do |format|
+      format.html {render action: "index"}
       format.json { render json: @goods_category }
     end
   end
 
   # GET /goods_categories/1/edit
   def edit
+    @goods_categories = GoodsCategory.roots
     @goods_category = GoodsCategory.find(params[:id])
+    render action: "index"
   end
 
   # POST /goods_categories
@@ -44,7 +56,7 @@ class GoodsCategoriesController < ApplicationController
 
     respond_to do |format|
       if @goods_category.save
-        format.html { redirect_to @goods_category, notice: 'Goods category was successfully created.' }
+        format.html { redirect_to goods_categories_url, notice: 'Goods category was successfully created.' }
         format.json { render json: @goods_category, status: :created, location: @goods_category }
       else
         format.html { render action: "new" }
@@ -60,7 +72,7 @@ class GoodsCategoriesController < ApplicationController
 
     respond_to do |format|
       if @goods_category.update_attributes(params[:goods_category])
-        format.html { redirect_to @goods_category, notice: 'Goods category was successfully updated.' }
+        format.html { redirect_to goods_categories_url, notice: 'Goods category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -2,7 +2,9 @@ Decoo::Application.routes.draw do
 
   resources :store_houses
 
-  resources :goods_categories
+  resources :goods_categories do 
+    get :new_child,:on=>:member
+  end
 
   resources :alone_porders
 
