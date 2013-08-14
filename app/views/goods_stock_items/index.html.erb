@@ -1,0 +1,31 @@
+<h1>Listing goods_stock_items</h1>
+
+<table>
+  <tr>
+    <th>Goods stock</th>
+    <th>Type</th>
+    <th>User</th>
+    <th>Memo</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @goods_stock_items.each do |goods_stock_item| %>
+  <tr>
+    <td><%= goods_stock_item.goods_stock_id %></td>
+    <td><%= goods_stock_item.type %></td>
+    <td><%= goods_stock_item.user_id %></td>
+    <td><%= goods_stock_item.memo %></td>
+    <td><%= goods_stock_item.quantity %></td>
+    <td><%= link_to 'Show', goods_stock_item %></td>
+    <td><%= link_to 'Edit', edit_goods_stock_item_path(goods_stock_item) %></td>
+    <td><%= link_to 'Destroy', goods_stock_item, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Goods stock item', new_goods_stock_item_path %>

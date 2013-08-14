@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806085151) do
+ActiveRecord::Schema.define(:version => 20130814072526) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,27 @@ ActiveRecord::Schema.define(:version => 20130806085151) do
     t.integer  "limit"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "goods_stock_items", :force => true do |t|
+    t.integer  "goods_stock_id"
+    t.string   "type"
+    t.integer  "user_id"
+    t.text     "memo"
+    t.integer  "quantity"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "goods_stocks", :force => true do |t|
+    t.string   "name",                             :null => false
+    t.integer  "quantity",          :default => 0
+    t.string   "bh",                               :null => false
+    t.text     "memo"
+    t.integer  "store_house_id"
+    t.integer  "goods_category_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "in_stock_items", :force => true do |t|

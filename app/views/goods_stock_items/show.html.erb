@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Goods stock:</b>
+  <%= @goods_stock_item.goods_stock_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @goods_stock_item.type %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @goods_stock_item.user_id %>
+</p>
+
+<p>
+  <b>Memo:</b>
+  <%= @goods_stock_item.memo %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @goods_stock_item.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_goods_stock_item_path(@goods_stock_item) %> |
+<%= link_to 'Back', goods_stock_items_path %>

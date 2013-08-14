@@ -1,0 +1,8 @@
+<% if @goods_stock.errors.blank? %>
+	$('#form-modal').modal('hide');
+	$('#item_<%= @goods_stock.id %>').replaceWith("<%= escape_javascript(render(@goods_stock)) %>");	
+	$('#msg').html('<%= escape_javascript(content_tag(:div, link_to("x", "#", :class => "close") + content_tag(:p,"货物已成功保存 "), :class => "alert alert-success", "data-alert" => "alert")) %>');
+	$('#item_<%= @goods_stock.id %>').fadeOut(1000).fadeIn(1000);
+<% else %>
+	$("#form-modal> .modal-body").html("<%= escape_javascript(render(:partial=>'form')) %>");
+<% end %>

@@ -7,6 +7,7 @@ class GoodsCategory < ActiveRecord::Base
   				:foreign_key=>"parent_id",
   				:dependent=>:destroy
 
+  has_many  :goods_stocks
 
 	def self.roots
 		where("parent_id is null")

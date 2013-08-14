@@ -1,0 +1,16 @@
+<%= simple_form_for(@goods_stock,:remote=>true) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :bh,:label=>"编号" %>
+    <%= f.input :name,:label=>"名称" %>
+    <%= f.association :goods_category,:label=>"分类" %>
+    <%= f.input :quantity,:label=>"初始库存" %>    
+    <%= f.input :memo,:label=>"备注" ,:input_html=>{ :rows=>"2" } %>
+    
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,:value=>"保存" %>
+  </div>
+<% end %>

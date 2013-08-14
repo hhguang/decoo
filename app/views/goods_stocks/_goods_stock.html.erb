@@ -1,0 +1,15 @@
+<tr id="item_<%= goods_stock.id %>">
+	<td><%= goods_stock.bh %></td>
+    <td><%= goods_stock.name %></td>
+    <td><%= goods_stock.goods_category.name %></td>
+    <td><%= goods_stock.quantity %></td>
+    
+    <td><%= goods_stock.memo %></td>    
+    <td>
+    	<%= link_to '修改', edit_goods_stock_path(goods_stock),:remote=>true %> |
+    	<%= link_to '删除', goods_stock, confirm: '确定要删除吗?', method: :delete,:remote=>true %> |
+    	<%= link_to '出入明细' %> |
+    	<%= link_to '出库' %> |
+    	<%= link_to '入库' %>
+    </td>
+  </tr>

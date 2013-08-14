@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  goods_stock_id: 1
+  type: 
+  user_id: 1
+  memo: MyText
+  quantity: 1
+
+two:
+  goods_stock_id: 1
+  type: 
+  user_id: 1
+  memo: MyText
+  quantity: 1

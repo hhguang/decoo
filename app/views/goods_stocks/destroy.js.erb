@@ -1,0 +1,2 @@
+$('#msg').html('<%= escape_javascript(content_tag(:div, link_to("x", "#", :class => "close") + content_tag(:p,"货物已删除 "), :class => "alert alert-success", "data-alert" => "alert")) %>');
+$('#item_<%= @goods_stock.id %>').fadeOut(1000);

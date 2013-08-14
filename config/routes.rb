@@ -1,5 +1,9 @@
 Decoo::Application.routes.draw do
 
+  resources :goods_stock_items
+
+  resources :goods_stocks
+
   resources :store_houses
 
   resources :goods_categories do 
