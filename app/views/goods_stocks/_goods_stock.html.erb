@@ -8,8 +8,8 @@
     <td>
     	<%= link_to '修改', edit_goods_stock_path(goods_stock),:remote=>true %> |
     	<%= link_to '删除', goods_stock, confirm: '确定要删除吗?', method: :delete,:remote=>true %> |
-    	<%= link_to '出入明细' %> |
+    	<%= link_to '明细' %> |
     	<%= link_to '出库' %> |
-    	<%= link_to '入库' %>
+    	<%= link_to '入库',in_goods_stock_goods_stock_items_path(goods_stock) %>
     </td>
   </tr>

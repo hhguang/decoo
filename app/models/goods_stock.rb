@@ -5,7 +5,8 @@ class GoodsStock < ActiveRecord::Base
   validates	:goods_category_id,:presence=>true
   validates	:quantity,:numericality=>{:greater_than_or_equal_to=>0} 
 
-  has_many :goods_stock_items
+  has_many :goods_stock_items,:dependent=>:destroy
+  has_many	:house_stocks,:dependent=>:destroy
   belongs_to :goods_category
   belongs_to	:store_house
 end

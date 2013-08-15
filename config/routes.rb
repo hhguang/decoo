@@ -1,8 +1,14 @@
 Decoo::Application.routes.draw do
 
-  resources :goods_stock_items
+  resources :house_stocks
 
-  resources :goods_stocks
+  # resources :goods_stock_items
+
+  resources :goods_stocks do
+    resources :goods_stock_items do
+      get :in,:on=>:collection
+    end
+  end
 
   resources :store_houses
 

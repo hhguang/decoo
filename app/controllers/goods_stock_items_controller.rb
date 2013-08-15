@@ -24,10 +24,23 @@ class GoodsStockItemsController < ApplicationController
   # GET /goods_stock_items/new
   # GET /goods_stock_items/new.json
   def new
-    @goods_stock_item = GoodsStockItem.new
+    @type=params[:type] || "in"
+    @goods=GoodsStock.find(params[:id])
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:type=>@type)
 
     respond_to do |format|
       format.html # new.html.erb
+      format.json { render json: @goods_stock_item }
+    end
+  end
+
+  def in
+    @type= "in"
+    @goods=GoodsStock.find(params[:goods_stock_id])
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:type=>@type)
+
+    respond_to do |format|
+      format.html {render :action=>'new'}
       format.json { render json: @goods_stock_item }
     end
   end

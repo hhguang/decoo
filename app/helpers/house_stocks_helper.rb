@@ -1,0 +1,2 @@
+module HouseStocksHelper
+end
