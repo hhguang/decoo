@@ -24,6 +24,7 @@ class GoodsStocksController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @goods_stock }
+      format.js
     end
   end
 

@@ -1,6 +1,9 @@
 class HouseStock < ActiveRecord::Base
   attr_accessible :goods_stock_id, :quantity, :store_house_id
 
+  belongs_to :store_house
+  belongs_to :goods_stock
+
   validates	:quantity,:numericality=>{:greater_than_or_equal_to=>0} 
 
   def self.in(item)

@@ -2,7 +2,7 @@
 	<td><%= goods_stock.bh %></td>
     <td><%= goods_stock.name %></td>
     <td><%= goods_stock.goods_category.name %></td>
-    <td><%= goods_stock.quantity %></td>
+    <td><%= link_to goods_stock.quantity,goods_stock,:remote=>true %></td>
     
     <td><%= goods_stock.memo %></td>    
     <td>
