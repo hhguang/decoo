@@ -37,11 +37,24 @@ class GoodsStockItemsController < ApplicationController
   def in
     @type= "in"
     @goods=GoodsStock.find(params[:goods_stock_id])
-    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:type=>@type)
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type)
 
     respond_to do |format|
       format.html {render :action=>'new'}
       format.json { render json: @goods_stock_item }
+      format.js
+    end
+  end
+
+  def out
+    @type= "out"
+    @goods=GoodsStock.find(params[:goods_stock_id])
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type)
+
+    respond_to do |format|
+      format.html {render :action=>'new'}
+      format.json { render json: @goods_stock_item }
+      format.js   {render :action=>'in'}
     end
   end
 
@@ -53,16 +66,24 @@ class GoodsStockItemsController < ApplicationController
   # POST /goods_stock_items
   # POST /goods_stock_items.json
   def create
-    @goods_stock_item = GoodsStockItem.new(params[:goods_stock_item])
+    @goods_stock_item=GoodsStockItem.new(params[:goods_stock_item])
+    if @goods_stock_item.act_type=="in"
+      GoodsStockItem.in(@goods_stock_item)
+    else
+      GoodsStockItem.out(@goods_stock_item)
+    end
 
     respond_to do |format|
-      if @goods_stock_item.save
-        format.html { redirect_to @goods_stock_item, notice: 'Goods stock item was successfully created.' }
+    
+        format.html { redirect_to :aciton=>'index', notice: 'Goods stock item was successfully created.' }
         format.json { render json: @goods_stock_item, status: :created, location: @goods_stock_item }
-      else
+        format.js
+    end
+  rescue
+    respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @goods_stock_item.errors, status: :unprocessable_entity }
-      end
+        format.js   
     end
   end
 

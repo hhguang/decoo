@@ -39,10 +39,11 @@ ActiveRecord::Schema.define(:version => 20130815083914) do
 
   create_table "goods_stock_items", :force => true do |t|
     t.integer  "goods_stock_id"
-    t.string   "type"
+    t.string   "act_type"
     t.integer  "user_id"
     t.text     "memo"
     t.integer  "quantity"
+    t.integer  "store_house_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

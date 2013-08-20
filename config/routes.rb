@@ -7,6 +7,7 @@ Decoo::Application.routes.draw do
   resources :goods_stocks do
     resources :goods_stock_items do
       get :in,:on=>:collection
+      get :out,:on=>:collection
     end
   end
 

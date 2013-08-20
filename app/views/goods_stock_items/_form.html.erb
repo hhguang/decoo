@@ -1,14 +1,16 @@
-<%= simple_form_for(@goods_stock_item) do |f| %>
+<%= simple_form_for(@goods_stock_item,:url=>{:controller=>'goods_stock_items',:action=>'create'},:remote=>true) do |f| %>
   <%= f.error_notification %>
 
+  货物：<%= @goods_stock_item.goods_stock.name %>
   <div class="form-inputs">
-    <%= f.association :goods_stock_id %>
-    <%= f.input :type %>
+    <%= f.input :goods_stock_id,:as=>:hidden %>
+    <%= f.association :store_house ,:label=>"仓库" %>
+    <%= f.input :act_type,:as=>:hidden %>
     <%= f.input :quantity,:label=>"数量" %>
     <%= f.input :memo,:label=>"备注" ,:input_html=>{ :rows=>"2" } %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit,:value=>“出入库” %>
+    <%= f.button :submit,:value=>(@goods_stock_item.act_type=="in" ? "入库" : "出库") %>
   </div>
 <% end %>
