@@ -8,6 +8,9 @@ class GoodsStocksController < ApplicationController
     else
       w="1=1"
     end
+    if params[:goods_category_id]
+      w="goods_category_id = ? ",params[:goods_category_id]
+    end
     @goods_stocks = GoodsStock.where(w).paginate(:page => params[:page], :per_page => 20).includes(:goods_category)
 
     respond_to do |format|

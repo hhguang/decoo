@@ -23,13 +23,23 @@
           <div class="row-fluid" style="padding:10px;">
             <div class="span2">
               <div class="btn-group " >
-              <a href="/goods_stocks" role="button"  class="btn  ">
-                所有货物
-              </a>
-              <%= link_to '新增货物', new_goods_stock_path,:class=>"btn",:remote=>true %>
-              <!--   <a href="#query-modal" role="button"  class="btn " data-toggle="modal">
-                高级查询
-              </a> -->
+                <%= link_to '新增货物', new_goods_stock_path,:class=>"btn",:remote=>true %>
+                <a href="/goods_stocks" role="button"  class="btn  ">
+                  所有货物
+                </a>
+                
+                
+                <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>             
+                <ul class="dropdown-menu">
+                  
+                      <% GoodsCategory.all.each do |goods_category| %>
+                      <li>
+                        <%= link_to goods_category.name,:action=>'index',:goods_category_id=>goods_category.id %>
+                      </li>
+                      <% end %>
+                      
+                    
+                </ul>
               </div>
             </div >
               <div class="span4" style="padding-top:7px;">
