@@ -37,7 +37,7 @@ class GoodsStockItemsController < ApplicationController
   def in
     @type= "in"
     @goods=GoodsStock.find(params[:goods_stock_id])
-    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type)
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type,:store_house_id=>StoreHouse.default.id)
 
     respond_to do |format|
       format.html {render :action=>'new'}
@@ -49,7 +49,7 @@ class GoodsStockItemsController < ApplicationController
   def out
     @type= "out"
     @goods=GoodsStock.find(params[:goods_stock_id])
-    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type)
+    @goods_stock_item = GoodsStockItem.new(:goods_stock_id=>@goods.id,:act_type=>@type,:store_house_id=>StoreHouse.default.id)
 
     respond_to do |format|
       format.html {render :action=>'new'}

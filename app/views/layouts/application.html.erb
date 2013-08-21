@@ -136,37 +136,37 @@
               </ul>
 
               <ul class="nav pull-right usernav">
-<%#*<li class="dropdown">%>
-<%#*<a href="#" class="dropdown-toggle" data-toggle="dropdown">%>
-<%#*<span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span>%>
-<%#*</a>%>
-<%#*<ul class="dropdown-menu">%>
-<%#*<li class="menu">%>
-<%#*<ul class="notif">%>
-<%#*<li class="header"><strong>Notifications</strong> (3) items</li>%>
-<%#*<li>%>
-<%#*<a href="#">%>
-<%#*<span class="icon"><span class="icon16 icomoon-icon-user-2"></span></span>%>
-<%#*<span class="event">1 User is registred</span>%>
-<%#*</a>%>
-<%#*</li>%>
-<%#*<li>%>
-<%#*<a href="#">%>
-<%#*<span class="icon"><span class="icon16 icomoon-icon-comments-4"></span></span>%>
-<%#*<span class="event">Jony add 1 comment</span>%>
-<%#*</a>%>
-<%#*</li>%>
-<%#*<li>%>
-<%#*<a href="#">%>
-<%#*<span class="icon"><span class="icon16 icomoon-icon-new"></span></span>%>
-<%#*<span class="event">admin Julia added post with a long description</span>%>
-<%#*</a>%>
-<%#*</li>%>
-<%#*<li class="view-all"><a href="#">View all notifications <span class="icon16  icomoon-icon-arrow-right-7"></span></a></li>%>
-<%#*</ul>%>
-<%#*</li>%>
-<%#*</ul>%>
-<%#*</li>%>
+                <li class="dropdown open">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span>
+                            </a>
+                            <!-- <ul class="dropdown-menu">
+                                <li class="menu">
+                                    <ul class="notif">
+                                        <li class="header"><strong>Notifications</strong> (3) items</li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-user-2"></span></span>
+                                                <span class="event">1 User is registred</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-comments-4"></span></span>
+                                                <span class="event">Jony add 1 comment</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="icon16 icomoon-icon-new"></span></span>
+                                                <span class="event">admin Julia added post</span>
+                                            </a>
+                                        </li>
+                                        <li class="view-all"><a href="#">View all notifications <span class="icon16  icomoon-icon-arrow-right-7"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul> -->
+                        </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
                     <img src="/images/avatar.jpg" alt="" class="image" />
@@ -272,15 +272,7 @@
                       <span class="icon16 icomoon-icon-paper"></span>库存查询
                     </a>
                   </li>
-                  <li>
-                    <a href="/in_stock_items" <%= 'class="current"' if controller_name.in?(['in_stock_items']) %>>
-                      <span class="icon16 icomoon-icon-paper"></span>入库
-                    </a>
-                  </li>
-                  <li><a href="/outstocks" <%= 'class="current"' if controller_name.in?(['outstocks']) %> >
-                      <span class="icon16 icomoon-icon-paper"></span>出库</a></li>
-                  <li><a href="/goods_categories/" <%= 'class="current"' if controller_name.in?(['goods_categories']) %> >
-                      <span class="icon16 icomoon-icon-paper"></span>分类管理</a></li>
+                  
                   <li><a href="/store_houses" <%= 'class="current"' if controller_name.in?(['store_houses']) %> >
                       <span class="icon16 icomoon-icon-paper"></span>仓库管理</a>
                   </li>
@@ -308,7 +300,8 @@
                       <span class="icon16 icomoon-icon-stats-up"></span>零件管理
                     </a>
                   </li>
-
+                  <li><a href="/goods_categories/" <%= 'class="current"' if controller_name.in?(['goods_categories']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>货物分类</a></li>
                   <li>
                     <a <%= 'class="current"' if controller_name.in?(['colors'])  %> href="/colors" >
                       <span class="icon16 icomoon-icon-delicious"></span>颜色设置

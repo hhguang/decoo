@@ -4,7 +4,8 @@
   <div class="form-inputs">
     <%= f.input :bh,:label=>"编号" %>
     <%= f.input :name,:label=>"名称" %>
-    <%= f.association :goods_category,:label=>"分类" %>    
+    <%= f.association :goods_category,:label=>"分类" %>  
+    <%= f.input :supplier,:label=>"供应商"  %>
     <%= f.input :memo,:label=>"备注" ,:input_html=>{ :rows=>"2" } %>
     
   </div>

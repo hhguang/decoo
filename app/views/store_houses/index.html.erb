@@ -22,22 +22,15 @@
           </div>
           <div class="content noPad">
               <div style="padding: 15px;">
-                  <%= simple_form_for(@store_house,:html=>{:class=>"form-inline"}) do |f| %>
-                    <%= f.error_notification %>
-
-                      <%= f.input :name,:label=>"名称" %>
- 
-                      <%= f.button :submit,:value=>"新增仓库" %>
-                    
-                  <% end %>
-                    
+                  <%= render 'form' %>
               </div>
 
                                     <table class="responsive table table-bordered">
                                         <thead>
                                           <tr>
                                             <th>#</th>
-                                            <th>名称</th>                                            
+                                            <th>名称</th> 
+                                            <th>默认仓库?</th>                                           
                                             <th>操作</th>
                                           </tr>
                                         </thead>
@@ -45,7 +38,8 @@
                                           <% @store_houses.each do |store_house| %>
                                           <tr>
                                             <td></td>
-                                            <td><%= store_house.name  %></td>                                            
+                                            <td><%= store_house.name  %></td> 
+                                            <td><%= store_house.default? ? "默认" : "" %></td>                                           
                                             <td>
                                                 <div class="controls center">
                                                   <%= link_to '', edit_store_house_path(store_house),:class=>"icon12 icomoon-icon-pencil" %>
