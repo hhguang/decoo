@@ -2,7 +2,13 @@ class GoodsStockItemsController < ApplicationController
   # GET /goods_stock_items
   # GET /goods_stock_items.json
   def index
-    @goods_stock_items = GoodsStockItem.all
+    @good_stock=GoodsStock.find(params[:goods_stock_id])
+    if params[:act_type]
+      @act_type=params[:act_type]
+      @goods_stock_items = @good_stock.goods_stock_items.where(:act_type=>params[:act_type]).order('created_at desc').paginate(:page => params[:page], :per_page => 20)
+    else
+      @goods_stock_items = @good_stock.goods_stock_items.order('created_at desc').paginate(:page => params[:page], :per_page => 20)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -67,6 +73,7 @@ class GoodsStockItemsController < ApplicationController
   # POST /goods_stock_items.json
   def create
     @goods_stock_item=GoodsStockItem.new(params[:goods_stock_item])
+    @goods_stock_item.user_id=current_user.id
     if @goods_stock_item.act_type=="in"
       GoodsStockItem.in(@goods_stock_item)
     else

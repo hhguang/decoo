@@ -1,3 +1,4 @@
+# encoding: utf-8
 class StoreHouse < ActiveRecord::Base
   attr_accessible :name,:default
 
@@ -13,5 +14,15 @@ class StoreHouse < ActiveRecord::Base
      if self.default?
        StoreHouse.where(["id <> ?",self.id]).update_all(:default=>false)
      end
+  end
+
+  after_destroy :check_count
+  def check_count
+    if StoreHouse.count.zero?
+      raise "不能删除最后一个仓库"
+    end
+    if house_stocks.any?
+      raise "仓库中已存放有货物,不能删除"
+    end
   end
 end

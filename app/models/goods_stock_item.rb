@@ -11,6 +11,7 @@ class GoodsStockItem < ActiveRecord::Base
 
   belongs_to :goods_stock
   belongs_to :store_house
+  belongs_to :user
 
   def self.in(item)
   	GoodsStockItem.transaction do 

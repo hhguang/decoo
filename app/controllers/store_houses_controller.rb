@@ -73,7 +73,11 @@ class StoreHousesController < ApplicationController
   # DELETE /store_houses/1.json
   def destroy
     @store_house = StoreHouse.find(params[:id])
-    @store_house.destroy
+    begin
+      @store_house.destroy
+    rescue Exception=>e
+      flash[:notice]=e.message
+    end
 
     respond_to do |format|
       format.html { redirect_to store_houses_url }

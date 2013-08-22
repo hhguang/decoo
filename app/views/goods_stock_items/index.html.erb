@@ -1,29 +1,96 @@
-<h1>Listing goods_stock_items</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"货物库存",:here=>"出入库明细" %>
 
-<table>
-  <tr>
-    <th>Goods stock</th>
-    <th>Type</th>
-    <th>User</th>
-    <th>Memo</th>
-    <th>Quantity</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  
 
-<% @goods_stock_items.each do |goods_stock_item| %>
-  <tr>
-    <td><%= goods_stock_item.goods_stock_id %></td>
-    <td><%= goods_stock_item.act_type %></td>
-    <td><%= goods_stock_item.user_id %></td>
-    <td><%= goods_stock_item.memo %></td>
-    <td><%= goods_stock_item.quantity %></td>
-    
-  </tr>
-<% end %>
-</table>
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
 
-<br />
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>出入库明细</span>
+          </h4>
+        </div>
 
-<%#= link_to 'New Goods stock item', new_goods_stock_item_path %>
+        <div class="content noPad">
+
+
+          <div class="row-fluid" style="padding:10px;">
+            <div class="span2">
+              <div class="btn-group " >                
+                        
+                <%= link_to '所有明细', goods_stock_goods_stock_items_path(@goods_stock),:class=>"btn" %>
+                <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>             
+                <ul class="dropdown-menu">
+                  <li>
+                     <%= link_to "入库",:action=>'index',:act_type=>"in" %>
+                  </li>  
+                  <li>
+                     <%= link_to "出库",:action=>'index',:act_type=>"out" %>
+                  </li>                     
+                    
+                </ul>
+              </div>
+            </div >
+              <div class="span4" style="padding-top:7px;">
+                <span>
+                
+                </span>
+              </div>
+              <div class="span6">
+              
+            </div>
+            
+          </div>
+
+
+          <table id="goods_stocks" class="responsive table table-bordered ">
+            <thead>
+              <tr>                       
+                <th>名称</th>  
+                <th>出/入库</th>  
+                <th>仓库</th>                      
+                <th>数量</th>
+                <th>业务员</th>   
+                <th>时间</th>
+                <th>备注</th>             
+                
+              </tr>
+            </thead>
+            <tbody id="items">
+              <% @goods_stock_items.each do |goods_stock_item| %>
+                <tr>
+                  <td><%= goods_stock_item.goods_stock.name %></td>
+                  <td><%= goods_stock_item.act_type=='in' ? "入库" : "出库" %></td>                 
+                  <td><%= goods_stock_item.store_house.name %></td>
+                  <td><%= goods_stock_item.quantity %></td>
+                  <td><%= goods_stock_item.user.name if goods_stock_item.user %></td>
+                  <td><%= goods_stock_item.created_at %></td>
+                  <td><%= goods_stock_item.memo %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+           <%= will_paginate @goods_stock_items, :inner_window => 2,:params=>{:act_type=>@act_type} %>
+        </div>
+  </div>
+
+</div>
+
+<div id="form-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">货物信息</h3>
+  </div>
+  <div class="modal-body">
+
+  </div>
+
+</div>
+
+
