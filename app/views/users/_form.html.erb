@@ -6,12 +6,15 @@
 <%= f.input :password %>
 <%= f.input :password_confirmation %>
 <%= f.input :disabled %>
+<%#= f.association :roles,:label=>"角色" %>
+<%= f.label "角色" %>
   <% for role in Role.all %>
 <div>
   <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
   <%=h role.title %>
 </div>
 <% end %>
+
 <%= hidden_field_tag "user[role_ids][]", "" %>
   
   <div class="form-actions">

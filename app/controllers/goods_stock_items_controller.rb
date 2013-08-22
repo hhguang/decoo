@@ -1,4 +1,5 @@
 class GoodsStockItemsController < ApplicationController
+  load_and_authorize_resource
   # GET /goods_stock_items
   # GET /goods_stock_items.json
   def index
