@@ -19,6 +19,16 @@ class GoodsStocksController < ApplicationController
     end
   end
 
+  def lower_limit_count
+    
+    render :text=>GoodsStock.lower_limit.size
+  end
+
+  def lower_limit
+    @goods_stocks=GoodsStock.lower_limit
+  end
+
+
   # GET /goods_stocks/1
   # GET /goods_stocks/1.json
   def show

@@ -10,6 +10,8 @@ class GoodsStock < ActiveRecord::Base
   belongs_to :goods_category
   belongs_to	:store_house
 
+  scope :lower_limit,joins(:goods_category).where('quantity< "goods_categories"."limit" ')
+
   def self.in(item)
   	goods_stock=GoodsStock.find_or_initialize_by_id(item.goods_stock_id)
   	goods_stock.quantity+=item.quantity

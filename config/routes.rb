@@ -5,6 +5,8 @@ Decoo::Application.routes.draw do
   # resources :goods_stock_items
 
   resources :goods_stocks do
+    get :lower_limit_count,:on=>:collection
+    get :lower_limit,:on=>:collection
     resources :goods_stock_items do
       get :in,:on=>:collection
       get :out,:on=>:collection

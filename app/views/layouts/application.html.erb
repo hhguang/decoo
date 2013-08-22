@@ -137,8 +137,10 @@
 
               <ul class="nav pull-right usernav">
                 <li class="dropdown open">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span>
+                            <a href="/goods_stocks/lower_limit"  title="货物库存下限提醒">
+                                <span class="icon16 icomoon-icon-bell"></span><span class="notification" id="limit">
+                                  <%= GoodsStock.lower_limit.size %>
+                                </span>
                             </a>
                             <!-- <ul class="dropdown-menu">
                                 <li class="menu">
@@ -424,7 +426,15 @@
     <script type="text/javascript" src="/js/main.js"></script>
 
     <%#= controller_javascript_include_tag %>
+    <script type="text/javascript">
+$(document).ready(function(){ 
+window.setInterval('GetData()', 3000); 
+});
 
+function GetData(){
+     $('#limit').load("/goods_stocks/lower_limit_count" );
+}
+</script>
   </body>
 </html>
 
