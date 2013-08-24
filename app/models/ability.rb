@@ -59,6 +59,8 @@ class Ability
         can :read, InStockItem
         can :read, Outstock
         can :read, OutstockItem
+        can :read, GoodsStock
+        can :read, GoodsStockItem
       elsif user.has_role?(:goods_manager)
         can :manage,GoodsStock
         cannot :destroy,GoodsStock
