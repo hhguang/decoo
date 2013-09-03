@@ -1,5 +1,5 @@
 class Stock < ActiveRecord::Base
-  attr_accessible :bh, :color_name, :color_id, :name, :product_id, :quantity,:spec_id
+  attr_accessible :bh, :color_name, :color_id, :name, :product_id, :quantity,:spec_id,:weight
   belongs_to :spec
   belongs_to :color
   belongs_to :product
@@ -20,9 +20,9 @@ class Stock < ActiveRecord::Base
     self.product_id=spec.product.id
   end
 
-  def weight
-    self.quantity*self.product.weight
-  end
+  # def weight
+  #   self.quantity*self.product.weight
+  # end
 
 #  def self.outstock(outstock_list)
 #    Stock.transaction do
