@@ -70,13 +70,16 @@
                     </td>
                     <td>
                       <span class="label label-info">
-                      <%= builder.object.quantity %>
+                        <% q1=builder.object.weight>0 ? builder.object.weight.div(builder.object.spec.product.weight) : 0  %>
+                      <%= q1 %>
+                      <%#= builder.object.quantity %>
                       <%#= builder.input :quantity,as: :hidden %>
                       </span>
                     </td>
                     <td>
                       <% q=builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
-                      <span class="label <%= q-builder.object.quantity<0 ? 'label-warning' : 'label-info' %>">
+                      
+                      <span class="label <%= q-q1<0 ? 'label-warning' : 'label-info' %>">
                       <%= builder.object.spec.stock.nil? ? 0 : builder.object.spec.stock.quantity %>
                       </span>
                     </td>
@@ -84,7 +87,7 @@
                       <%= builder.object.spec.stock.nil? ? 0 : number_with_precision(builder.object.spec.stock.weight) %>
                     </td>
                     <td>
-                      <%= builder.input :weight,label: false,as: :string,input_html: { class: 'input-mini' } %>
+                      <%= builder.input :weight,label: false,as: :string,input_html: { class: 'input-mini' ,value: ''} %>
                     </td>
                   </tr>
                 <% end %>

@@ -48,4 +48,12 @@ namespace :utils do
     puts 'File transfer complete'
   end
 
+  task(:add_weight_to_stock => :environment) do |t|
+    Stock.where(:weight=>0).all.each do |stock|
+      stock.weight=stock.quantity*stock.product.weight
+      stock.save!
+    end
+  end
+
+
 end

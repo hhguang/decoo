@@ -20,6 +20,10 @@ class Stock < ActiveRecord::Base
     self.product_id=spec.product.id
   end
 
+  def quantity
+    self.weight.div self.product.weight
+  end
+
   # def weight
   #   self.quantity*self.product.weight
   # end

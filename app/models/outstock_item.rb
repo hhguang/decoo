@@ -4,6 +4,7 @@ class OutstockItem < ActiveRecord::Base
 
   belongs_to :outstock
   belongs_to :spec
+  belongs_to :product
 
   validates :spec_bh,:presence => true
   validates :weight,:presence => true,
@@ -26,6 +27,10 @@ class OutstockItem < ActiveRecord::Base
 #    end
 #  end
 
+def quantity
+  self.weight.div self.product.weight
+end
+
  after_validation :set_item
 
   def set_item
@@ -38,9 +43,9 @@ class OutstockItem < ActiveRecord::Base
           errors.add(:weight,"出库重量小于该零件的单位重量")
           return false
         else
-          self.quantity=(self.weight/spec.product.weight).round if self.weight
+          # self.quantity=(self.weight/spec.product.weight).round if self.weight
           if stock=Stock.find_by_spec_id(spec.id)
-            if stock.quantity<self.quantity
+            if stock.weight<self.weight
               errors.add(:weight,"库存不足")
               return false
             end

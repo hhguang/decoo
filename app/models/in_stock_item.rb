@@ -44,6 +44,10 @@ class InStockItem < ActiveRecord::Base
     self.spec_id=spec.id
     self.product_id=spec.product_id
     self.color_id=spec.color_id
-    self.quantity=(self.weight/self.product.weight).round
+    # self.quantity=(self.weight/self.product.weight).round
+  end
+
+  def quantity
+    self.weight.div self.product.weight
   end
 end

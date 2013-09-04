@@ -48,7 +48,8 @@ class OutstocksController < ApplicationController
       @outstock.save!
       @outstock.outstock_items.each do |item|
          stock=Stock.find_by_spec_id(item.spec_id)
-          stock.quantity -= item.quantity
+          # stock.quantity -= item.quantity
+          stock.weight-=item.weight
           stock.save!
         
       end
@@ -123,7 +124,8 @@ class OutstocksController < ApplicationController
     # @outstock.outstock_items.build
     @porder.porder_items.each do |item|
       part=item.part ? item.part : item
-      @outstock.outstock_items.build(:spec_bh=>part.spec.bh,:spec_id=>part.spec_id,:weight=>'',:quantity=>part.quantity*@porder.quantity)
+      weight=part.spec.product.weight ?  part.quantity*@porder.quantity*part.spec.product.weight : 0
+      @outstock.outstock_items.build(:spec_bh=>part.spec.bh,:spec_id=>part.spec_id,:weight=>weight,:quantity=>part.quantity*@porder.quantity)
     end
   end
   

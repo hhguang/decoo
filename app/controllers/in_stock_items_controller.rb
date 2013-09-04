@@ -50,10 +50,11 @@ class InStockItemsController < ApplicationController
     @in_stock_item.user_id=current_user.id
     @in_stock_item.save!
     if @stock=Stock.find_by_spec_id(@in_stock_item.spec_id)
-      @stock.quantity +=@in_stock_item.quantity
+      # @stock.quantity +=@in_stock_item.quantity
+      @stock.weight +=@in_stock_item.weight
       @stock.save!
     else
-      @stock=Stock.create!({:spec_id=>@in_stock_item.spec_id,:quantity=>@in_stock_item.quantity})
+      @stock=Stock.create!({:spec_id=>@in_stock_item.spec_id,:weight=>@in_stock_item.weight})
     end
     end
     respond_to do |format|
