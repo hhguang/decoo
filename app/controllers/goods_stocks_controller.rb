@@ -1,6 +1,7 @@
 class GoodsStocksController < ApplicationController
   load_and_authorize_resource
   skip_load_and_authorize_resource :only=>[:lower_limit,:lower_limit_count]
+  skip_filter :log,:only=>[:lower_limit,:lower_limit_count]
   # GET /goods_stocks
   # GET /goods_stocks.json
   def index

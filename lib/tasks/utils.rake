@@ -49,10 +49,15 @@ namespace :utils do
   end
 
   task(:add_weight_to_stock => :environment) do |t|
-    Stock.where(:weight=>0).all.each do |stock|
+    Stock.all.each do |stock|
       stock.weight=stock.quantity*stock.product.weight
       stock.save!
     end
+  end
+
+  task(:clean_userlog => :environment) do |t|
+    UserLog.delete_all(["updated_at < ?",1.month.ago])
+    # UserLog.delete_all(["updated_at < ?",1.day.ago])
   end
 
 

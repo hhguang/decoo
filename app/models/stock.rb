@@ -6,7 +6,7 @@ class Stock < ActiveRecord::Base
   
 
   validates :spec_id,:presence => true
-  validates :quantity,:numericality=>{:greater_than_or_equal_to=>0}
+  # validates :quantity,:numericality=>{:greater_than_or_equal_to=>0}
 #  def feedin(in_stock_item)
 #
 #  end
