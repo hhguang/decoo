@@ -114,4 +114,23 @@ class StocksController < ApplicationController
     @wait_items=arr.sort_by!{|a|a[:stock_left]}
   end
 
+  def in_out_query
+    @act=params[:act]
+    if params[:search] && !params[:search].empty?
+      bh='spec_bh= ? ', params[:search]
+    else
+      bh='1=1'
+    end
+    if @act
+    if params[:act]=='in'
+      record=InStockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
+      @weight=record.sum(:weight)
+    else
+      record=OutstockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
+      @weight=record.sum(:weight)
+    end
+    end
+
+  end
+
 end

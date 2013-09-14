@@ -65,13 +65,17 @@ Decoo::Application.routes.draw do
 
   resources :specs
 
-  resources :in_stock_items
+  resources :in_stock_items do 
+    get :count,:on=>:collection
+  end
+
 
   resources :in_stocks
 
   resources :stocks do
     get :list,:on=>:member
     get :analysis,:on=>:collection
+    get :in_out_query,:on=>:collection
   end
 
   resources :colors
@@ -82,6 +86,7 @@ Decoo::Application.routes.draw do
 
   get "main/index"
   post "outstocks/find_stock"
+
 
   
 
@@ -142,5 +147,5 @@ Decoo::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+   match ':controller(/:action(/:id))(.:format)'
 end

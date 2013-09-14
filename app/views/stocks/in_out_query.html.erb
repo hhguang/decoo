@@ -1,0 +1,73 @@
+<link href="../css/datetimepicker.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"零件出入库查询",:here=>"零件出入库查询" %>
+
+  
+
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>零件出入库查询</span>
+          </h4>
+        </div>
+
+        <div class="content ">
+
+
+          <div class="row-fluid" style="padding:10px;">
+            
+              
+              <div class="span12">
+              <form class="form-inline " style="padding-left:20px;" action="/stocks/in_out_query"> 
+                <label>零件编号：</label> 
+                <input type="text" class="input-medium " name="search" placeholder="如查询所有零件留空"/>
+                <label>开始：</label>
+                <div class="input-append date form_datetime">
+                <input size="8" type="text" value="" readonly name='start' style="width:auto;">
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <label>结束：</label>
+                <div class="input-append date form_datetime">
+                <input size="8" type="text" value="" readonly name='end' style="width:auto;">
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <script type="text/javascript">
+                    $(".form_datetime").datetimepicker({
+                        format: "yyyy-mm-dd",
+                        minView: 2,
+                        language:'zh-CN'
+                    });
+                </script>                 
+               
+                <button type="submit" class="btn" name="act" value="in">入库查询</button>
+                <button type="submit" class="btn" name="act" value="out">出库查询</button>
+              </form>
+            </div>
+            
+          </div>
+          <% if @act %>
+          <div class="page-header">
+            <h4>查询结果</h4>
+          </div>
+          <div>
+            <%= @act=='in' ? '入库总重量：' : '出库总重量：' %>
+            <%= @weight %>
+          </div>
+          <% end %>
+        </div>
+  </div>
+
+</div>
+
+
+
+
