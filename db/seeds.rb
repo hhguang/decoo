@@ -13,3 +13,4 @@ Role.create(name: 'goods_manager',title: '货物管理员')
 admin=User.create(name: 'admin', username: 'admin', password: "123456",password_confirmation: '123456', email: 'admin@decool.net')
 admin.roles<<admin_role
 StoreHouse.create(:name=>"默认仓库",:default=>true)
+Sets.create(:key=>"StockLowerWarning",:title=>"零件库存预警下限",:value=>'0')

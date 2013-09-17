@@ -41,4 +41,10 @@ class Stock < ActiveRecord::Base
 #    end
 #
 #  end
+
+  def self.lower
+    stock_lower_warning=Sets.where(:key=>'StockLowerWarning').value 
+    
+  end
+
 end

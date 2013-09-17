@@ -25,6 +25,7 @@ class GoodsStocksController < ApplicationController
   def lower_limit_count
     
     render :text=>GoodsStock.lower_limit.size
+    
   end
 
   def lower_limit

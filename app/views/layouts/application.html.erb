@@ -136,7 +136,16 @@
               </ul>
 
               <ul class="nav pull-right usernav">
+                <li >
+                  <a href="/goods_stocks/lower_limit"  title="零件库存下限提醒">
+                                <span class="icon16 icomoon-icon-bell"></span><span class="notification" id="Stock_l">
+                                  <%= GoodsStock.lower_limit.size %>
+                                </span>
+                            </a>
+                </li>
                 <li class="dropdown open">
+                  
+
                             <a href="/goods_stocks/lower_limit"  title="货物库存下限提醒">
                                 <span class="icon16 icomoon-icon-bell"></span><span class="notification" id="limit">
                                   <%= GoodsStock.lower_limit.size %>
@@ -316,6 +325,9 @@
                       <span class="icon16 icomoon-icon-stats-up"></span>自定义规格
                     </a>
                   </li>
+                  <li><a <%= 'class="current"' if controller_name.in?(['sets'])  %> href="/sets" >
+                    <span class="icon16 minia-icon-cog"></span>零件预警下限</a>
+                  </li>
                 </ul>
               </li>
 
@@ -331,9 +343,8 @@
                     <a href="/user_logs" <%= 'class="current"' if controller_name.in?(['user_logs'])  %>>
                     <span class="icon16 icomoon-icon-rocket"></span>用户日志
                     </a>
-                  </li>
-                  <li><a href="#"><span class="icon16 icomoon-icon-paper"></span>数据备份</a></li>
-                  <li><a href="#"><span class="icon16 minia-icon-cog"></span>系统管理</a></li>
+                  </li>                  
+                  <li><a href="#"><span class="icon16 minia-icon-cog"></span>系统设置</a></li>
                 </ul>
               </li>
 

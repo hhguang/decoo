@@ -1,0 +1,38 @@
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"系统设置",:here=>"零件库存预警下限" %>
+
+  
+
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>零件库存预警下限</span>
+          </h4>
+        </div>
+
+        <div class="content ">
+
+
+          <div class="row-fluid" style="padding:10px;">
+            
+              
+              <div class="span12">
+              
+              <%= simple_form_for @sets do |f| %>
+              <%= f.input :value, label: '零件库存预警下限' %>
+              <%= f.submit  '设置' %>
+              <% end %>
+            </div>
+            
+          </div>
+        </div>
+  </div>
+
+</div>

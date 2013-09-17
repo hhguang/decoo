@@ -1,5 +1,9 @@
 Decoo::Application.routes.draw do
 
+  # get "sets/index"
+
+  resources :sets
+
   resources :house_stocks
 
   # resources :goods_stock_items
