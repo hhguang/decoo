@@ -124,13 +124,14 @@ class StocksController < ApplicationController
       bh='1=1'
     end
     if @act
-    if params[:act]=='in'
-      record=InStockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
-      @weight=record.sum(:weight)
-    else
-      record=OutstockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
-      @weight=record.sum(:weight)
-    end
+      if params[:act]=='in'
+        record=InStockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
+        @weight=record.sum(:weight)
+      else
+        record=OutstockItem.where("created_at > ? and created_at< ?",params[:start],params[:end]).where(bh)
+        @weight=record.sum(:weight)
+      end
+      @quantity=record.sum{|r| r.quantity}
     end
 
   end
