@@ -43,8 +43,8 @@ class Stock < ActiveRecord::Base
 #  end
 
   def self.lower
-    stock_lower_warning=Sets.where(:key=>'StockLowerWarning').value 
-    
+    stock_lower_warning=Sets.where(:key=>'StockLowerWarning').first.value 
+    joins(:spec).where(' ("specs"."low" is not null and weight< "specs"."low") or ("specs"."low" is null and weight < ?) ',stock_lower_warning)
   end
 
 end

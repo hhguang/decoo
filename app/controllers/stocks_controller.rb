@@ -1,5 +1,7 @@
 class StocksController < ApplicationController
   load_and_authorize_resource
+   skip_load_and_authorize_resource :only=>[:low_count,:low_list]
+  skip_filter :log,:only=>[:low_count,:low_list]
   # GET /stocks
   # GET /stocks.json
   def index
@@ -131,6 +133,16 @@ class StocksController < ApplicationController
     end
     end
 
+  end
+
+  def low_count
+    render :text=>Stock.lower.size
+    rescue
+      render :text=>Stock.lower.size
+  end
+
+  def low_list
+    @stocks=Stock.lower
   end
 
 end

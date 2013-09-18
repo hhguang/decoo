@@ -137,9 +137,9 @@
 
               <ul class="nav pull-right usernav">
                 <li >
-                  <a href="/goods_stocks/lower_limit"  title="零件库存下限提醒">
+                  <a href="/stocks/low_list"  title="零件库存下限提醒">
                                 <span class="icon16 icomoon-icon-bell"></span><span class="notification" id="Stock_l">
-                                  <%= GoodsStock.lower_limit.size %>
+                                  <%= Stock.lower.size %>
                                 </span>
                             </a>
                 </li>
@@ -446,6 +446,7 @@ window.setInterval('GetData()', 3000);
 
 function GetData(){
      $('#limit').load("/goods_stocks/lower_limit_count" );
+     $('#Stock_l').load("/stocks/low_count");
 }
 </script>
   </body>

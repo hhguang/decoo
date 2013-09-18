@@ -80,6 +80,8 @@ Decoo::Application.routes.draw do
     get :list,:on=>:member
     get :analysis,:on=>:collection
     get :in_out_query,:on=>:collection
+    get :low_count,:on=>:collection
+    get :low_list,:on=>:collection
   end
 
   resources :colors
