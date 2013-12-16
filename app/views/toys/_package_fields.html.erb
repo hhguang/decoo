@@ -4,7 +4,8 @@
         <%= f.text_field :name %>
         <%= f.label :quantity, "零件包数量" %>
         <%= f.text_field :quantity %>
-        <%= f.label :_destroy,"移除" %>
+        <%= f.label :_destroy,"移除",:style=>"max-width:60px;" %>
+        
         <%= f.check_box :_destroy %>
         <div class="btn-group" style="padding:10px 0 10px 0;">
         <%= link_to "新增零件",'#',:class=>"btn ",:id=>"new_part_#{p}" %>

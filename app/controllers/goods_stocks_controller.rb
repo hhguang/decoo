@@ -12,9 +12,10 @@ class GoodsStocksController < ApplicationController
       w="1=1"
     end
     if params[:goods_category_id]
+      @goods_category_id=params[:goods_category_id]
       w="goods_category_id = ? ",params[:goods_category_id]
     end
-    @goods_stocks = GoodsStock.where(w).paginate(:page => params[:page], :per_page => 20).includes(:goods_category)
+    @goods_stocks = GoodsStock.where(w).paginate(:page => params[:page], :per_page => 20).includes(:goods_category).order("bh+0")
 
     respond_to do |format|
       format.html # index.html.erb

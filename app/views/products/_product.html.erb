@@ -9,6 +9,7 @@
   <td><%= product.title %></td>
 
   <td><%= product.weight.to_f if product.weight %></td>
+  <td><%= product.xqs %></td>
   <td>
     <span id="count-spec-<%= product.id %>">
       <%= product.specs.size %>
@@ -25,7 +26,8 @@
     <div id="spec-<%= product.id %>" style="display: none;"></div>
   </td>
   <td>
-    <%= product.created_at.to_s(:db) %>
+    <%#= product.created_at.to_s(:db) %>
+    <%= product.created_at.strftime('%Y-%m-%d')  %>
   </td>
   <td>
     <div class="controls center">

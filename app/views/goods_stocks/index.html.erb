@@ -74,7 +74,7 @@
               <%= render(@goods_stocks) %>
             </tbody>
           </table>
-           <%#= will_paginate @stocks, :inner_window => 2,:params=>{:search=>@search} %>
+           <%= will_paginate @goods_stocks, :inner_window => 2,:params=>{:search=>@search,:goods_category_id=>@goods_category_id} %>
         </div>
   </div>
 
