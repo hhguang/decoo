@@ -69,6 +69,7 @@ end
 
 group :production do
 	gem "eventmachine"
+	# gem "mysql"
 end
 
 # permission

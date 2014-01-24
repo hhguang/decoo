@@ -1,6 +1,6 @@
 Decoo::Application.routes.draw do
 
-  # get "sets/index"
+  # get "sets/index"  
 
   resources :sets
 
@@ -56,14 +56,11 @@ Decoo::Application.routes.draw do
     }
 
   resources :users
-
   
   resources :outstock_items
 
   get "outstocks/from_porder"
   resources :outstocks
-   
-
 
   resources :spec_properties
 
