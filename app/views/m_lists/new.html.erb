@@ -20,7 +20,9 @@
         <div class="content noPad">
           
           <div style="padding: 15px;" >
-            已添加成品：<%= @m_cart.m_items.size %>
+            已添加成品：
+            <span id='m_items_size'><%= @m_cart.m_items.size %></span>
+            
             <% if can? :manage, @toy %>
             
             <%= link_to m_lists_path,:class=>'btn btn-success',:method=>'post' do  %>
@@ -57,7 +59,7 @@
                       
                 <% if can? :manage, toy %>
                 <div>
-                  <%= form_for :m_item,:url=>{:action=>'add_item'},:html=>{:class=>'form-inline'} do |f| %>
+                  <%= form_for :m_item,:url=>{:action=>'add_item'},:html=>{:class=>'form-inline',:remote=>true} do |f| %>
                   <%= f.text_field :quantity,:class=>'input-mini',:placeholder=>'数量' %>
                   <%= f.hidden_field :toy_id,:value=>toy.id %>                  
                   <button type="submit" class="btn">添加</button>

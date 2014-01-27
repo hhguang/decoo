@@ -53,6 +53,7 @@ class MListsController < ApplicationController
       if @m_item.save
         format.html { redirect_to action: "new", notice: 'M list was successfully created.' }
         format.json { render json: @m_list, status: :created, location: @m_list }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @m_list.errors, status: :unprocessable_entity }

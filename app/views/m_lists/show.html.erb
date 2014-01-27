@@ -84,7 +84,7 @@
 							<%= spec.color.name %>							
 						</td>
 						<td>
-							<%= quantity / m.xqs if m.xqs %>
+							<%= (quantity.to_f / m.xqs).ceil if m.xqs %>
 						</td>
 						<td>
 							<%= quantity %>

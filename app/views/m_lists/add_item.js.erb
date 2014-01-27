@@ -1,0 +1,12 @@
+# encoding: utf-8
+
+$('#m_items_size').html("<%= @m_cart.m_items.size %>");
+$.pnotify({
+			type: 'success',
+		    title: '成品添加成功',
+    		text: "注塑列表中已有<%= @m_cart.m_items.size %>种成品",
+		    icon: 'picon icon16 iconic-icon-check-alt white',
+		    opacity: 0.95,
+		    history: false,
+		    sticker: false
+		});
