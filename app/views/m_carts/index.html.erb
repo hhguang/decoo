@@ -1,0 +1,21 @@
+<h1>Listing m_carts</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @m_carts.each do |m_cart| %>
+  <tr>
+    <td><%= link_to 'Show', m_cart %></td>
+    <td><%= link_to 'Edit', edit_m_cart_path(m_cart) %></td>
+    <td><%= link_to 'Destroy', m_cart, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New M cart', new_m_cart_path %>

@@ -1,0 +1,149 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render '/share/head',:title=>'生产管理',:here=>'布产单' %>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="btn-group span4" >
+        <a href="/m_lists" role="button"  class="btn  ">
+          所有布产单
+        </a>        
+        <a href="#" onclick="pr($('#printg1').html());" class="btn" >打印</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="msg" style="padding:10px;">
+        <%= notice_message %>
+      </div>
+      <div id="printg1">
+      <div class="box gradient invoice">
+
+        <div class="title clearfix">
+
+          <h4 class="left">
+            <span>布产单</span>
+            <span class="number"> <strong class="red">#<%#= @porder.name %></strong></span>
+          </h4>
+          <%#*<div class="print">%>
+            <%#*<a class="tip" href="#" oldtitle="Print invoice" title=""><span class="icon24 entypo-icon-printer"></span></a>%>
+          <%#*</div>%>
+          <div class="invoice-info">
+            
+            <span class="data gray"><%#= @porder.created_at.strftime("%Y-%m-%d ") %></span>
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+        <div class="content">
+          <div class="you">
+            <ul class="unstyled">
+              
+              <!-- <li><h5>
+                领料部门：________________________     配料员：________________________
+              </h5>
+              </li>  -->             
+          </div>
+          <div class="client">
+            <ul class="unstyled">
+              
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+          
+          <table class="responsive table table-bordered" id="t">
+            <thead>
+              <tr>
+                <th>模具编号</th>                
+                <th>材料</th>
+                <th >颜色</th>
+                <th>生产模数</th>
+                <th>零件数量</th>
+                <th>重量</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+				<% @modules.each do |m,s| %>             
+
+	              <tr>
+	                <td rowspan=<%= s.size+1 %>>
+	                	<%= m.bh %>
+	                </td>                
+	              </tr>
+	              <% s.each do |spec,quantity| %>
+					<tr>
+						<td>
+							<%= spec.material %>							
+						</td>
+						<td>
+							<%= spec.color.name %>							
+						</td>
+						<td>
+							<%= quantity / m.xqs if m.xqs %>
+						</td>
+						<td>
+							<%= quantity %>
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+	              <% end %>
+              	<% end %>
+            </tbody>
+          </table>
+          
+          <!-- <div class="payment">
+            <ul class="unstyled">
+              <li><h3>备注</h3></li>
+              
+            </ul>
+          </div>
+
+          <div class="total">
+            
+          </div> -->
+
+
+          <div class="clearfix"></div>
+
+          <div class="invoice-footer">
+            
+          </div>
+
+        </div>
+
+      </div>
+      <div>
+        <!-- end print -->
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+function pr(content){
+  // bdhtml=window.document.body.innerHTML;
+  bdhtml=$("body").clone(true);
+  window.document.body.innerHTML=content;
+  window.print();
+  // window.document.body.innerHTML=bdhtml;
+  // $("body").replaceWith(bdhtml);
+  $("body").empty();
+  bdhtml.appendTo($("body"));
+}
+
+
+</script>
+
+

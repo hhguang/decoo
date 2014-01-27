@@ -26,4 +26,14 @@ class ApplicationController < ActionController::Base
     end
   	
   end
+
+  private
+
+    def current_cart
+      MCart.find(session[:m_cart_id])
+    rescue ActiveRecord::RecordNotFound
+      cart=MCart.create
+      session[:m_cart_id]=cart.id
+      cart
+    end
 end

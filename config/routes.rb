@@ -1,5 +1,9 @@
 Decoo::Application.routes.draw do
 
+  resources :m_carts
+
+  resources :m_lists
+
   # get "sets/index"  
 
   resources :sets
