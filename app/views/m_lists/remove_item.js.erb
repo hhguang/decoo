@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 $('#m_items_size').html("<%= @m_cart.m_items.size %>");
-$('#m_cart').prepend("<%= escape_javascript(render(:partial=>'m_item',:object=>@m_item)) %>");
+$('#item<%= @m_item.id %>').fadeOut(1000).remove();
 $.pnotify({
 			type: 'success',
-		    title: '成品添加成功',
+		    title: '成品移除成功',
     		text: "注塑列表中已有<%= @m_cart.m_items.size %>种成品",
 		    icon: 'picon icon16 iconic-icon-check-alt white',
 		    opacity: 0.95,

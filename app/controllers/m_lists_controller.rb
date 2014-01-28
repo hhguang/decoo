@@ -1,8 +1,14 @@
+# encoding: utf-8
 class MListsController < ApplicationController
   # GET /m_lists
   # GET /m_lists.json
   def index
-    @m_lists = MList.paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    if params[:search] 
+      @search=params[:search]
+      @m_lists=MList.where('name like ? ',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    else
+      @m_lists = MList.paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +41,7 @@ class MListsController < ApplicationController
   # GET /m_lists/new.json
   def new
     @m_cart = current_cart
+    @m_items=@m_cart.m_items
     if params[:search] 
           @toys=Toy.where('name like ?',"%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 16).order('name+0')
     else
@@ -61,6 +68,23 @@ class MListsController < ApplicationController
     end
   end
 
+  def clear_cart
+    @m_cart = current_cart
+    @m_cart.m_items.clear
+    respond_to do |format|
+      format.js 
+    end
+  end
+
+  def remove_item
+    @m_cart = current_cart
+    @m_item=MItem.find(params[:m_item_id])
+    @m_cart.m_items.delete(@m_item)
+    respond_to do |format|
+      format.js 
+    end
+  end
+
   # GET /m_lists/1/edit
   def edit
     @m_list = MList.find(params[:id])
@@ -79,7 +103,7 @@ class MListsController < ApplicationController
       if @m_list.save
         MCart.destroy(session[:m_cart_id])
         session[:m_cart_id]=nil
-        format.html { redirect_to @m_list, notice: 'M list was successfully created.' }
+        format.html { redirect_to @m_list, notice: '布产单已成功创建.' }
         format.json { render json: @m_list, status: :created, location: @m_list }
       else
         format.html { render action: "new" }

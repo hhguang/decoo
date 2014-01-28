@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 $('#m_items_size').html("<%= @m_cart.m_items.size %>");
-$('#m_cart').prepend("<%= escape_javascript(render(:partial=>'m_item',:object=>@m_item)) %>");
+$('#m_cart').html("<li class='view-all'><span><a href='/m_lists/clear_cart' data-remote=true>清空 <span class='icon16  brocco-icon-trashcan'></span></a></span></li>");
 $.pnotify({
 			type: 'success',
-		    title: '成品添加成功',
+		    title: '列表已经清空',
     		text: "注塑列表中已有<%= @m_cart.m_items.size %>种成品",
 		    icon: 'picon icon16 iconic-icon-check-alt white',
 		    opacity: 0.95,

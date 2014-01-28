@@ -2,7 +2,10 @@ Decoo::Application.routes.draw do
 
   resources :m_carts
 
-  resources :m_lists
+  resources :m_lists do
+    get :clear_cart,:on=>:collection
+    get :remove_item,:on=>:collection
+  end
 
   # get "sets/index"  
 

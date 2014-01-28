@@ -20,17 +20,34 @@
         <div class="content noPad">
           
           <div style="padding: 15px;" >
-            已添加成品：
-            <span id='m_items_size'><%= @m_cart.m_items.size %></span>
-            
-            <% if can? :manage, @toy %>
+            <a href="#" class="btn btn-default dropdown-toggle " data-toggle="dropdown">
+                                已添加成品：
+            <span id='m_items_size' class="badge badge-important"><%= @m_cart.m_items.size %></span>
+            <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="menu">
+                  <ul class="messages" style="min-width:260px;" id="m_cart">  
+                    <%= render :partial=>'m_item',:collection=> @m_items %>
+                    
+                    <li class="view-all">
+                      <span>                        
+                        <a href="/m_lists/clear_cart" data-remote=true>清空 <span class="icon16  brocco-icon-trashcan"></span></a>
+                      </span>
+                      
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+                        
+            <%# if can? :manage, @toy %>
             
             <%= link_to m_lists_path,:class=>'btn btn-success',:method=>'post' do  %>
-              <span class="icon14 iconic-icon-plus white"></span>
+              <!-- <span class="icon14 iconic-icon-plus white"></span> -->
               生成布产单
             <% end %>
             
-            <% end %>
+            <%# end %>
             <form class="form-inline pull-right" style="padding-left:20px;" action="<%=  toys_path %>">
               <input type="text" class="input-medium search-query" name="search"/>
               <button type="submit" class="btn">搜索</button>

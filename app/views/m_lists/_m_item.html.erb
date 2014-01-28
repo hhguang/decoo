@@ -1,0 +1,8 @@
+<li class="header" id="item<%= m_item.id %>">
+    <strong><%= m_item.toy.name %></strong> 
+    -<strong><%= m_item.toy.title %></strong> 
+    (<%= m_item.quantity %>)
+    <span style="float:right;width:50px;">                          
+		<a data-remote=true href="/m_lists/remove_item/?m_item_id=<%= m_item.id %>">移除</a>
+    </span>
+</li>
