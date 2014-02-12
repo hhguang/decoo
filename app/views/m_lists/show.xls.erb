@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">模具编号</Data></Cell>
+        <Cell><Data ss:Type="String">颜色编号</Data></Cell>
+        <Cell><Data ss:Type="String">颜色</Data></Cell>
+        <Cell><Data ss:Type="String">材料</Data></Cell>
+        <Cell><Data ss:Type="String">生产模数</Data></Cell>
+        <Cell><Data ss:Type="String">零件数量</Data></Cell>
+        <Cell><Data ss:Type="String">重量</Data></Cell>
+        <Cell><Data ss:Type="String">备注</Data></Cell>
+      </Row>
+    <% last='' %>
+    <% @modules.each do |m,s| %>     
+    <% s.each do |spec,quantity| %>
+      <Row>
+        <% if m.bh==last %>
+        <Cell><Data ss:Type="String"><%= last %></Data></Cell>               
+        <% else %>
+        <Cell ss:MergeDown="<%= s.size-1 %>"><Data ss:Type="String"><%= m.bh %></Data></Cell> 
+        <% end %>
+        <% last=m.bh %>
+        <Cell><Data ss:Type="String"><%= spec.color.bh %>   </Data></Cell>
+        <Cell><Data ss:Type="String"><%= spec.color.name %> </Data></Cell>
+        <Cell><Data ss:Type="String"><%= spec.material %>   </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= (quantity.to_f / m.xqs).ceil if m.xqs %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= quantity %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= number_with_precision(quantity*m.weight.to_f) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+    <% end %>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

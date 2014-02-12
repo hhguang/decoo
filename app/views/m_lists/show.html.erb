@@ -8,6 +8,7 @@
           所有布产单
         </a>        
         <a href="#" onclick="pr($('#printg1').html());" class="btn" >打印</a>
+        <%= link_to "Excel", m_list_path(@m_list,format: "xls"),:class=>'btn' %>
       </div>
     </div>
   </div>
@@ -56,8 +57,9 @@
             <thead>
               <tr>
                 <th>模具编号</th>                
-                <th>材料</th>
+                <th>颜色编号</th>
                 <th >颜色</th>
+                <th>材料</th>
                 <th>生产模数</th>
                 <th>零件数量</th>
                 <th>重量</th>
@@ -75,11 +77,14 @@
 	              <% s.each do |spec,quantity| %>
 					<tr>
 						<td>
-							<%= spec.material %>							
+							<%= spec.color.bh %>							
 						</td>
 						<td>
 							<%= spec.color.name %>							
 						</td>
+            <td>
+              <%= spec.material %>              
+            </td>
 						<td>
 							<%= (quantity.to_f / m.xqs).ceil if m.xqs %>
 						</td>
@@ -87,7 +92,7 @@
 							<%= quantity %>
 						</td>
 						<td>
-							
+							<%= number_with_precision(quantity*m.weight.to_f) %>
 						</td>
 						<td>
 							
