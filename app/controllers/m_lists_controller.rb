@@ -28,7 +28,7 @@ class MListsController < ApplicationController
         product=spec.product
         @modules[product]={}  if !@modules[product]
         @modules[product][spec]=0 if !@modules[product][spec]
-        @modules[product][spec]+=item.quantity
+        @modules[product][spec]+=part.quantity*item.quantity
       end
     end
     respond_to do |format|

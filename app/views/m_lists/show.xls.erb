@@ -21,12 +21,12 @@
     <% s.each do |spec,quantity| %>
       <Row>
         <% if m.bh==last %>
-        <Cell><Data ss:Type="String"><%= last %></Data></Cell>               
+        
         <% else %>
         <Cell ss:MergeDown="<%= s.size-1 %>"><Data ss:Type="String"><%= m.bh %></Data></Cell> 
         <% end %>
         <% last=m.bh %>
-        <Cell><Data ss:Type="String"><%= spec.color.bh %>   </Data></Cell>
+        <Cell ss:Index="2"><Data ss:Type="String"><%= spec.color.bh %>   </Data></Cell>
         <Cell><Data ss:Type="String"><%= spec.color.name %> </Data></Cell>
         <Cell><Data ss:Type="String"><%= spec.material %>   </Data></Cell>
         <Cell><Data ss:Type="Number"><%= (quantity.to_f / m.xqs).ceil if m.xqs %></Data></Cell>
