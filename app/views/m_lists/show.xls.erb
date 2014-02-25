@@ -11,14 +11,20 @@
         <Cell><Data ss:Type="String">颜色编号</Data></Cell>
         <Cell><Data ss:Type="String">颜色</Data></Cell>
         <Cell><Data ss:Type="String">材料</Data></Cell>
+        <Cell><Data ss:Type="String">需生产零件</Data></Cell>
+        <Cell><Data ss:Type="String">库存零件</Data></Cell>
+        <Cell><Data ss:Type="String">待出库零件</Data></Cell>
         <Cell><Data ss:Type="String">生产模数</Data></Cell>
-        <Cell><Data ss:Type="String">零件数量</Data></Cell>
+        <Cell><Data ss:Type="String">生产零件</Data></Cell>
         <Cell><Data ss:Type="String">重量</Data></Cell>
         <Cell><Data ss:Type="String">备注</Data></Cell>
       </Row>
     <% last='' %>
     <% @modules.each do |m,s| %>     
     <% s.each do |spec,quantity| %>
+    <% stock_quantity= spec.stock ? spec.stock.quantity : 0 %>
+    <% tquantity=@m_list.is_ridstock? ? quantity-stock_quantity+spec.wait_for_out : quantity %>
+    <% tquantity=tquantity<0 ? 0 : tquantity %>
       <Row>
         <% if m.bh==last %>
         
@@ -29,10 +35,13 @@
         <Cell ss:Index="2"><Data ss:Type="String"><%= spec.color.bh %>   </Data></Cell>
         <Cell><Data ss:Type="String"><%= spec.color.name %> </Data></Cell>
         <Cell><Data ss:Type="String"><%= spec.material %>   </Data></Cell>
-        <Cell><Data ss:Type="Number"><%= (quantity.to_f / m.xqs).ceil if m.xqs %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= quantity %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= number_with_precision(quantity*m.weight.to_f) %></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= spec.stock.quantity if spec.stock %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= spec.wait_for_out %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= (tquantity.to_f / m.xqs).ceil if m.xqs %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tquantity %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= number_with_precision(tquantity*m.weight.to_f) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>        
       </Row>
     <% end %>
     <% end %>

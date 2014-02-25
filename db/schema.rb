@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140127070719) do
+ActiveRecord::Schema.define(:version => 20140225014538) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(:version => 20140127070719) do
   create_table "goods_categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "limit",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "limit"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "goods_stock_items", :force => true do |t|
@@ -104,8 +104,9 @@ ActiveRecord::Schema.define(:version => 20140127070719) do
 
   create_table "m_lists", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_ridstock", :default => true
   end
 
   create_table "outstock_items", :force => true do |t|
@@ -223,10 +224,10 @@ ActiveRecord::Schema.define(:version => 20140127070719) do
     t.integer  "color_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "spec_id"
-    t.decimal  "weight",     :default => 0.0
+    t.decimal  "weight"
   end
 
   create_table "store_houses", :force => true do |t|

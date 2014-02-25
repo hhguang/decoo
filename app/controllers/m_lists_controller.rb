@@ -86,6 +86,20 @@ class MListsController < ApplicationController
     end
   end
 
+  def ridstock
+    @m_list = MList.find(params[:id])
+    @m_list.is_ridstock=!@m_list.is_ridstock?
+    respond_to do |format|
+      if @m_list.save
+        format.html { redirect_to @m_list, notice: '布产单已成功更改.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @m_list, notice: '布产单更改失败.'  }
+        format.json { render json: @m_list.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /m_lists/1/edit
   def edit
     @m_list = MList.find(params[:id])

@@ -5,6 +5,7 @@ Decoo::Application.routes.draw do
   resources :m_lists do
     get :clear_cart,:on=>:collection
     get :remove_item,:on=>:collection
+    get :ridstock,:on=>:member
   end
 
   # get "sets/index"  

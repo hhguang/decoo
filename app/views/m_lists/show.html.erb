@@ -2,11 +2,27 @@
   <%= render '/share/head',:title=>'生产管理',:here=>'布产单' %>
 
   <div class="row-fluid">
-    <div class="span12">
-      <div class="btn-group span4" >
-        <a href="/m_lists" role="button"  class="btn  ">
+    <div class="btn-toolbar span12">
+      <div class="btn-group">
+      <a href="/m_lists" role="button"  class="btn  ">
           所有布产单
-        </a>        
+      </a> 
+      </div>
+      <div class="btn-group " >
+            
+        <% if @m_list.is_ridstock? %>
+        <%= link_to ridstock_m_list_path(@m_list),:class=>"btn btn-info active" do %>
+          <span class="icon16 icomoon-icon-checkmark white"></span>
+          减去库存
+        <% end %>
+        
+        <% else %>
+        <%= link_to ridstock_m_list_path(@m_list),:class=>"btn btn-info " do %>
+          
+          减去库存
+        <% end %>
+        
+        <% end %>
         <a href="#" onclick="pr($('#printg1').html());" class="btn" >打印</a>
         <%= link_to "Excel", m_list_path(@m_list,format: "xls"),:class=>'btn' %>
       </div>
@@ -25,7 +41,7 @@
 
           <h4 class="left">
             <span>布产单</span>
-            <span class="number"> <strong class="red">#<%#= @porder.name %></strong></span>
+            <span class="number"> <strong class="red">#<%= @m_list.name %></strong></span>
           </h4>
           <%#*<div class="print">%>
             <%#*<a class="tip" href="#" oldtitle="Print invoice" title=""><span class="icon24 entypo-icon-printer"></span></a>%>
@@ -51,6 +67,7 @@
               
             </ul>
           </div>
+
           <div class="clearfix"></div>
           
           <table class="responsive table table-bordered" id="t">
@@ -60,9 +77,12 @@
                 <th>颜色编号</th>
                 <th >颜色</th>
                 <th>材料</th>
-                <th>生产模数</th>
-                <th>零件数量</th>
-                <th>重量</th>
+                <th>需生产零件</th>                  
+                <th>库存零件</th>
+                <th>待出库零件</th>             
+                <th>生产模数</th>                  
+                <th>生产零件</th>                            
+                <th>重量</th>                
                 <th>备注</th>
               </tr>
             </thead>
@@ -75,6 +95,9 @@
 	                </td>                
 	              </tr>
 	              <% s.each do |spec,quantity| %>
+                <% stock_quantity= spec.stock ? spec.stock.quantity : 0 %>
+                <% tquantity=@m_list.is_ridstock? ? quantity-stock_quantity+spec.wait_for_out : quantity %>
+                <% tquantity=tquantity<0 ? 0 : tquantity %>
 					<tr>
 						<td>
 							<%= spec.color.bh %>							
@@ -85,15 +108,26 @@
             <td>
               <%= spec.material %>              
             </td>
+            <td>
+              <%= quantity %>
+            </td>
+            <td>
+              <%= spec.stock.quantity if spec.stock %>
+            </td>
+            <td>
+              <%= spec.wait_for_out %>
+            </td>
+            
 						<td>
-							<%= (quantity.to_f / m.xqs).ceil if m.xqs %>
+							<%= (tquantity.to_f / m.xqs).ceil if m.xqs %>
 						</td>
 						<td>
-							<%= quantity %>
+							<%= tquantity %>
 						</td>
 						<td>
-							<%= number_with_precision(quantity*m.weight.to_f) %>
+							<%= number_with_precision(tquantity*m.weight.to_f) %>
 						</td>
+            
 						<td>
 							
 						</td>

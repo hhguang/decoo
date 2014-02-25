@@ -3,4 +3,6 @@ class MItem < ActiveRecord::Base
   belongs_to :m_list
   belongs_to :toy
   belongs_to :m_cart
+
+  
 end
