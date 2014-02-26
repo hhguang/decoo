@@ -20,7 +20,7 @@
         <Cell><Data ss:Type="String">备注</Data></Cell>
       </Row>
     <% last='' %>
-    <% @modules.each do |m,s| %>     
+    <% @modules.sort_by{|m,s| m.bh}.each do |m,s| %>     
     <% s.each do |spec,quantity| %>
     <% stock_quantity= spec.stock ? spec.stock.quantity : 0 %>
     <% tquantity=@m_list.is_ridstock? ? quantity-stock_quantity+spec.wait_for_out : quantity %>

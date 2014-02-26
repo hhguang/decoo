@@ -87,7 +87,7 @@
               </tr>
             </thead>
             <tbody>
-				<% @modules.each do |m,s| %>             
+				<% @modules.sort_by{|m,s| m.bh}.each do |m,s| %>             
 
 	              <tr>
 	                <td rowspan=<%= s.size+1 %>>
