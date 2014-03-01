@@ -14,7 +14,14 @@ Decoo::Application.routes.draw do
 
   resources :house_stocks
 
-  # resources :goods_stock_items
+  
+
+  resources :product_stocks do
+    resources :goods_stock_items do
+      get :in,:on=>:collection
+      get :out,:on=>:collection
+    end
+  end
 
   resources :goods_stocks do
     get :lower_limit_count,:on=>:collection

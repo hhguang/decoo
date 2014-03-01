@@ -278,19 +278,13 @@
               </li>
 
               <li>
-                <a href="#"><span class="icon16 minia-icon-list-4"></span>货物库存管理</a>
-                <ul class="sub">
-                  <li>
-                    <a href="/goods_stocks" <%= 'class="current"' if controller_name.in?(['goods_stocks']) %> >
-                      <span class="icon16 icomoon-icon-paper"></span>库存查询
-                    </a>
-                  </li>
-                  
-                  <li><a href="/store_houses" <%= 'class="current"' if controller_name.in?(['store_houses']) %> >
-                      <span class="icon16 icomoon-icon-paper"></span>仓库管理</a>
-                  </li>
+                <a href="#"><span class="icon16 icomoon-icon-cube-2"></span>货物库存管理</a>
+                
+              </li>
 
-                </ul>
+              <li>
+                <a href="/goods_stocks" <%= 'class="current"' if controller_name.in?(['goods_stocks']) %> ><span class="icon16  silk-icon-office"></span>物料库存管理</a>
+                
               </li>
 
               <li>
@@ -320,6 +314,9 @@
                   <li><a href="/goods_categories/" <%= 'class="current"' if controller_name.in?(['goods_categories']) %> >
                       <span class="icon16 icomoon-icon-paper"></span>货物分类</a></li>
                   <li>
+                  <li><a href="/store_houses" <%= 'class="current"' if controller_name.in?(['store_houses']) %> >
+                      <span class="icon16 icomoon-icon-paper"></span>仓库管理</a>
+                  </li>
                     <a <%= 'class="current"' if controller_name.in?(['colors'])  %> href="/colors" >
                       <span class="icon16 icomoon-icon-delicious"></span>颜色设置
                     </a>
