@@ -1,0 +1,78 @@
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"货物库存",:here=>"货物库存" %>  
+
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>库存</span>
+          </h4>
+        </div>
+
+        <div class="content noPad">
+
+
+          <div class="row-fluid" style="padding:10px;">
+            <div class="span2">
+              <div class="btn-group " >
+                <%= link_to '新增货物', new_goods_stock_path,:class=>"btn",:remote=>true %>        
+                
+              </div>
+            </div >
+              <div class="span4" style="padding-top:7px;">
+                <span>
+                
+                </span>
+              </div>
+              <div class="span6">
+              <form class="form-inline " style="padding-left:20px;" action="<%=  goods_stocks_path %>">                
+                <input type="text" class="input-medium " name="search"/>
+                <button type="submit" class="btn">搜索</button>
+              </form>
+            </div>
+            
+          </div>
+
+
+          <table id="goods_stocks" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>                
+                <th>名称</th>  
+                <th>分类</th>  
+                <th>供应商</th>                         
+                <th>数量</th>
+                <th>备注</th>             
+                <th>操作</th>
+
+              </tr>
+            </thead>
+            <tbody id="items">
+              <%= render(@goods_stocks) %>
+            </tbody>
+          </table>
+           <%= will_paginate @goods_stocks, :inner_window => 2,:params=>{:search=>@search,:goods_category_id=>@goods_category_id} %>
+        </div>
+  </div>
+
+</div>
+
+<div id="form-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">货物信息</h3>
+  </div>
+  <div class="modal-body">
+
+  </div>
+
+</div>
+
+
+
