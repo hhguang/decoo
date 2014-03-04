@@ -1,0 +1,9 @@
+<% 
+house_stocks="<ul>"
+@goods_stock.house_stocks.each do  |item|
+	house_stocks+="<li>仓库：#{item.store_house.name} 库存：#{item.quantity}</li>"
+end
+house_stocks+="</ul>"
+	%>
+$("#form-modal> .modal-body").html("<div><h3>名称：<%= @goods_stock.name %> 总量： <%= @goods_stock.quantity %></h3> <%= house_stocks.html_safe %></div>");
+ $('#form-modal').modal('show');   

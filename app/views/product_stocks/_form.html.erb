@@ -1,0 +1,19 @@
+<%= simple_form_for(@goods_stock,:remote=>true,:html=>{:class=>"form-horizontal"} ) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :bh,:label=>"编号" %>
+    <%= f.input :name,:label=>"名称" %>
+    <%#= f.association :goods_category,:label=>"分类" %>  
+    <%= f.input :goods_category_id,:as=>:hidden,:input_html=>{:value=>0} %>
+    <%= f.input :supplier,:label=>"供应商"  %>
+    <%= f.input :package_number,:label=>"件数" %>
+    <%= f.input :box_number,:label=>"装箱" %>
+    <%= f.input :memo,:label=>"备注" ,:input_html=>{ :rows=>"2" } %>
+    
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,:value=>"保存" %>
+  </div>
+<% end %>

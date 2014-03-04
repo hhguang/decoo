@@ -1,0 +1,18 @@
+<tr id="item_<%= product_stock.id %>">
+	<td><%= product_stock.bh %></td>
+    <td><%= product_stock.name %></td>
+    <td><%= product_stock.package_number %></td>
+    <td><%= product_stock.box_number %></td>
+    <td><%= product_stock.supplier %></td>
+    <td><%= link_to product_stock.quantity,product_stock,:remote=>true %></td>
+    
+    <td><%= product_stock.memo %></td>    
+    <td>
+    	<%= link_to '修改', edit_product_stock_path(product_stock),:remote=>true %> |
+    	<%= link_to '删除', product_stock, confirm: '确定要删除吗?', method: :delete,:remote=>true %> |
+    	<%= link_to '明细', goods_stock_goods_stock_items_path(product_stock) %> |
+    	
+        <%= link_to '出库',out_goods_stock_goods_stock_items_path(product_stock),:remote=>true %> |
+    	<%= link_to '入库',in_goods_stock_goods_stock_items_path(product_stock),:remote=>true %>
+    </td>
+  </tr>
