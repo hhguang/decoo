@@ -1,5 +1,7 @@
 Decoo::Application.routes.draw do
 
+  resources :orders
+
   resources :m_carts
 
   resources :m_lists do

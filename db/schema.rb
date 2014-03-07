@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303081122) do
+ActiveRecord::Schema.define(:version => 20140307074931) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(:version => 20140303081122) do
     t.string   "supplier"
     t.string   "type"
     t.integer  "box_number"
+    t.integer  "order_id"
+    t.integer  "order_item_id"
   end
 
   create_table "house_stocks", :force => true do |t|
@@ -109,6 +111,26 @@ ActiveRecord::Schema.define(:version => 20140303081122) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "is_ridstock", :default => true
+  end
+
+  create_table "order_items", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "product_bh"
+    t.string   "product_name"
+    t.string   "pack"
+    t.integer  "box_number"
+    t.integer  "quantity"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.string   "bh"
+    t.string   "company"
+    t.string   "mark"
+    t.integer  "total"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "outstock_items", :force => true do |t|

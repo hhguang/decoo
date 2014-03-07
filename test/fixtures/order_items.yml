@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order_id: 1
+  product_bh: MyString
+  product_name: MyString
+  pack: MyString
+  box_number: 1
+  quantity: 1
+
+two:
+  order_id: 1
+  product_bh: MyString
+  product_name: MyString
+  pack: MyString
+  box_number: 1
+  quantity: 1
