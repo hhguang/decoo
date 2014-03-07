@@ -1,7 +1,7 @@
 class GoodsStock < ActiveRecord::Base
   attr_accessible :bh, :memo, :name, :quantity,:goods_category_id,:supplier,:box_number,:package_number
 
-  validates :bh,:name,:presence => true, :uniqueness => true
+  validates :bh,:presence => true, :uniqueness => true
   validates	:goods_category_id,:presence=>true
   validates	:quantity,:numericality=>{:greater_than_or_equal_to=>0} 
 

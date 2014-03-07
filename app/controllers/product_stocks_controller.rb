@@ -2,7 +2,7 @@ class ProductStocksController < ApplicationController
 	def index
 		@search=params[:search] 
 	    if params[:search] and !params[:search].empty?
-	      w="bh like ? or name like ?","%#{params[:search]}%","%#{params[:search]}%"
+	      w="bh like ? or name like ? or memo like ? ","%#{params[:search]}%","%#{params[:search]}%","%#{params[:search]}%"
 	    else
 	      w="1=1"
 	    end    

@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20140303081122) do
     t.datetime "updated_at",                       :null => false
     t.string   "supplier"
     t.string   "type"
-    t.integer  "package_number"
     t.integer  "box_number"
   end
 

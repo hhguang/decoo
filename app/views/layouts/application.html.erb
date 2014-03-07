@@ -278,7 +278,16 @@
               </li>
 
               <li>
-                <a href="/product_stocks" <%= 'class="current"' if controller_name.in?(['product_stocks']) %>><span class="icon16 icomoon-icon-cube-2"></span>货物库存管理</a>
+                <a href="#"><span class="icon16 icomoon-icon-cube-2"></span>货物库存管理</a>
+                <ul  class="sub">
+                  <li>
+                    <a href="/product_stocks" <%= 'class="current"' if controller_name.in?(['product_stocks']) %>><span class="icon16 icomoon-icon-paper"></span>备货库存</a>
+                  </li>
+                  <li>
+                    <a href="/order_stocks" <%= 'class="current"' if controller_name.in?(['order_stocks']) %>><span class="icon16 icomoon-icon-paper"></span>订单货库存</a>
+                  </li>
+                </ul>
+                
                 
               </li>
 
