@@ -1,0 +1,23 @@
+<tr>
+
+      <td>
+        <%= f.input :product_bh,:label=>'产品货号',input_html: {class: 'input-small'} %>
+      </td>
+      <td>
+        <%= f.input :product_name,:label=>'产品名称' %>
+      </td>
+      <td>
+        <%= f.input :pack,:label=>'包装' %>
+      </td>
+      <td>
+        <%= f.input :box_number,:label=>'每件数量',input_html: {class: 'input-mini'} %>
+      </td>      
+      <td>
+        <%= f.input :quantity,:label=>'件数',input_html: {class: 'input-mini'} %>
+      </td>    
+      <td >        
+        <%#= f.input :_destroy, as: :boolean,label: '移除',input_html:{style:'height:35px;'} %>
+        <%= f.hidden_field :_destroy %> <%= link_to_function "移除", "remove_fields(this)" %>
+      </td>
+    
+</tr>

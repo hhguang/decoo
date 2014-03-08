@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :bh,inline_label: '订单号' %>
+    <%= f.input :bh,label: '订单号' %>
     <%= f.input :company,label: '公司名称' %>
     <%= f.input :mark,label: '唛头' %>
     <%= f.input :total %>
@@ -10,25 +10,8 @@
   <table>   
   
     <%= f.fields_for :order_items do |builder| %>
-    <tr>
-      <td>
-        <%= builder.input :product_bh,:label=>'产品货号',input_html: {class: 'input-small'} %>
-      </td>
-      <td>
-        <%= builder.input :product_name,:label=>'产品名称' %>
-      </td>
-      <td>
-        <%= builder.input :pack,:label=>'包装' %>
-      </td>
-      <td>
-        <%= builder.input :box_number,:label=>'每件数量',input_html: {class: 'input-mini'} %>
-      </td>      
-      <td>
-        <%= builder.input :quantity,:label=>'件数',input_html: {class: 'input-mini'} %>
-      </td>    
-    
+    <%= render 'order_item_fields', :f => builder %>
     <% end %>
-    </tr>
   </table>
   <div class="form-actions">
     <%= f.button :submit %>
