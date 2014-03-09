@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :company
       t.string :mark
       t.integer :total
+      t.text	:memo
 
       t.timestamps
     end

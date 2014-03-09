@@ -2,6 +2,13 @@ Decoo::Application.routes.draw do
 
   resources :orders
 
+  resources :order_stocks do
+    resources :goods_stock_items do
+      get :in,:on=>:collection
+      get :out,:on=>:collection
+    end
+  end
+
   resources :m_carts
 
   resources :m_lists do

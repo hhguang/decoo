@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20140307074931) do
     t.string   "supplier"
     t.string   "type"
     t.integer  "box_number"
-    t.integer  "order_id"
     t.integer  "order_item_id"
   end
 
@@ -129,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20140307074931) do
     t.string   "company"
     t.string   "mark"
     t.integer  "total"
+    t.text     "memo"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

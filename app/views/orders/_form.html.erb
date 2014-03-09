@@ -7,6 +7,7 @@
     <%= f.input :mark,label: '唛头' %>
     <%= f.input :total %>
   </div>
+  <%= link_to_add_fields "添加订单项", f, :order_items %>
   <table>   
   
     <%= f.fields_for :order_items do |builder| %>
@@ -17,3 +18,16 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+<script type="text/javascript">
+  function remove_fields(link) {  
+      $(link).prev("input[type=hidden]").val("1");  
+      $(link).parents("tr").hide();  
+  }  
+  function add_fields(link, association, content) {  
+    var new_id = new Date().getTime();  
+    var regexp = new RegExp("new_" + association, "g");  
+    $(link).next("table").append(content.replace(regexp, new_id) );        
+    
+  }  
+  
+</script>

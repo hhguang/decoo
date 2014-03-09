@@ -1,29 +1,65 @@
-<h1>Listing orders</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"订单货库存",:here=>"订单货库存" %> 
 
-<table>
-  <tr>
-    <th>Bh</th>
-    <th>Company</th>
-    <th>Mark</th>
-    <th>Total</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>订单库存</span>
+          </h4>
+        </div>
 
-<% @orders.each do |order| %>
-  <tr>
-    <td><%= order.bh %></td>
-    <td><%= order.company %></td>
-    <td><%= order.mark %></td>
-    <td><%= order.total %></td>
-    <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+        <div class="content noPad">
 
-<br />
 
-<%= link_to 'New Order', new_order_path %>
+          <div class="row-fluid" style="padding:10px;">
+            <div class="span4 btn-toolbar">
+              <div class="btn-group " >                
+                <%= link_to '新建订单', new_order_path,:class=>"btn" %>                 
+              </div>    
+              
+
+            </div >
+              <div class="span2" style="padding-top:7px;">
+                <span>
+                
+                </span>
+              </div>
+              <div class="span6">
+              <form class="form-inline " style="padding-left:20px;" action="<%=  orders_path %>">    
+                
+                <input type="text" class="input-medium " name="search"/>
+                <button type="submit" class="btn">搜索</button>
+              </form>
+            </div>
+            
+          </div>
+
+
+          <table id="goods_stocks" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>                
+                <th>公司名称</th>  
+                <th>唛头</th>                  
+                <th>备注</th>             
+                <th>总件数</th>  
+                <th>操作</th>
+
+              </tr>
+            </thead>
+            <tbody id="items">
+              <%= render(@orders) %>
+            </tbody>
+          </table>
+           <%= will_paginate @orders, :inner_window => 2,:params=>{:search=>@search} %>
+        </div>
+  </div>
+
+</div>
+

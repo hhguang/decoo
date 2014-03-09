@@ -1,25 +1,100 @@
-<p id="notice"><%= notice %></p>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"订单货库存",:here=>"订单货库存" %> 
 
-<p>
-  <b>Bh:</b>
-  <%= @order.bh %>
-</p>
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>订单明细</span>
+          </h4>
+        </div>
 
-<p>
-  <b>Company:</b>
-  <%= @order.company %>
-</p>
+        <div class="content noPad">
+          <div class="row-fluid" style="padding:10px;">
+            <p>
+			  <b>订单编号:</b>
+			  <%= @order.bh %>
+			</p>
 
-<p>
-  <b>Mark:</b>
-  <%= @order.mark %>
-</p>
+			<p>
+			  <b>公司名称:</b>
+			  <%= @order.company %>
+			</p>
 
-<p>
-  <b>Total:</b>
-  <%= @order.total %>
-</p>
+			<p>
+			  <b>唛头:</b>
+			  <%= @order.mark %>
+			</p>
+
+			<p>
+			  <b>Total:</b>
+			  <%= @order.total %>
+			</p>
+            <div class="btn-group " >                
+                <%= link_to '全部出库', new_order_path,:class=>"btn btn-primary" %>                 
+            </div> 
+          </div>
 
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+          <table id="goods_stocks" class="responsive table table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>                
+                <th>名称</th>  
+                <th>装箱</th>                  
+                <th>件数</th>                             
+                <th>库存</th>    
+                <th>操作</th>
+
+              </tr>
+            </thead>
+            <tbody id="items">
+            	<% @order.order_items.each do |order_item| %>              
+            	<tr id="item_<%= order_item.order_stock.id %>">
+            		<td>
+            			<%= order_item.product_bh %>
+            		</td>
+            		<td>
+            			<%= order_item.product_name %>
+            		</td>
+            		<td>
+            			<%= order_item.box_number %>            			
+            		</td>
+            		<td>
+            			<%= order_item.quantity %>
+            		</td>
+            		<td>
+            			<%= order_item.order_stock.quantity %>
+            		</td>
+            		<td>
+            			
+    	<%= link_to '明细', goods_stock_goods_stock_items_path(order_item.order_stock) %> |
+    	
+        <%= link_to '出库',out_goods_stock_goods_stock_items_path(order_item.order_stock),:remote=>true %> |
+    	<%= link_to '入库',in_goods_stock_goods_stock_items_path(order_item.order_stock),:remote=>true %>
+            		</td>
+            	</tr>
+            	<% end %>
+            </tbody>
+          </table>
+           
+        </div>
+  </div>
+
+</div>
+
+<div id="form-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">货物信息</h3>
+  </div>
+  <div class="modal-body">
+
+  </div>
+
+</div>

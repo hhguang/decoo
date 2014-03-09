@@ -2,7 +2,13 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @search=params[:search] 
+    if params[:search] and !params[:search].empty?
+      w="bh like ? or company like ? or mark like ?","%#{params[:search]}%","%#{params[:search]}%","%#{params[:search]}%"
+    else
+      w="1=1"
+    end
+    @orders = Order.where(w).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

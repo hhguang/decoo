@@ -1,0 +1,24 @@
+<tr id="item_<%= order_stock.id %>">
+            		<td>
+            			<%= order_stock.order_item.product_bh %>
+            		</td>
+            		<td>
+            			<%= order_stock.order_item.product_name %>
+            		</td>
+            		<td>
+            			<%= order_stock.order_item.box_number %>            			
+            		</td>
+            		<td>
+            			<%= order_stock.order_item.quantity %>
+            		</td>
+            		<td>
+            			<%= order_stock.quantity %>
+            		</td>
+            		<td>
+            			
+    	<%= link_to '明细', goods_stock_goods_stock_items_path(order_stock) %> |
+    	
+        <%= link_to '出库',out_goods_stock_goods_stock_items_path(order_stock),:remote=>true %> |
+    	<%= link_to '入库',in_goods_stock_goods_stock_items_path(order_stock),:remote=>true %>
+            		</td>
+            	</tr>
