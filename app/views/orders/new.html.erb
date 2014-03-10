@@ -1,5 +1,26 @@
-<h1>New order</h1>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"订单货库存",:here=>"订单货库存" %> 
 
-<%= render 'form' %>
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+  <div class="btn-group " style="padding-bottom: 10px; ;">                
+      <%= link_to '返回', orders_path,:class=>"btn" %>             
+  </div> 
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>订单</span>
+          </h4>
+        </div>
 
-<%= link_to 'Back', orders_path %>
+        <div class="content " >
+          <%= render 'form' %>
+      	</div>
+  </div>
+
+</div>
+

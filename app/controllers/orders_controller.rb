@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @order = Order.new
-    3.times do
+    10.times do
       @order.order_items.build
     end
 
@@ -86,6 +86,15 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to orders_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def out
+    @order = Order.find(params[:id])
+    @order.out
+    respond_to do |format|
+      format.html { redirect_to @order }
       format.json { head :no_content }
     end
   end

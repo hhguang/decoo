@@ -5,7 +5,7 @@
     <%= f.input :bh,label: '订单号' %>
     <%= f.input :company,label: '公司名称' %>
     <%= f.input :mark,label: '唛头' %>
-    <%= f.input :total %>
+    
   </div>
   <%= link_to_add_fields "添加订单项", f, :order_items %>
   <table>   
@@ -15,7 +15,8 @@
     <% end %>
   </table>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <input class="btn btn-primary"  name="commit" type="submit" value="保存订单">
+    <%#= f.button :submit,:value=> '保存订单',input_html: {class: 'btn btn-primary'} %>
   </div>
 <% end %>
 <script type="text/javascript">

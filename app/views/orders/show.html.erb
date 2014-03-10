@@ -6,6 +6,10 @@
       <%= notice_message %>
     </div>
   </div>
+  <div class="btn-group " style="padding-bottom: 10px; ;">                
+      <%= link_to '返回订单列表',orders_path,:class=>"btn" %>
+      <%= link_to '全部出库', out_order_path(@oder),:class=>"btn btn-primary" %>                 
+  </div> 
   <div class="box">
         <div class="title">
           <h4>
@@ -32,12 +36,10 @@
 			</p>
 
 			<p>
-			  <b>Total:</b>
+			  <b>总件数:</b>
 			  <%= @order.total %>
 			</p>
-            <div class="btn-group " >                
-                <%= link_to '全部出库', new_order_path,:class=>"btn btn-primary" %>                 
-            </div> 
+            
           </div>
 
 
@@ -45,10 +47,12 @@
             <thead>
               <tr>
                 <th>#</th>                
-                <th>名称</th>  
+                <th>产品名称</th>  
                 <th>装箱</th>                  
-                <th>件数</th>                             
-                <th>库存</th>    
+                <th>订单件数</th>                             
+                <th>库存</th> 
+                <th>入库状况</th> 
+                <th>出库状况</th> 
                 <th>操作</th>
 
               </tr>
@@ -71,6 +75,12 @@
             		<td>
             			<%= order_item.order_stock.quantity %>
             		</td>
+                <td>
+                  <%= order_item.order_stock.total_of_in %>
+                </td>
+                <td>
+                  <%= order_item.order_stock.total_of_out %>
+                </td>
             		<td>
             			
     	<%= link_to '明细', goods_stock_goods_stock_items_path(order_item.order_stock) %> |

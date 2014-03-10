@@ -1,6 +1,8 @@
 Decoo::Application.routes.draw do
 
-  resources :orders
+  resources :orders do
+    get :out,:on=>:member
+  end
 
   resources :order_stocks do
     resources :goods_stock_items do
