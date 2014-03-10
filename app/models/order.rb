@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
   has_many :order_items,:dependent=>:destroy
   has_many :order_stocks,:through=>:order_items
 
+  validates :bh,:presence => true, :uniqueness => true
+
   accepts_nested_attributes_for :order_items,:reject_if => lambda { |a| a[:product_bh].blank? || a[:quantity].blank?  }, :allow_destroy => true
 
   def total
