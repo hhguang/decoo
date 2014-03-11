@@ -4,7 +4,7 @@
     <td><%= order.mark %></td>
     <td><%= order.memo %></td>
     <td><%= order.total %></td>
-    <td><%= order.total_of_in %></td>
+    <td><span class="badge badge-info"><%= order.total_of_in %></sapn></td>
     <td><%= order.total_of_out %></td>
     <td><%= link_to '明细及出入库', order %> | 
     	<%= link_to '修改', edit_order_path(order) %> |

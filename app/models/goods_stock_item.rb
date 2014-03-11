@@ -8,6 +8,8 @@ class GoodsStockItem < ActiveRecord::Base
 
   validate :out_check
 
+  validate :check_order,:if=>Proc.new { |a| a.goods_stock.class==OrderStock  }
+
 
   belongs_to :goods_stock
   belongs_to :store_house
@@ -44,5 +46,12 @@ class GoodsStockItem < ActiveRecord::Base
 		  	end
 	  	end
 	end
+
+  def check_order
+    if act_type=="in"
+      order_stock=OrderStock.find(goods_stock_id)
+      errors[:quantity] << "超过订单件数" if order_stock.total_of_in+quantity > order_stock.order_item.quantity
+    end
+  end
 
 end
