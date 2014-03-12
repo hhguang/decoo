@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
       w="bh like ? or company like ? or mark like ?","%#{params[:search]}%","%#{params[:search]}%","%#{params[:search]}%"    
     end
     
-    @orders = Order.where(w).paginate(:page => params[:page], :per_page => 20)
+    @orders = Order.where(:completed=>false).where(w).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

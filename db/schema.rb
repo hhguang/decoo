@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140307074931) do
+ActiveRecord::Schema.define(:version => 20140312013129) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -129,8 +129,9 @@ ActiveRecord::Schema.define(:version => 20140307074931) do
     t.string   "mark"
     t.integer  "total"
     t.text     "memo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "completed",  :default => false
   end
 
   create_table "outstock_items", :force => true do |t|

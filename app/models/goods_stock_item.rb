@@ -10,10 +10,22 @@ class GoodsStockItem < ActiveRecord::Base
 
   validate :check_order,:if=>Proc.new { |a| a.goods_stock.class==OrderStock  }
 
-
   belongs_to :goods_stock
   belongs_to :store_house
   belongs_to :user
+
+  after_save :check_order_completed
+
+  def check_order_completed
+    if (self.goods_stock.class== OrderStock) &  (act_type=="out")
+      order=OrderStock.find(goods_stock_id).order_item.order
+      if order.total==order.total_of_out
+        order.update_attributes!(:completed=>true)
+      else
+        order.update_attributes!(:completed=>false)
+      end
+    end
+  end
 
   def self.in(item)
   	GoodsStockItem.transaction do 

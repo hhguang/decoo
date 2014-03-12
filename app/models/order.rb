@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  attr_accessible :bh, :company, :mark, :total,:order_items_attributes,:memo
+  attr_accessible :bh, :company, :mark, :total,:order_items_attributes,:memo,:completed
 
   has_many :order_items,:dependent=>:destroy
   has_many :order_stocks,:through=>:order_items
@@ -7,6 +7,17 @@ class Order < ActiveRecord::Base
   validates :bh,:presence => true, :uniqueness => true
 
   accepts_nested_attributes_for :order_items,:reject_if => lambda { |a| a[:product_bh].blank? || a[:quantity].blank?  }, :allow_destroy => true
+
+  # before_save :check_order_completed
+  
+  def check_order_completed    
+      if self.total==self.total_of_out
+        self.completed=true
+      else
+        self.completed=false
+      end    
+      
+  end
 
   def total
   	order_items.sum :quantity
