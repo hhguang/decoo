@@ -5,6 +5,13 @@ class OrderItem < ActiveRecord::Base
   has_one :order_stock,:dependent=>:destroy
 
   after_save :save_order_item
+  after_save :check_order_completed
+
+  def check_order_completed
+    self.order.check_order_completed
+    self.order.save!
+  end
+
   def save_order_item
   	p={:box_number=>box_number,:goods_category_id=>0,:name=>product_name,:bh=>"#{order.bh}-#{product_bh}"}
   	if order_stock.nil?   		
@@ -14,4 +21,7 @@ class OrderItem < ActiveRecord::Base
   		self.order_stock.update_attributes(p)
   	end
   end
+
+
+
 end

@@ -15,8 +15,7 @@ class Order < ActiveRecord::Base
         self.completed=true
       else
         self.completed=false
-      end    
-      
+      end          
   end
 
   def total

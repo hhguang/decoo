@@ -21,8 +21,26 @@
             <div class="span4 btn-toolbar">
               <div class="btn-group " >                
                 <%= link_to '新建订单', new_order_path,:class=>"btn" %>                 
-              </div>    
-              
+              </div> 
+
+              <div class="btn-group " >
+                <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#" style="padding-bottom: 4px;">
+                  <%= @completed ? '已完成出库订单' : "未完成出库订单"   %>
+                  <span class="caret"></span>
+                </a>             
+                <ul class="dropdown-menu">
+                      <li>
+                        <a href="/orders/?completed=true" >
+                          已完成出库订单
+                        </a>
+                      </li> 
+                      <li>
+                        <a href="/orders/?completed=false" >
+                          未完成出库订单
+                        </a>
+                      </li>                     
+                </ul>
+                </div>             
 
             </div >
               <div class="span2" style="padding-top:7px;">

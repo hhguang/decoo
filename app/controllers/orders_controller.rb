@@ -6,8 +6,12 @@ class OrdersController < ApplicationController
     if params[:search] and !params[:search].empty?
       w="bh like ? or company like ? or mark like ?","%#{params[:search]}%","%#{params[:search]}%","%#{params[:search]}%"    
     end
-    
-    @orders = Order.where(:completed=>false).where(w).paginate(:page => params[:page], :per_page => 20)
+    if params[:completed]&& params[:completed]=='true'
+      @completed=true
+    else
+      @completed=false
+    end
+    @orders = Order.where(:completed=>@completed).where(w).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb
