@@ -29,45 +29,94 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    user ||= User.new # in case of guest
-      if user.blank? || user.disabled?
-        # not logged in
-        cannot :manage, :all
-#        basic_read_only
-      elsif user.has_role?(:admin)
-        # admin
-        can :manage, :all
-      elsif user.has_role?(:warehouse_keeper)
-        can :read,Product
-        can :read,Color
-        can :read, Spec
+    # user ||= User.new # in case of guest
+#       if user.blank? || user.disabled?
+#         # not logged in
+#         cannot :manage, :all
+# #        basic_read_only
+#       elsif user.has_role?(:admin)
+#         # admin
+#         can :manage, :all
+#       elsif user.has_role?(:warehouse_keeper)
+#         can :read,Product
+#         can :read,Color
+#         can :read, Spec
         
-        can :manage,Stock
-        can :manage, InStockItem
-        can :manage, Outstock
-        can :manage, OutstockItem
-        can :out,Porder
-      elsif user.has_role?(:produce_manager)
-        can :read,Toy
-        can :manage,Porder
-        can :read,Stock
-        can :list,Stock
-        can :analysis,Stock
-        can :read,Product
-        can :read,Color
-        can :read, Spec
-        can :read, InStockItem
-        can :read, Outstock
-        can :read, OutstockItem
-        can :read, GoodsStock
-        can :read, GoodsStockItem
-      elsif user.has_role?(:goods_manager)
-        can :manage,GoodsStock
-        cannot :destroy,GoodsStock
-        can :manage,GoodsStockItem
-      else
-            cannot :manage,:all
+#         can :manage,Stock
+#         can :manage, InStockItem
+#         can :manage, Outstock
+#         can :manage, OutstockItem
+#         can :out,Porder
+#       elsif user.has_role?(:produce_manager)
+#         can :read,Toy
+#         can :manage,Porder
+#         can :read,Stock
+#         can :list,Stock
+#         can :analysis,Stock
+#         can :read,Product
+#         can :read,Color
+#         can :read, Spec
+#         can :read, InStockItem
+#         can :read, Outstock
+#         can :read, OutstockItem
+#         can :read, GoodsStock
+#         can :read, GoodsStockItem
+#       elsif user.has_role?(:goods_manager)
+#         can :manage,GoodsStock
+#         cannot :destroy,GoodsStock
+#         can :manage,GoodsStockItem
+#       else
+#             cannot :manage,:all
 
-      end
+#       end
+
+    @user = user || User.new
+    @user.roles.each { |role| send(role.name.downcase) }
+
+    if @user.roles.size == 0
+      cannot :manage,:all #for guest without roles
     end
+
+    
+  end
+
+  def admin
+    can :manage, :all
+  end
+
+  def warehouse_keeper
+    can :read,Product
+    can :read,Color
+    can :read, Spec
+        
+    can :manage,Stock
+    can :manage, InStockItem
+    can :manage, Outstock
+    can :manage, OutstockItem
+  end
+
+  def produce_manager
+    can :read,Toy
+    can :manage,Porder
+    can :read,Stock
+    can :list,Stock
+    can :analysis,Stock
+    can :read,Product
+    can :read,Color
+    can :read, Spec
+    can :read, InStockItem
+    can :read, Outstock
+    can :read, OutstockItem
+    can :read, GoodsStock
+    can :read, GoodsStockItem
+  end
+
+  def goods_manager
+    can :manage,GoodsStock
+    cannot :destroy,GoodsStock
+    can :manage,GoodsStockItem
+  end
+
+    
+
 end
