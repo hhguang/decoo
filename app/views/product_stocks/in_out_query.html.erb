@@ -1,0 +1,86 @@
+<link href="../css/datetimepicker.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<div class="contentwrapper"><!--Content wrapper-->
+  <%= render "/share/head",:title=>"备货出入库查询",:here=>"备货出入库查询" %>  
+
+  <div class="row-fluid"  >
+    <div class="span12" id="msg" >
+      <%= notice_message %>
+    </div>
+  </div>
+
+  <div class="tool-bar" style="padding-bottom:10px;">
+    <div class="btn-group ">
+      <%= link_to '备货库存列表', product_stocks_path,:class=>"btn" %>
+      <%= link_to '出入库查询', in_out_query_product_stocks_path, :class=>'btn' %>
+    </div>    
+  </div>  
+
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>备货出入库查询</span>
+          </h4>
+        </div>
+
+        <div class="content ">
+          <div class="row-fluid" style="padding:10px;">          
+              
+              <div class="span12">
+              <form class="form-inline " style="padding-left:20px;" action="/product_stocks/in_out_query"> 
+                <label>编号：</label> 
+                <input type="text" class="input-medium " name="search" placeholder="如查询所有零件留空"/>
+                <label>开始：</label>
+                <div class="input-append date form_datetime">
+                <input size="8" type="text" value="" readonly name='start' style="width:auto;">
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <label>结束：</label>
+                <div class="input-append date form_datetime">
+                <input size="8" type="text" value="" readonly name='end' style="width:auto;">
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <script type="text/javascript">
+                    $(".form_datetime").datetimepicker({
+                        format: "yyyy-mm-dd",
+                        minView: 2,
+                        language:'zh-CN'
+                    });
+                </script>                 
+               
+                <button type="submit" class="btn" name="act" value="in">入库查询</button>
+                <button type="submit" class="btn" name="act" value="out">出库查询</button>
+              </form>
+            </div>
+            
+          </div>
+          
+          <% if @quantity_list %>
+          <div class="page-header">
+            <h4>查询结果</h4>
+          </div>
+          <div>            
+            <table class="responsive table table-bordered ">
+              <tr>
+                <th>货号</th>
+                <th>数量</th>
+              </tr>
+              <% @quantity_list.each do |key,value| %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= value %></td>
+              </tr>
+              <% end %>
+            </table>
+          </div>          
+          <% end %>
+        </div>
+  </div>
+
+</div>
+
+
+
+

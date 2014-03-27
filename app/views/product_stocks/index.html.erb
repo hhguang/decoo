@@ -7,6 +7,13 @@
     </div>
   </div>
 
+  <div class="tool-bar" style="padding-bottom:10px;">
+    <div class="btn-group ">
+      <%= link_to '备货库存列表', product_stocks_path,:class=>"btn" %>
+      <%= link_to '出入库查询', in_out_query_product_stocks_path, :class=>'btn' %>
+    </div>    
+  </div>  
+
   <div class="box">
         <div class="title">
           <h4>
@@ -14,20 +21,16 @@
             <span>库存</span>
           </h4>
         </div>
-
         <div class="content noPad">
-
-
           <div class="row-fluid" style="padding:10px;">
             <div class="span2">
               <div class="btn-group " >
-                <%= link_to '新增货物', new_product_stock_path,:class=>"btn",:remote=>true %>        
-                
+               <%= link_to '新增货物', new_product_stock_path,:class=>"btn btn-primary",:remote=>true %>
               </div>
             </div >
               <div class="span4" style="padding-top:7px;">
                 <span>
-                
+                  总数量：<%= ProductStock.sum(:quantity) %>
                 </span>
               </div>
               <div class="span6">

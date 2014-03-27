@@ -93,6 +93,7 @@ class Ability
     can :manage, InStockItem
     can :manage, Outstock
     can :manage, OutstockItem
+    can :out,Porder
   end
 
   def produce_manager
@@ -117,6 +118,9 @@ class Ability
     can :manage,GoodsStockItem
   end
 
-    
+  def product_goods_manager
+    can :manage,ProductStock
+    can :manage,Order
+  end
 
 end
