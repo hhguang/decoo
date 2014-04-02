@@ -16,9 +16,9 @@ class PordersController < ApplicationController
     end
     if params[:search] 
       @search=params[:search]
-      @porders=Porder.joins(:toy).where(filter).where('porders.name like ? or toys.name like ? ',"%"+params[:search]+"%","%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+      @porders=Porder.joins(:toy).where(filter).where('porders.name like ? or toys.name like ? or porders.memo like ?',"%"+params[:search]+"%","%"+params[:search]+"%","%"+params[:search]+"%").paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
     else
-       @porders = Porder.where(filter).paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
+      @porders = Porder.where(filter).paginate(:page => params[:page], :per_page => 10).order('updated_at desc')
     end
     
 

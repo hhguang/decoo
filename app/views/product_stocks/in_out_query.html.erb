@@ -53,32 +53,48 @@
                 <button type="submit" class="btn" name="act" value="in">入库查询</button>
                 <button type="submit" class="btn" name="act" value="out">出库查询</button>
               </form>
-            </div>
-            
-          </div>
-          
-          <% if @quantity_list %>
-          <div class="page-header">
-            <h4>查询结果</h4>
-          </div>
-          <div>            
-            <table class="responsive table table-bordered ">
-              <tr>
-                <th>货号</th>
-                <th>数量</th>
-              </tr>
-              <% @quantity_list.each do |key,value| %>
-              <tr>
-                <td><%= key %></td>
-                <td><%= value %></td>
-              </tr>
-              <% end %>
-            </table>
-          </div>          
-          <% end %>
+            </div>            
+          </div>  
         </div>
-  </div>
 
+  </div>
+  <% if @quantity_list %>        
+  <div class="box">
+        <div class="title">
+          <h4>
+            <span class="icon16 brocco-icon-grid"></span>
+            <span>查询结果</span>
+          </h4>
+        </div>
+
+        <div class="content ">
+        </div>
+        <table class="responsive table table-bordered ">
+          <thead>
+          <tr>
+            <th></th>
+            <th>货号</th>
+            <th>名称</th>
+            <th>装箱</th>
+            <th>数量</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @quantity_list.each do |key,value| %>
+          <% product_stock=ProductStock.find_by_bh(key) %>
+          <tr>
+            <td></td>
+            <td><%= key %></td>
+            <td><%= product_stock.name %></td>
+            <td><%= product_stock.box_number %></td>
+            <td><span class="badge badge-info"><%= value %></span></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <% end %>
+  </div>
 </div>
 
 
