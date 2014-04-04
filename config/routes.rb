@@ -1,5 +1,7 @@
 Decoo::Application.routes.draw do
 
+  resources :permissions
+
   resources :orders do
     get :out,:on=>:member
   end

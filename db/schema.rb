@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140312013129) do
+ActiveRecord::Schema.define(:version => 20140404021722) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -172,6 +172,22 @@ ActiveRecord::Schema.define(:version => 20140312013129) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "action"
+    t.string   "subject"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "permissions_roles", :id => false, :force => true do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
+  add_index "permissions_roles", ["permission_id", "role_id"], :name => "index_permissions_roles_on_permission_id_and_role_id"
+  add_index "permissions_roles", ["role_id", "permission_id"], :name => "index_permissions_roles_on_role_id_and_permission_id"
 
   create_table "porder_items", :force => true do |t|
     t.integer  "part_id"

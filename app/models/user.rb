@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :in_stock_items
   has_many :outstocks
   has_many :porders
+  has_many :permissions, :through => :roles
   accepts_nested_attributes_for :roles
 
   def has_role?(role_sym)
@@ -25,10 +26,10 @@ class User < ActiveRecord::Base
   def update_by_admin(params={})
     if params[:password].blank? && params[:pasword_comfirmateion].blank?
       self.update_without_password(params)
-    else 
+    else
       self.update_attributes(params)
     end
   end
 
-  
+
 end

@@ -11,12 +11,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #
@@ -41,7 +41,7 @@ class Ability
 #         can :read,Product
 #         can :read,Color
 #         can :read, Spec
-        
+
 #         can :manage,Stock
 #         can :manage, InStockItem
 #         can :manage, Outstock
@@ -71,13 +71,36 @@ class Ability
 #       end
 
     @user = user || User.new
-    @user.roles.each { |role| send(role.name.downcase) }
+    if user.roles.include? 'admin'
+      can :manage, :all
+    else
+      user.permissions.each do |p|
+        begin
+          action = p.action.to_sym
+          subject = begin
+                        # RESTful Controllers
+                        p.subject.camelize.constantize
+                      rescue
+                        # Non RESTful Controllers
+                        p.subject.underscore.to_sym
+                      end
+                      can action, subject
+        rescue => e
+                      Rails.logger.info "#{e}"
+                      Rails.logger.info "#{subject}"
+        end
+      end
+
+    end
+    # @user.roles.each { |role| send(role.name.downcase) }
+
+
 
     if @user.roles.size == 0
       cannot :manage,:all #for guest without roles
     end
 
-    
+
   end
 
   def admin
@@ -88,7 +111,7 @@ class Ability
     can :read,Product
     can :read,Color
     can :read, Spec
-        
+
     can :manage,Stock
     can :manage, InStockItem
     can :manage, Outstock

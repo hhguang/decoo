@@ -1,0 +1,17 @@
+<%= simple_form_for(@permission) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :action %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :subject %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

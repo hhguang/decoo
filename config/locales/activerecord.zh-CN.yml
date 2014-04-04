@@ -13,7 +13,8 @@ zh-CN:
       color: "颜色"
       toy: "成品"
       package: "零件包"
-      porder: "生产单"      
+      porder: "生产单"
+      role: "角色"
     attributes:
       product:
         bh: "编号"
@@ -46,10 +47,14 @@ zh-CN:
         name: "名称"
       toy/packages:
         name: "零件包名称"
-        quantity: "零件包数量"        
-      package: 
+        quantity: "零件包数量"
+      package:
         name: "名称"
         quantity: "数量"
       porder/porder_items:
         spec_id: "编号"
         quantity: "数量"
+      role:
+        name: "标识"
+        title: "名称"
+        permissions: "权限"
